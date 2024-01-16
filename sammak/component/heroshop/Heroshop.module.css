@@ -1,0 +1,22 @@
+.beforeload {
+    height: 60vh;
+}
+
+.loader_content {
+    position: relative;
+    left: 32vw;
+    top: 23vh;
+}
+
+.product_wrap {
+    transition: 0.15s;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.product_wrap:hover {
+    scale: 1.05;
+}
+.product_wrap:active{
+    scale: 0.99;
+}

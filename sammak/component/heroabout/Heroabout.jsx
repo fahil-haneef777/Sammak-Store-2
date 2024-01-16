@@ -1,0 +1,282 @@
+import React from "react";
+
+function Heroabout() {
+  //   initializer
+  Panda.init = function () {
+    Panda.appearAnimate(".appear-animate");
+
+    Panda.countTo(".count-to");
+    Panda.countdown(".product-countdown, .countdown");
+
+    Panda.status = "complete";
+  };
+  Panda.prepare();
+  window.onload = function () {
+    Panda.status = "loaded";
+    Panda.$body.addClass("loaded");
+    Panda.$window.trigger("Panda_load");
+    Panda.call(Panda.initLayout);
+    Panda.call(Panda.init);
+    Panda.$window.trigger("panda_complete");
+    Panda.refreshSidebar();
+  };
+  // ends
+
+  //   counter function increment and decrement
+  Panda.countTo = function (selector) {
+    if ($.fn.numerator) {
+      Panda.$(selector).each(function () {
+        var $this = $(this),
+          options = {
+            fromValue: $this.data("fromvalue"),
+            toValue: $this.data("tovalue"),
+            duration: $this.data("duration"),
+            delimiter: $this.data("delimiter"),
+            rounding: $this.data("round"),
+          };
+        $.extend(options, {
+          onProgress: function () {
+            if ($this.data("append")) {
+              $this.html($this.html() + $this.data("append"));
+            }
+            if ($this.data("prepend")) {
+              $this.html($this.data("prepend") + $this.html());
+            }
+          },
+        });
+        Panda.appear(this, function () {
+          setTimeout(function () {
+            $this.numerator(options);
+          }, 300);
+        });
+      });
+    }
+  };
+  Panda.countdown = function (selector) {
+    if ($.fn.countdown) {
+      Panda.$(selector).each(function () {
+        var $this = $(this),
+          untilDate = $this.data("until"),
+          compact = $this.data("compact"),
+          dateFormat = !$this.data("format") ? "DHMS" : $this.data("format"),
+          newLabels = !$this.data("labels-short")
+            ? [
+                "Years",
+                "Months",
+                "Weeks",
+                "Days",
+                "Hours",
+                "Minutes",
+                "Seconds",
+              ]
+            : ["Years", "Months", "Weeks", "Days", "Hours", "Mins", "Secs"],
+          newLabels1 = !$this.data("labels-short")
+            ? ["Year", "Month", "Week", "Day", "Hour", "Minute", "Second"]
+            : ["Year", "Month", "Week", "Day", "Hour", "Min", "Sec"];
+        var newDate;
+        if (!$this.data("relative")) {
+          var untilDateArr = untilDate.split(", "),
+            newDate = new Date(
+              untilDateArr[0],
+              untilDateArr[1] - 1,
+              untilDateArr[2]
+            );
+        } else {
+          newDate = untilDate;
+        }
+        $this.countdown({
+          until: newDate,
+          format: dateFormat,
+          padZeroes: true,
+          compact: compact,
+          compactLabels: [" y", " m", " w", " days, "],
+          timeSeparator: " : ",
+          labels: newLabels,
+          labels1: newLabels1,
+        });
+      });
+    }
+  };
+  //   ends
+
+  return (
+    <main className="main">
+      <div className="page-header" style={{ backgroundColor: "#f9f8f4" }}>
+        <h1 className="page-title">About Us</h1>
+      </div>
+      <nav className="breadcrumb-nav has-border">
+        <div className="container">
+          <ul className="breadcrumb">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>About Us</li>
+          </ul>
+        </div>
+      </nav>
+      <div className="page-content about-page">
+        <div className="container">
+          <section className="row align-items-center">
+            <div className="col-lg-6">
+              <figure>
+                <img
+                  src="images/subpage/about/1.jpg"
+                  width="610"
+                  height="450"
+                  alt="image"
+                />
+              </figure>
+            </div>
+            <div className="col-lg-6">
+              <div className="pl-lg-8 pr-lg-3 pt-5 pt-lg-0">
+                <h4 className="text-uppercase text-body font-weight-normal ls-1 mb-4">
+                  What we sell
+                </h4>
+                <h2 className="desc-title mb-4">
+                  We Provide Fresh Goods & Tasty Nuts
+                </h2>
+                <p className="mb-3 ml-1">
+                  Facilisi nullam vehicula ipsum a arcu cursus vitae congue.
+                  Pretium quam vu lputate dignissim suspendisse in est. Sit amet
+                  consectetur adipiscing elit ut aliquam purus sit.
+                </p>
+                <p className="mb-8 ml-1">
+                  Porttitor rhoncus dolor purus non enim praesent elementum
+                  facilisis leo.
+                </p>
+                <a
+                  href="shop-5-cols.html"
+                  className="btn btn-outline btn-dark ml-1 mb-1"
+                >
+                  Get our store<i className="p-icon-arrow-long-right"></i>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+        <section className="pb-6" style={{ backgroundColor: "#f9f8f4" }}>
+          <div className="container text-center">
+            <h4 className="text-uppercase text-body font-weight-normal ls-1 mb-3">
+              What we do
+            </h4>
+            <h2 className="desc-title mb-10">We are Trusted by Clients</h2>
+            <div className="row cols-lg-3 cols-md-2 cols-1 justify-content-center">
+              <div className="counter mb-6">
+                <span
+                  className="count-to text-primary"
+                  data-fromvalue="0"
+                  data-tovalue="10"
+                  data-duration="2000"
+                  data-delimiter=","
+                >
+                  0
+                </span>
+                <div className="counter-content">
+                  <h4 className="count-title text-dark mb-2">BUSINESS YEARS</h4>
+                  <p className="count-desc mx-auto" style={{ width: "80%" }}>
+                    Lorem ipsum dolor sit amet, consectetur adip do eiusmod
+                    tempor incididunt ut
+                  </p>
+                </div>
+              </div>
+              <div className="counter mb-6">
+                <span
+                  className="count-to text-primary"
+                  data-fromvalue="0"
+                  data-tovalue="80"
+                  data-duration="2000"
+                  data-delimiter=","
+                  data-append="K+"
+                >
+                  0
+                </span>
+                <div className="counter-content">
+                  <h4 className="count-title text-dark mb-2">PRODUCTS SALES</h4>
+                  <p className="count-desc mx-auto" style={{ width: "80%" }}>
+                    Lorem ipsum dolor sit amet, consectetur adip do eiusmod
+                    tempor incididunt ut
+                  </p>
+                </div>
+              </div>
+              <div className="counter mb-6">
+                <span
+                  className="count-to text-primary"
+                  data-fromvalue="0"
+                  data-tovalue="90"
+                  data-duration="2000"
+                  data-delimiter=","
+                  data-append="%"
+                >
+                  0
+                </span>
+                <div className="counter-content">
+                  <h4 className="count-title text-dark mb-2">
+                    HAPPY CUSTOMERS
+                  </h4>
+                  <p className="count-desc mx-auto" style={{ width: "80%" }}>
+                    Lorem ipsum dolor sit amet, consectetur adip do eiusmod
+                    tempor incididunt ut
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div className="container">
+          <section className="row align-items-center">
+            <div className="col-lg-6">
+              <div className="pr-lg-3">
+                <h4 className="text-uppercase text-body font-weight-normal ls-1 mt-5 mb-4">
+                  our delivery system
+                </h4>
+                <h2 className="desc-title mb-4">
+                  The Fastest & Best Delivery ever met before
+                </h2>
+                <ul className="list list-circle text-dim">
+                  {/* List items for delivery system */}
+                  {/* You can replace this with actual content */}
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <figure>
+                <img
+                  src="images/subpage/about/2.jpg"
+                  width="610"
+                  height="450"
+                  alt="image"
+                />
+              </figure>
+            </div>
+          </section>
+        </div>
+        <section style={{ backgroundColor: "#f9f8f4", paddingBottom: "8rem" }}>
+          <div className="container text-center">
+            <h4 className="text-uppercase text-body font-weight-normal ls-1 mb-3">
+              Testimonial
+            </h4>
+            <h2 className="desc-title mb-4">Why You Choose Panda</h2>
+            <div className="owl-carousel owl-theme row owl-nav-box cols-1">
+              {/* Testimonial components */}
+              {/* You can replace this with actual content */}
+            </div>
+          </div>
+        </section>
+        <div className="container">
+          <section className="text-center pb-10 pt-10 mb-6">
+            <h4 className="text-uppercase text-body font-weight-normal ls-1 mt-7 mb-3">
+              our staffs
+            </h4>
+            <h2 className="desc-title mb-9">Panda Shop Members</h2>
+            <div className="owl-carousel owl-theme row cols-lg-4 cols-md-3 cols-sm-2 cols-1">
+              {/* Staff members */}
+              {/* You can replace this with actual content */}
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default Heroabout;
