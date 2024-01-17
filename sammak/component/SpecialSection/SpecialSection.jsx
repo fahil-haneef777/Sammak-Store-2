@@ -1,5 +1,5 @@
 import React from "react";
-
+import '../../main.js'
 const SpecialSection = () => {
   return (
     <section

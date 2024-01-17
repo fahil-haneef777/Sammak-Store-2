@@ -5,7 +5,7 @@ import Herocart from "../herocart/Herocart";
 import { useNavigate } from "react-router-dom";
 import Loader from "react-js-loader";
 import style from "./Heroshop.module.css";
-
+import '../../main.js'
 function Heroshop() {
   const [data, setdata] = useState("");
   const { id, setid, cart, setcart, productinfo, setproductinfo } =

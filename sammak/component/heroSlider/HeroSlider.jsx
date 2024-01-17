@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios, { Axios } from "axios";
 import AllContext from "../../src/Context/Context";
-
+import '../../main.js'
 function HeroSlider(props) {
   const { heroSilderData, setheroSliderData } = useContext(AllContext);
 

@@ -7,7 +7,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "react-js-loader";
-
+import '../../main.js'
 function Viewcart() {
   //
   const [loginuser, setloginuser] = useState({ email: "", password: "" });

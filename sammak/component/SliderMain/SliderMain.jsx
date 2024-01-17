@@ -6,6 +6,7 @@ import AllContext from "../../src/Context/Context";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import '../../main.js'
 function SliderMain(props) {
   const onAutoplayTimeLeft = (s, time, progress) => {};
   const { heroSilderData, setheroSliderData } = useContext(AllContext);

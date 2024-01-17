@@ -7,7 +7,7 @@ import AllContext from "../../src/Context/Context";
 import { useNavigate } from "react-router-dom";
 import SliderMain from "../SliderMain/SliderMain";
 import SpecialSection from "../SpecialSection/SpecialSection";
-
+import '../../main.js'
 function Herohome() {
   const [data, setdata] = useState([]);
   const { id, setid, cart, setcart, productinfo, setproductinfo } =

@@ -5,7 +5,7 @@ import AllContext from "../../src/Context/Context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-js-loader";
-
+import '../../main.js'
 function Checkout() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({

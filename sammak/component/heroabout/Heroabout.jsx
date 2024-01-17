@@ -1,5 +1,5 @@
 import React from "react";
-
+import '../../main.js'
 function Heroabout() {
   //   initializer
   Panda.init = function () {
