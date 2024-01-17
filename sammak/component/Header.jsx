@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Loader from "react-js-loader";
 import { RotatingLines } from "react-loader-spinner";
-import '../main.js'
+import "../main.js";
 function Header() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -201,7 +201,6 @@ function Header() {
 
   const onSearch = () => {};
   console.log(search);
-  
 
   return (
     <>
@@ -251,10 +250,10 @@ function Header() {
         <div className="header-middle has-center sticky-header fix-top sticky-content">
           <div className="container">
             <div className="header-left">
-              <a href="#" className="mobile-menu-toggle" title="Mobile Menu">
+              <a className="mobile-menu-toggle" title="Mobile Menu">
                 <i className="p-icon-bars-solid"></i>
               </a>
-              <a href="demo1.html" className="logo">
+              <a href="/" className="logo">
                 <img src="images/logo.png" alt="logo" width="171" height="41" />
               </a>
             </div>
@@ -278,7 +277,7 @@ function Header() {
             </div>
             <div className="header-right">
               <div className="header-search hs-toggle">
-                <a className="search-toggle" href="#" title="Search">
+                <a className="search-toggle" title="Search">
                   <i className="p-icon-search-solid"></i>
                 </a>
                 <form action="#" className="form-simple">
@@ -320,11 +319,7 @@ function Header() {
                     }}
                   >
                     {" "}
-                    <a
-                      className="login-toggle"
-                      href=""
-                      data-toggle="login-modal"
-                    >
+                    <a className="login-toggle" data-toggle="login-modal">
                       <i className="p-icon-user-solid mr-2"></i>
                       <span>login/Signup</span>
                     </a>
@@ -332,7 +327,7 @@ function Header() {
                 )}
 
                 <div className="canvas-overlay"></div>
-                <a href="#" className="btn-close"></a>
+                <a  className="btn-close"></a>
                 <div className="dropdown-box scrollable">
                   <div className="login-popup">
                     <div className="form-box">
@@ -403,7 +398,7 @@ function Header() {
                                     Remember me
                                   </label>
                                 </div>
-                                <a href="#" className="lost-link">
+                                <a href="" className="lost-link">
                                   Lost your password?
                                 </a>
                               </div>
