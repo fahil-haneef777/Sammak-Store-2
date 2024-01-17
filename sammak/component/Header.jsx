@@ -214,7 +214,7 @@ function Header() {
                 <span>+456 789 000</span>
               </a>
               <span className="divider"></span>
-              <a href="contact.html" className="contact">
+              <a className="contact">
                 <i className="p-icon-map"></i>
                 <span>Saudi Arabia,Jazan, KSA</span>
               </a>

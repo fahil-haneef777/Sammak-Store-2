@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Loader from "react-js-loader";
 import { RotatingLines } from "react-loader-spinner";
-import '../../main.js'
+import "../../main.js";
 function Shopview() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -206,7 +206,7 @@ function Shopview() {
                 <span>+456 789 000</span>
               </a>
               <span className="divider"></span>
-              <a href="contact.html" className="contact">
+              <a className="contact">
                 <i className="p-icon-map"></i>
                 <span>Saudi Arabia,Jazan, KSA</span>
               </a>
@@ -677,7 +677,7 @@ function Shopview() {
                 <a onClick={about1}>About Us</a>
               </li>
               <li>
-                <a href="contact.html">Contact Us</a>
+                <a onClick={contact1}>Contact Us</a>
               </li>
             </ul>
           </div>
