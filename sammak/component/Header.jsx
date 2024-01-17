@@ -201,6 +201,7 @@ function Header() {
 
   const onSearch = () => {};
   console.log(search);
+  
 
   return (
     <>

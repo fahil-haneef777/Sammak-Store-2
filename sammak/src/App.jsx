@@ -13,6 +13,7 @@ import SliderMain from "../component/SliderMain/SliderMain";
 
 function App() {
   const [count, setCount] = useState(0);
+  
 
   return (
     <Provider>

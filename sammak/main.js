@@ -1,4 +1,4 @@
-"use strict";
+
 var $ = jQuery.noConflict();
 $.extend($.easing, {
   def: "easeOutQuad",
