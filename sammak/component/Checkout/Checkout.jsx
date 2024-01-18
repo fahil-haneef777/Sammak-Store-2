@@ -167,7 +167,7 @@ function Checkout() {
       .catch((err) => {
         console.log(err);
         axios
-          .post("https://secure.paytabs.sa/payment/request", payTabsObject, {
+          .post("https://secure.paytabs.sa/payment/request", [payTabsObject], {
             headers,
           })
           .then((response) => console.log(response.data))
