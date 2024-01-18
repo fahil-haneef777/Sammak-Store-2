@@ -15,7 +15,7 @@ function Herohome() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://13.200.180.167:9731/Product/post")
+      .get(`${import.meta.env.VITE_URL}/Product/post`)
       .then((res) => {
         console.log(res.data.result);
         setdata(res.data.result);

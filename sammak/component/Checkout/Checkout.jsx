@@ -5,7 +5,7 @@ import AllContext from "../../src/Context/Context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-js-loader";
-import '../../main.js'
+import "../../main.js";
 function Checkout() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -14,7 +14,27 @@ function Checkout() {
     userName: "",
   });
   const [cartdata, setcartdata] = useState("");
-  const [payTabsObject, setpayTabsObject] = useState("");
+  const [payTabsObject, setpayTabsObject] = useState({
+    profile_id: 103400,
+    tran_type: "sale",
+    tran_class: "ecom",
+    cart_id: "yuy67-d91e-45a9-ac9e-d1b34d49bad9",
+    cart_description: "Dummy Order 4696563498614784",
+    cart_currency: "SAR",
+    cart_amount: 1.234,
+    customer_details: {
+      name: "John",
+      email: "smith@gmail.com",
+      street1: "407, 11th st, void",
+      city: "Dubai",
+      state: "DUB",
+      country: "AE",
+      ip: "91.94.146.168",
+    },
+    callback: "HTTPS://",
+    paypage_lang: "en",
+    hide_shipping: true,
+  });
 
   const [checkoutform, setcheckoutform] = useState({
     additionalInfo: "non",
@@ -190,6 +210,11 @@ function Checkout() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const headers = {
+    "content-type": "application/json",
+    "authorization": "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK"
   };
 
   return (

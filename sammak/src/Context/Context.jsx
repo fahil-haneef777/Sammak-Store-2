@@ -18,7 +18,7 @@ const Provider = ({ children }) => {
   const [search, setsearch] = useState("");
   useEffect(() => {
     axios
-      .get("http://13.200.180.167:9731/HeroSlider/getAll")
+      .get(`${import.meta.env.VITE_URL}/HeroSlider/getAll`)
       .then((res) => {
         console.log(res.data.result);
         setheroSliderData(res.data.result);
@@ -27,7 +27,7 @@ const Provider = ({ children }) => {
         console.log(err);
       });
   }, []);
-
+  console.log(import.meta.env.VITE_URL);
   const config = {
     headers: {
       Accept: "*/*",
@@ -38,13 +38,13 @@ const Provider = ({ children }) => {
   useEffect(() => {
     axios
       .get(
-        `http://13.200.180.167:9731/CartMaster/getAll/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
           "userid"
         )}`,
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
+        console.log(res);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)

@@ -80,7 +80,7 @@ function Header() {
       setloading(false);
     } else {
       axios
-        .post("http://13.200.180.167:9731/v1/auth/createUser", registeruser)
+        .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
         .then((res) => {
           setloading(false);
           console.log(res);
@@ -118,7 +118,7 @@ function Header() {
       setloading(false);
     } else {
       axios
-        .post("http://13.200.180.167:9731/v1/auth/login", loginuser)
+        .post(`${import.meta.env.VITE_URL}/v1/auth/login`, loginuser)
         .then((res) => {
           setloading(false);
 
@@ -159,7 +159,7 @@ function Header() {
   useEffect(() => {
     axios
       .get(
-        `http://13.200.180.167:9731/CartMaster/getAll/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
           "userid"
         )}`,
         config
@@ -186,7 +186,7 @@ function Header() {
     setcartdata(newCartdata);
     axios
       .delete(
-        `http://13.200.180.167:9731/CartMaster/deleteByProductId/${id}/${parseInt(
+        `${import.meta.env.VITE_URL}/CartMaster/deleteByProductId/${id}/${parseInt(
           localStorage.getItem("userid")
         )}/${cartid}`,
         config
@@ -201,6 +201,8 @@ function Header() {
 
   const onSearch = () => {};
   console.log(search);
+
+  console.log(import.meta.env.VITE_URL)
 
   return (
     <>
