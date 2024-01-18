@@ -182,7 +182,9 @@ function Shopview() {
     setcartdata(newCartdata);
     axios
       .delete(
-        `${import.meta.env.VITE_URL}/CartMaster/deleteByProductId/${id}/${parseInt(
+        `${
+          import.meta.env.VITE_URL
+        }/CartMaster/deleteByProductId/${id}/${parseInt(
           localStorage.getItem("userid")
         )}/${cartid}`,
         config
@@ -243,10 +245,10 @@ function Shopview() {
         <div className="header-middle has-center sticky-header fix-top sticky-content">
           <div className="container">
             <div className="header-left">
-              <a href="#" className="mobile-menu-toggle" title="Mobile Menu">
+              <a  className="mobile-menu-toggle" title="Mobile Menu">
                 <i className="p-icon-bars-solid"></i>
               </a>
-              <a href="demo1.html" className="logo">
+              <a className="logo">
                 <img src="images/logo.png" alt="logo" width="171" height="41" />
               </a>
             </div>
