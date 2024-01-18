@@ -7,7 +7,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "react-js-loader";
-import '../../main.js'
+import "../../main.js";
 function Viewcart() {
   //
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
@@ -102,7 +102,7 @@ function Viewcart() {
     }
 
     axios
-      .post("http://13.200.180.167:9731/v1/auth/createUser", registeruser)
+      .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
       .then((res) => {
         console.log(res.data);
         if (res.data.status === 200) {
@@ -138,7 +138,7 @@ function Viewcart() {
       });
     }
     axios
-      .post("http://13.200.180.167:9731/v1/auth/login", loginuser)
+      .post(`${import.meta.env.VITE_URL}/v1/auth/login`, loginuser)
       .then((res) => {
         console.log(res.data);
         console.log(res.data.result.emailId);
@@ -174,11 +174,11 @@ function Viewcart() {
   //
   useEffect(() => {
     if (!loggedin) {
-      navigate('/');
+      navigate("/");
     }
     axios
       .get(
-        `http://13.200.180.167:9731/CartMaster/getAll/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
           "userid"
         )}`,
         config
@@ -213,7 +213,9 @@ function Viewcart() {
     console.log(parseInt(localStorage.getItem("userid")));
     axios
       .delete(
-        `http://13.200.180.167:9731/CartMaster/deleteByProductId/${productid}/${parseInt(
+        `${
+          import.meta.env.VITE_URL
+        }/CartMaster/deleteByProductId/${productid}/${parseInt(
           localStorage.getItem("userid")
         )}/${cartid}`,
         config
@@ -237,7 +239,7 @@ function Viewcart() {
 
     axios
       .put(
-        `http://13.200.180.167:9731/CartMaster/UpdateCart/${id}/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/UpdateCart/${id}/${localStorage.getItem(
           "userid"
         )}/${cartId}/${updatedCartData[index].quantity}`,
         {},
@@ -266,7 +268,7 @@ function Viewcart() {
     console.log(updatedCartData[index].quantity);
     axios
       .put(
-        `http://13.200.180.167:9731/CartMaster/UpdateCart/${id}/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/UpdateCart/${id}/${localStorage.getItem(
           "userid"
         )}/${cartId}/${updatedCartData[index].quantity}`,
         {},
@@ -283,7 +285,7 @@ function Viewcart() {
   useEffect(() => {
     axios
       .get(
-        `http://13.200.180.167:9731/CartMaster/getAll/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
           "userid"
         )}`,
         config
@@ -869,7 +871,6 @@ function Viewcart() {
             </ul>
           </div>
         </div>
-
       </header>
 
       <main className="main cart">

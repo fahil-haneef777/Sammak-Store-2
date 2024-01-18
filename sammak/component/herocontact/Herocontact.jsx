@@ -21,7 +21,7 @@ function Herocontact() {
 
   const handleContact = () => {
     axios
-      .post("http://13.200.180.167:9731/contactUs/post", contactData, config)
+      .post(`${import.meta.env.VITE_URL}/contactUs/post`, contactData, config)
       .then((res) => {
         console.log(res.data);
         if(res.data.status===200){

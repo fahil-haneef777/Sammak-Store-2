@@ -93,7 +93,7 @@ function Herocart() {
     }
 
     axios
-      .post("http://13.200.180.167:9731/v1/auth/createUser", registeruser)
+      .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
       .then((res) => {
         console.log(res.data);
         if (res.data.status === 200) {
@@ -129,7 +129,7 @@ function Herocart() {
       setloading(false);
     } else {
       axios
-        .post("http://13.200.180.167:9731/v1/auth/login", loginuser)
+        .post(`${import.meta.env.VITE_URL}/v1/auth/login`, loginuser)
         .then((res) => {
           setloading(false);
 
@@ -179,7 +179,7 @@ function Herocart() {
 
     axios
       .post(
-        `http://13.200.180.167:9731/cart/addToCart/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/cart/addToCart/${localStorage.getItem(
           "id"
         )}/${localStorage.getItem("userid")}/${quantity}`,
         {},
@@ -207,7 +207,7 @@ function Herocart() {
   useEffect(() => {
     axios
       .get(
-        `http://13.200.180.167:9731/CartMaster/getAll/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
           "userid"
         )}`,
         config
@@ -234,7 +234,7 @@ function Herocart() {
     setcartdata(newCartdata);
     axios
       .delete(
-        `http://13.200.180.167:9731/CartMaster/deleteByProductId/${id}/${parseInt(
+        `${import.meta.env.VITE_URL}/CartMaster/deleteByProductId/${id}/${parseInt(
           localStorage.getItem("userid")
         )}`,
         config

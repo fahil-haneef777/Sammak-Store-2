@@ -111,7 +111,7 @@ function Checkout() {
   const register = () => {
     console.log(registeruser);
     axios
-      .post("http://13.200.180.167:9731/v1/auth/createUser", registeruser)
+      .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
       .then((res) => {
         console.log(res.data);
       })
@@ -123,7 +123,7 @@ function Checkout() {
   const login = () => {
     console.log(loginuser);
     axios
-      .post("http://13.200.180.167:9731/v1/auth/login", loginuser)
+      .post(`${import.meta.env.VITE_URL}/v1/auth/login`, loginuser)
       .then((res) => {
         console.log(res.data);
         console.log(res.data.result.emailId);
@@ -155,7 +155,7 @@ function Checkout() {
     e.preventDefault();
     axios
       .post(
-        `http://13.200.180.167:9731/Address/AddAddress/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/Address/AddAddress/${localStorage.getItem(
           "userid"
         )}`,
         [checkoutform],
@@ -172,7 +172,7 @@ function Checkout() {
   useEffect(() => {
     axios
       .get(
-        `http://13.200.180.167:9731/CartMaster/getAll/${localStorage.getItem(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
           "userid"
         )}`,
         config
@@ -199,7 +199,7 @@ function Checkout() {
     setcartdata(newCartdata);
     axios
       .delete(
-        `http://13.200.180.167:9731/CartMaster/deleteByProductId/${id}/${parseInt(
+        `${import.meta.env.VITE_URL}/CartMaster/deleteByProductId/${id}/${parseInt(
           localStorage.getItem("userid")
         )}`,
         config
