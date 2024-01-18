@@ -17,6 +17,7 @@ function Herocart() {
     password: "",
     userName: "",
   });
+  const [loading,setloading]=useState(false)
   const [ishover, setishovered] = useState(false);
   const [addCartLogin, setaddCartLogin] = useState(false);
   const [quantity, setquantity] = useState(1);
@@ -159,7 +160,6 @@ function Herocart() {
         });
     }
   };
-
 
   const token = localStorage.getItem("token");
   console.log(token);

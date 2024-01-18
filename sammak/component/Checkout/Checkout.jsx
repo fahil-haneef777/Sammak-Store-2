@@ -166,6 +166,12 @@ function Checkout() {
       })
       .catch((err) => {
         console.log(err);
+        axios
+          .post("https://secure.paytabs.sa/payment/request", payTabsObject, {
+            headers,
+          })
+          .then((response) => console.log(response.data))
+          .catch((error) => console.error("error", error));
       });
   };
 
@@ -199,7 +205,9 @@ function Checkout() {
     setcartdata(newCartdata);
     axios
       .delete(
-        `${import.meta.env.VITE_URL}/CartMaster/deleteByProductId/${id}/${parseInt(
+        `${
+          import.meta.env.VITE_URL
+        }/CartMaster/deleteByProductId/${id}/${parseInt(
           localStorage.getItem("userid")
         )}`,
         config
@@ -214,7 +222,7 @@ function Checkout() {
 
   const headers = {
     "content-type": "application/json",
-    "authorization": "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK"
+    authorization: "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK",
   };
 
   return (
