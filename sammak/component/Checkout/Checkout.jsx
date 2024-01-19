@@ -164,9 +164,13 @@ function Checkout() {
       .then((res) => {
         console.log(res.data);
         axios
-          .post("https://secure.paytabs.sa/payment/request", [payTabsObject], {
+          .post(
+            "https://secure.paytabs.sa/payment/request",
             headers,
-          })
+            JSON.stringify(payTabsObject),
+            
+            
+          )
           .then((response) => console.log(response.data))
           .catch((error) => console.error("error", error));
       })
@@ -226,7 +230,7 @@ function Checkout() {
   }, []);
   const headers = {
     "content-type": "application/json",
-    authorization: "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK",
+    Authorization: "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK",
   };
 
   return (
