@@ -9,7 +9,7 @@ import Loader from "react-js-loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RotatingLines } from "react-loader-spinner";
-import '../../main.js'
+import "../../main.js";
 function Herocart() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -17,7 +17,7 @@ function Herocart() {
     password: "",
     userName: "",
   });
-  const [loading,setloading]=useState(false)
+  const [loading, setloading] = useState(false);
   const [ishover, setishovered] = useState(false);
   const [addCartLogin, setaddCartLogin] = useState(false);
   const [quantity, setquantity] = useState(1);
@@ -91,32 +91,35 @@ function Herocart() {
         closeOnClick: true,
         position: "top-right",
       });
+      setloading(false);
+    } else {
+      axios
+        .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
+        .then((res) => {
+          setloading(false);
+          console.log(res);
+          if (res.data.status === 200) {
+            toast.success("Registered successfully", {
+              position: "top-right",
+              autoClose: 400,
+              closeOnClick: true,
+            });
+            setTimeout(() => {
+              toast.info(
+                "Please click link from your email for activation and login back!",
+                {
+                  autoClose: 3000,
+                  position: "top-right",
+                }
+              );
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setloading(false);
+        });
     }
-
-    axios
-      .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.status === 200) {
-          toast.success("Registered successfully", {
-            position: "top-right",
-            autoClose: 400,
-            closeOnClick: true,
-          });
-          setTimeout(() => {
-            toast.info(
-              "Please click link from your email for activation and login back!",
-              {
-                autoClose: 3000,
-                position: "top-right",
-              }
-            );
-          }, 1000);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const login = () => {
@@ -234,7 +237,9 @@ function Herocart() {
     setcartdata(newCartdata);
     axios
       .delete(
-        `${import.meta.env.VITE_URL}/CartMaster/deleteByProductId/${id}/${parseInt(
+        `${
+          import.meta.env.VITE_URL
+        }/CartMaster/deleteByProductId/${id}/${parseInt(
           localStorage.getItem("userid")
         )}`,
         config
@@ -482,6 +487,7 @@ function Herocart() {
                             <form
                               onSubmit={(e) => {
                                 e.preventDefault();
+                                setloading(true);
                                 login();
                               }}
                             >
@@ -532,6 +538,27 @@ function Herocart() {
                                 type="submit"
                               >
                                 Login
+                                {loading && (
+                                  <span
+                                    style={{
+                                      position: "relative",
+                                      left: "4vh",
+                                      top: "0.5vh",
+                                    }}
+                                  >
+                                    <RotatingLines
+                                      visible={true}
+                                      height="20"
+                                      width="25"
+                                      color="	#87CEEB"
+                                      strokeWidth="5"
+                                      animationDuration="0.75"
+                                      ariaLabel="rotating-lines-loading"
+                                      wrapperStyle={{}}
+                                      wrapperClass=""
+                                    />
+                                  </span>
+                                )}
                               </button>
                             </form>
                             <div className="form-choice text-center">
@@ -559,6 +586,7 @@ function Herocart() {
                             <form
                               onSubmit={(e) => {
                                 e.preventDefault();
+                                setloading(true);
                                 register();
                               }}
                             >
@@ -622,6 +650,27 @@ function Herocart() {
                                 type="submit"
                               >
                                 Register
+                                {loading && (
+                                  <span
+                                    style={{
+                                      position: "relative",
+                                      left: "4vh",
+                                      top: "0.5vh",
+                                    }}
+                                  >
+                                    <RotatingLines
+                                      visible={true}
+                                      height="20"
+                                      width="25"
+                                      color="	#87CEEB"
+                                      strokeWidth="5"
+                                      animationDuration="0.75"
+                                      ariaLabel="rotating-lines-loading"
+                                      wrapperStyle={{}}
+                                      wrapperClass=""
+                                    />
+                                  </span>
+                                )}
                               </button>
                             </form>
                             <div className="form-choice text-center">
@@ -838,10 +887,7 @@ function Herocart() {
                       />
                     </figure>
                   </div>
-                  <div
-                    className="product-thumbs-wrap"
-                 
-                  >
+                  <div className="product-thumbs-wrap">
                     <div className="product-thumbs">
                       <div className="product-thumb productco">
                         <img
@@ -1277,35 +1323,43 @@ function Herocart() {
             </div>
           </section>
         </div>
-         <div className="mobile-menu-wrapper">
-    <div className="mobile-menu-overlay"></div>
+        <div className="mobile-menu-wrapper">
+          <div className="mobile-menu-overlay"></div>
 
-    <a className="mobile-menu-close" href="#"><i className="p-icon-times"></i></a>
+          <a className="mobile-menu-close" href="#">
+            <i className="p-icon-times"></i>
+          </a>
 
-    <div className="mobile-menu-container scrollable">
-      <form action="#" className="inline-form">
-        <input type="search" name="search" autoComplete="off" placeholder="Search your keyword..." required="" />
-        <button className="btn btn-search" type="submit">
-          <i className="p-icon-search-solid"></i>
-        </button>
-      </form>
+          <div className="mobile-menu-container scrollable">
+            <form action="#" className="inline-form">
+              <input
+                type="search"
+                name="search"
+                autoComplete="off"
+                placeholder="Search your keyword..."
+                required=""
+              />
+              <button className="btn btn-search" type="submit">
+                <i className="p-icon-search-solid"></i>
+              </button>
+            </form>
 
-      <ul className="mobile-menu mmenu-anim">
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/shopview">Shop</a>
-        </li>
-        <li>
-          <a href="about.html">About Us</a>
-        </li>
-        <li>
-          <a href="contact.html">Contact Us</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+            <ul className="mobile-menu mmenu-anim">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/shopview">Shop</a>
+              </li>
+              <li>
+                <a href="about.html">About Us</a>
+              </li>
+              <li>
+                <a href="contact.html">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </main>
       <Footer />
     </>

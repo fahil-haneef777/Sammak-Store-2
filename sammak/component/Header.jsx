@@ -409,27 +409,7 @@ function Header() {
                                 type="submit"
                               >
                                 Login
-                                {loading && (
-                                  <span
-                                    style={{
-                                      position: "relative",
-                                      left: "4vh",
-                                      top: "0.5vh",
-                                    }}
-                                  >
-                                    <RotatingLines
-                                      visible={true}
-                                      height="20"
-                                      width="25"
-                                      color="	#87CEEB"
-                                      strokeWidth="5"
-                                      animationDuration="0.75"
-                                      ariaLabel="rotating-lines-loading"
-                                      wrapperStyle={{}}
-                                      wrapperClass=""
-                                    />
-                                  </span>
-                                )}
+                                
                               </button>
                             </form>
                             <div className="form-choice text-center">

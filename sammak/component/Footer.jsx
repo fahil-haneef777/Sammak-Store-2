@@ -52,7 +52,7 @@ function Footer() {
               </ul>
             </div>
             <div className="footer-center">
-              <a href="demo1.html" className="logo-footer">
+              <a  className="logo-footer">
                 <img src="images/logo.png" alt="logo-footer" width="171" height="41" />
               </a>
               <div className="social-links">

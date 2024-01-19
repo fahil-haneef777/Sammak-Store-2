@@ -27,7 +27,7 @@ const Provider = ({ children }) => {
         console.log(err);
       });
   }, []);
-  console.log(import.meta.env.VITE_URL);
+
   const config = {
     headers: {
       Accept: "*/*",

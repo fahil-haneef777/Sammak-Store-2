@@ -219,7 +219,11 @@ function Checkout() {
         console.log(err);
       });
   };
-
+  useEffect(() => {
+    if (!loggedin) {
+      navigate(-1);
+    }
+  });
   const headers = {
     "content-type": "application/json",
     authorization: "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK",
@@ -326,7 +330,7 @@ function Checkout() {
               <a href="#" className="mobile-menu-toggle" title="Mobile Menu">
                 <i className="p-icon-bars-solid"></i>
               </a>
-              <a href="demo1.html" className="logo">
+              <a href="/" className="logo">
                 <img src="images/logo.png" alt="logo" width="171" height="41" />
               </a>
             </div>
