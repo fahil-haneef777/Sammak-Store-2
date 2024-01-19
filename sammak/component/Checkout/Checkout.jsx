@@ -163,15 +163,15 @@ function Checkout() {
       )
       .then((res) => {
         console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
         axios
           .post("https://secure.paytabs.sa/payment/request", [payTabsObject], {
             headers,
           })
           .then((response) => console.log(response.data))
           .catch((error) => console.error("error", error));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -223,7 +223,7 @@ function Checkout() {
     if (!loggedin) {
       navigate(-1);
     }
-  });
+  }, []);
   const headers = {
     "content-type": "application/json",
     authorization: "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK",
