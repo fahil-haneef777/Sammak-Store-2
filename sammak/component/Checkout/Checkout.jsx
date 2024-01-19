@@ -15,12 +15,12 @@ function Checkout() {
   });
   const [cartdata, setcartdata] = useState("");
   const [payTabsObject, setpayTabsObject] = useState({
-    profile_id: 103400,
+    profile_id: 137790,
     tran_type: "sale",
     tran_class: "ecom",
     cart_id: "yuy67-d91e-45a9-ac9e-d1b34d49bad9",
     cart_description: "Dummy Order 4696563498614784",
-    cart_currency: "SAR",
+    cart_currency: "AED",
     cart_amount: 1.234,
     customer_details: {
       name: "John",
@@ -31,9 +31,7 @@ function Checkout() {
       country: "AE",
       ip: "91.94.146.168",
     },
-    callback: "HTTPS://",
-    paypage_lang: "en",
-    hide_shipping: true,
+    callback: "https://sammakstore.vercel.app",
   });
 
   const [checkoutform, setcheckoutform] = useState({
@@ -164,11 +162,22 @@ function Checkout() {
       .then((res) => {
         console.log(res.data);
         axios
-          .post("https://secure.paytabs.sa/payment/request", payTabsObject, {
-            header: { Authorization: "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK" },
+          .post(
+            "https://secure-global.paytabs.com/payment/request",
+            payTabsObject,
+            {
+              headers: {
+                Authorization: SMJ9N6H62D - JH9926JBTH - GGHKJ6DWRG,
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((response) => {
+            console.log("Response:", response.data);
           })
-          .then((response) => console.log(response.data))
-          .catch((error) => console.error("error", error));
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       })
       .catch((err) => {
         console.log(err);
