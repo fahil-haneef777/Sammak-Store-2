@@ -151,6 +151,7 @@ function Checkout() {
   };
   const handlePlace = (e) => {
     e.preventDefault();
+
     axios
       .post(
         `${import.meta.env.VITE_URL}/Address/AddAddress/${localStorage.getItem(
@@ -161,27 +162,11 @@ function Checkout() {
       )
       .then((res) => {
         console.log(res.data);
-        axios
-          .post(
-            "https://secure-global.paytabs.com/payment/request",
-            payTabsObject,
-            {
-              headers: {
-                Authorization: SMJ9N6H62D - JH9926JBTH - GGHKJ6DWRG,
-                "Content-Type": "application/json",
-              },
-            }
-          )
-          .then((response) => {
-            console.log("Response:", response.data);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
       })
       .catch((err) => {
         console.log(err);
       });
+    handlepaytabs();
   };
 
   useEffect(() => {
@@ -236,6 +221,46 @@ function Checkout() {
   const headers = {
     "content-type": "application/json",
     Authorization: "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK",
+  };
+
+  const handlepaytabs = () => {
+    const profileServerKey = "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK";
+
+    const requestData = {
+      profile_id: 103400,
+      tran_type: "sale",
+      tran_class: "ecom",
+      cart_id: "yuy67-d91e-45a9-ac9e-d1b34d49bad9",
+      cart_description: "Dummy Order 4696563498614784",
+      cart_currency: "SAR",
+      cart_amount: 1.234,
+      customer_details: {
+        name: "John",
+        email: "smith@gmail.com",
+        street1: "407, 11th st, void",
+        city: "Dubai",
+        state: "DUB",
+        country: "AE",
+        ip: "91.94.146.168",
+      },
+      callback: "HTTPS://",
+      paypage_lang: "en",
+      hide_shipping: true,
+    };
+
+    axios
+      .post("https://secure.paytabs.sa/payment/request", requestData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: profileServerKey,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (

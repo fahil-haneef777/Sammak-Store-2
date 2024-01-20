@@ -584,7 +584,7 @@ function Header() {
                   <a href="#" className="cart-toggle link">
                     <i className="p-icon-cart-solid">
                       <span className="cart-count">
-                        {cartdata.length > 0 && cartdata.length}
+                        {cartdata.length > 0? cartdata.length:0}
                       </span>
                     </i>
                   </a>
