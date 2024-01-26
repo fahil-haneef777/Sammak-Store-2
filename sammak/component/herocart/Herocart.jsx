@@ -353,8 +353,8 @@ function Herocart() {
               <a href="#" className="mobile-menu-toggle" title="Mobile Menu">
                 <i className="p-icon-bars-solid"></i>
               </a>
-              <a href="demo1.html" className="logo">
-                <img src="images/logo.png" alt="logo" width="171" height="41" />
+              <a href="/" className="logo">
+                <img src="/images/logo.png" alt="logo" width="171" height="41" />
               </a>
             </div>
             <div className="header-center">
