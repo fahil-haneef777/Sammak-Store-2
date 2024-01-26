@@ -1,6 +1,24 @@
-import React from "react";
-import '../../main.js'
+import React, { useState, useEffect } from "react";
+import "../../main.js";
+import axios from "axios";
+
 const SpecialSection = () => {
+  const [data, setdata] = useState("");
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/getallproducts")
+      .then((res) => {
+        console.log(res.data.allproducts);
+        setdata(res.data.allproducts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  axios
+    .get("http:localhost:3000/getallproducts")
+    .then((res) => {})
+    .catch((err) => {});
   return (
     <section
       className="benefit-section appear-animate fadeIn appear-animation-visible"
@@ -16,7 +34,7 @@ const SpecialSection = () => {
         <figure className="img-back floating">
           <img
             className="layer"
-            src="images/demos/demo1/banner/banner1.jpg"
+            src={data?data[0].images[0].url:''}
             width="674"
             height="514"
             alt="banner"
@@ -37,8 +55,7 @@ const SpecialSection = () => {
               <div className="icon-box-content">
                 <h4 className="icon-box-title">Good for Health</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur eiusmod tempor
-                  incididunt ut labore.
+               {data?data[3].images[0].url:''}
                 </p>
               </div>
             </div>

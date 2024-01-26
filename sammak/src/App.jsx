@@ -9,11 +9,11 @@ import Checkout from "../component/Checkout/Checkout";
 import ResetPassword from "../pages/home/ResetPassword/ResetPassword";
 import Shopview from "../component/Shopview/Shopview";
 import SliderMain from "../component/SliderMain/SliderMain";
-
+import OrderComplete from "../component/OrderComplete/OrderComplete";
+import CheckoutMain from "../component/Main/CheckoutMain";
 
 function App() {
   const [count, setCount] = useState(0);
-  
 
   return (
     <Provider>
@@ -25,7 +25,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/shopview" element={<Shopview />} />
-        
+          <Route path="/orderComplete" element={<OrderComplete />} />
+          <Route path="/setting" element={<CheckoutMain />} />
         </Routes>
       </BrowserRouter>
     </Provider>

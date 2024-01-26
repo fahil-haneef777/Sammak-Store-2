@@ -234,6 +234,8 @@ function Viewcart() {
       ...updatedCartData[index],
       quantity: updatedCartData[index].quantity + 1,
     };
+    updatedCartData[index].subtotal =
+    updatedCartData[index].quantity * updatedCartData[index].productResponse.sellingPrice;
 
     setcartdata(updatedCartData);
 
@@ -263,7 +265,9 @@ function Viewcart() {
     if (updatedCartData[index].quantity === 0) {
       updatedCartData[index].quantity = 1;
     }
-    console.log(cartId, id);
+    updatedCartData[index].subtotal =
+    updatedCartData[index].quantity * updatedCartData[index].productResponse.sellingPrice;
+
     setcartdata(updatedCartData);
     console.log(updatedCartData[index].quantity);
     axios
@@ -426,7 +430,7 @@ function Viewcart() {
               <a href="#" className="mobile-menu-toggle" title="Mobile Menu">
                 <i className="p-icon-bars-solid"></i>
               </a>
-              <a href="demo1.html" className="logo">
+              <a href="/" className="logo">
                 <img src="images/logo.png" alt="logo" width="171" height="41" />
               </a>
             </div>
