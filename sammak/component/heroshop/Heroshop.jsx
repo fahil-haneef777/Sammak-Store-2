@@ -118,7 +118,7 @@ function Heroshop() {
                           style={{ width: "269px", height: "369px" }}
                         />
                         <img
-                          src="images/products/5-2-295x369.jpg"
+                          src="public/images/products/5-2-295x369.jpg"
                           alt="product"
                           style={{ width: "269px", height: "369px" }}
                         />

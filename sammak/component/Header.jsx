@@ -260,7 +260,7 @@ function Header() {
                 <i className="p-icon-bars-solid"></i>
               </a>
               <a href="/" className="logo">
-                <img src="public/images/logo.png" alt="logo" width="171" height="41" />
+                <img src="../public/images/logo.png" alt="logo" width="171" height="41" />
               </a>
             </div>
             <div className="header-center">
