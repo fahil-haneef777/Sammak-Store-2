@@ -14,25 +14,6 @@ function Checkout() {
     userName: "",
   });
   const [cartdata, setcartdata] = useState("");
-  const [payTabsObject, setpayTabsObject] = useState({
-    profile_id: 137790,
-    tran_type: "sale",
-    tran_class: "ecom",
-    cart_id: "yuy67-d91e-45a9-ac9e-d1b34d49bad9",
-    cart_description: "Dummy Order 4696563498614784",
-    cart_currency: "AED",
-    cart_amount: 1.234,
-    customer_details: {
-      name: "John",
-      email: "smith@gmail.com",
-      street1: "407, 11th st, void",
-      city: "Dubai",
-      state: "DUB",
-      country: "AE",
-      ip: "91.94.146.168",
-    },
-    callback: "https://sammakstore.vercel.app",
-  });
 
   const [checkoutform, setcheckoutform] = useState({
     additionalInfo: "non",
@@ -46,7 +27,38 @@ function Checkout() {
     pinCode: "",
     state: "",
   });
+  const [customer, setcustomer] = useState({
+    city: "",
+    country: "",
+    email: "",
+    ip: "",
+    name: "",
+    state: "",
+    street1: "",
+  });
 
+  const [paytabinfo, setpaytabinfo] = useState({
+    callback: "https://admin.sammak.store",
+    cart_amount: "111",
+    cart_currency: "SAR",
+    cart_description: "Fish",
+    cart_id: "10 11",
+    customer_details: {
+      city: "",
+      country: "",
+      email: "",
+      ip: "",
+      name: "",
+      state: "",
+      street1: "",
+    },
+    hide_shipping: true,
+    paypage_lang: "en",
+    profile_id: 0,
+    tran_class: "ecom",
+    tran_type: "sale  ",
+  });
+  console.log(paytabinfo);
   //
 
   const [data, setdata] = useState("");
@@ -224,37 +236,9 @@ function Checkout() {
   };
 
   const handlepaytabs = () => {
-    const profileServerKey = "SHJN6KTM9G-J6W6WR6GTN-G2RMKNRWKK";
-
-    const requestData = {
-      profile_id: 103400,
-      tran_type: "sale",
-      tran_class: "ecom",
-      cart_id: "yuy67-d91e-45a9-ac9e-d1b34d49bad9",
-      cart_description: "Dummy Order 4696563498614784",
-      cart_currency: "SAR",
-      cart_amount: 1.234,
-      customer_details: {
-        name: "John",
-        email: "smith@gmail.com",
-        street1: "407, 11th st, void",
-        city: "Dubai",
-        state: "DUB",
-        country: "AE",
-        ip: "91.94.146.168",
-      },
-      callback: "HTTPS://",
-      paypage_lang: "en",
-      hide_shipping: true,
-    };
-
+    console.log(paytabinfo);
     axios
-      .post("https://secure.paytabs.sa/payment/request", requestData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: profileServerKey,
-        },
-      })
+      .post(`${import.meta.env.VITE_URL}/checkOut/fromCart`, paytabinfo, config)
       .then((response) => {
         console.log(response.data);
       })
@@ -262,7 +246,7 @@ function Checkout() {
         console.error("Error:", error);
       });
   };
-
+console.log(paytabinfo)
   return (
     <>
       <header className="header">
@@ -823,6 +807,13 @@ function Checkout() {
                             ...checkoutform,
                             firstName: e.target.value,
                           });
+                          setpaytabinfo({
+                            ...paytabinfo,
+                            customer_details: {
+                              ...paytabinfo.customer_details,
+                              name: e.target.value,
+                            },
+                          });
                         }}
                       />
                     </div>
@@ -855,6 +846,13 @@ function Checkout() {
                           ...checkoutform,
                           country: e.target.value,
                         });
+                        setpaytabinfo({
+                          ...paytabinfo,
+                          customer_details: {
+                            ...paytabinfo.customer_details,
+                            country: e.target.value,
+                          },
+                        });
                       }}
                     />
                   </div>
@@ -869,6 +867,13 @@ function Checkout() {
                       setcheckoutform({
                         ...checkoutform,
                         address: e.target.value,
+                      });
+                      setpaytabinfo({
+                        ...paytabinfo,
+                        customer_details: {
+                          ...paytabinfo.customer_details,
+                          street1: e.target.value,
+                        },
                       });
                     }}
                   />
@@ -885,6 +890,13 @@ function Checkout() {
                             ...checkoutform,
                             city: e.target.value,
                           });
+                          setpaytabinfo({
+                            ...paytabinfo,
+                            customer_details: {
+                              ...paytabinfo.customer_details,
+                              city: e.target.value,
+                            },
+                          });
                         }}
                       />
                     </div>
@@ -899,6 +911,13 @@ function Checkout() {
                           setcheckoutform({
                             ...checkoutform,
                             state: e.target.value,
+                          });
+                          setpaytabinfo({
+                            ...paytabinfo,
+                            customer_details: {
+                              ...paytabinfo.customer_details,
+                              state: e.target.value,
+                            },
                           });
                         }}
                       />
@@ -916,6 +935,13 @@ function Checkout() {
                           setcheckoutform({
                             ...checkoutform,
                             pinCode: e.target.value,
+                          });
+                          setpaytabinfo({
+                            ...paytabinfo,
+                            customer_details: {
+                              ...paytabinfo.customer_details,
+                              ip: e.target.value,
+                            },
                           });
                         }}
                       />
@@ -946,6 +972,13 @@ function Checkout() {
                       setcheckoutform({
                         ...checkoutform,
                         email: e.target.value,
+                      });
+                      setpaytabinfo({
+                        ...paytabinfo,
+                        customer_details: {
+                          ...paytabinfo.customer_details,
+                          email: e.target.value,
+                        },
                       });
                     }}
                   />
