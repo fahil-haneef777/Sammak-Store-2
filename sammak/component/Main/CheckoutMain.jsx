@@ -1,10 +1,13 @@
 import React from "react";
-import '../../main.js'
+import "../../main.js";
+import { useNavigate } from "react-router-dom";
 function CheckoutMain() {
+  const navigate = useNavigate();
+
   return (
     <>
       <main className="main account-page">
-        <div className="page-header" style={{backgroundColor: '#f9f8f4' }}>
+        <div className="page-header" style={{ backgroundColor: "#f9f8f4" }}>
           <h1 className="page-title">My Account</h1>
         </div>
         <nav className="breadcrumb-nav has-border">
@@ -31,25 +34,31 @@ function CheckoutMain() {
                     Orders
                   </a>
                 </li>
-             
+
                 <li className="nav-item">
                   <a className="nav-link" href="#address">
                     Addresses
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link no-tab-item" href="login.html">
+                  <a
+                    className="nav-link no-tab-item"
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate("/");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
                     Logout
                   </a>
                 </li>
               </ul>
               <div className="tab-content col-lg-9 col-md-8">
                 <div className="tab-pane active" id="dashboard">
-                 
                   <p className="">
                     From your account dashboard you can view your &nbsp;
                     <a href="#orders" className="link-to-tab text-primary">
-                       recent orders
+                      recent orders
                     </a>
                     , manage your{" "}
                     <a href="#address" className="link-to-tab text-primary">
@@ -75,18 +84,7 @@ function CheckoutMain() {
                         </a>
                       </div>
                     </div>
-                    <div className="ib-wrapper mb-4">
-                      <div className="icon-box text-center ib-border">
-                        <a href="#downloads">
-                          <span className="icon-box-icon">
-                            <i className="p-icon-download"></i>
-                          </span>
-                          <div className="icon-box-content">
-                            <p>DOWNLOADS</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
+
                     <div className="ib-wrapper mb-4">
                       <div className="icon-box text-center ib-border">
                         <a href="#address">
@@ -111,25 +109,21 @@ function CheckoutMain() {
                         </a>
                       </div>
                     </div>
-                    <div className="ib-wrapper mb-4">
+
+                    <div
+                      className="ib-wrapper mb-4"
+                      onClick={() => {
+                        localStorage.clear();
+                        navigate("/");
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
                       <div className="icon-box text-center ib-border">
-                        <a href="wishlist.html" className="no-tab-item">
-                          <span className="icon-box-icon">
-                            <i className="p-icon-heart-solid"></i>
-                          </span>
-                          <div className="icon-box-content">
-                            <p>WISHLIST</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="ib-wrapper mb-4">
-                      <div className="icon-box text-center ib-border">
-                        <a href="login.html" className="no-tab-item">
+                        <a className="no-tab-item">
                           <span className="icon-box-icon">
                             <i className="p-icon-logout"></i>
                           </span>
-                          <div className="icon-box-content">
+                          <div>
                             <p>LOGOUT</p>
                           </div>
                         </a>

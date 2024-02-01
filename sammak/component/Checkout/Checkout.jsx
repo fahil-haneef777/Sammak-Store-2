@@ -14,6 +14,8 @@ function Checkout() {
     userName: "",
   });
   const [cartdata, setcartdata] = useState("");
+  const [cod, setcod] = useState(false);
+  const [total, settotal] = useState("");
 
   const [checkoutform, setcheckoutform] = useState({
     additionalInfo: "non",
@@ -27,36 +29,35 @@ function Checkout() {
     pinCode: "",
     state: "",
   });
-  const [customer, setcustomer] = useState({
-    city: "",
-    country: "",
-    email: "",
-    ip: "",
-    name: "",
-    state: "",
-    street1: "",
-  });
 
+  const cartid = localStorage.getItem("cart");
+  const parseCartid = JSON.parse(cartid);
+  console.log(parseCartid);
+
+  console.log(parseCartid);
   const [paytabinfo, setpaytabinfo] = useState({
     callback: "https://admin.sammak.store",
-    cart_amount: "111",
+    cart_amount:'11',
     cart_currency: "SAR",
     cart_description: "Fish",
-    cart_id: "10 11",
+    cart_id: "17,18",
     customer_details: {
       city: "",
       country: "",
       email: "",
-      ip: "",
       name: "",
+      phone: "",
       state: "",
       street1: "",
+      zip: "",
     },
     hide_shipping: true,
+    paymentMode: "online",
     paypage_lang: "en",
     profile_id: 0,
     tran_class: "ecom",
     tran_type: "sale  ",
+    userId: 13,
   });
   console.log(paytabinfo);
   //
@@ -153,7 +154,7 @@ function Checkout() {
       setcartdata(parseCart);
     }
   }, []);
-  console.log(cartdata);
+
   const token = localStorage.getItem("token");
   const config = {
     headers: {
@@ -161,24 +162,30 @@ function Checkout() {
       Authorization: `Bearer ` + token,
     },
   };
+  const isAnyfieldEmpty = () => {
+    return Object.values(checkoutform).some((value) => value === "");
+  };
   const handlePlace = (e) => {
     e.preventDefault();
-
-    axios
-      .post(
-        `${import.meta.env.VITE_URL}/Address/AddAddress/${localStorage.getItem(
-          "userid"
-        )}`,
-        [checkoutform],
-        config
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    handlepaytabs();
+    if (isAnyfieldEmpty()) {
+      console.log("please fill all the field");
+    } else {
+      axios
+        .post(
+          `${
+            import.meta.env.VITE_URL
+          }/Address/AddAddress/${localStorage.getItem("userid")}`,
+          checkoutform,
+          config
+        )
+        .then((res) => {
+          console.log(res.data);
+          handlepaytabs();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -241,12 +248,18 @@ function Checkout() {
       .post(`${import.meta.env.VITE_URL}/checkOut/fromCart`, paytabinfo, config)
       .then((response) => {
         console.log(response.data);
+        if (cod) {
+          navigate("/ordercomplete");
+          console.log("cod");
+        } else {
+          window.location.href = response.data.result;
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-console.log(paytabinfo)
+  console.log(paytabinfo);
   return (
     <>
       <header className="header">
@@ -721,16 +734,7 @@ console.log(paytabinfo)
 
                     <div className="cart-total">
                       <label>Total:</label>
-                      <span className="price">
-                        {" "}
-                        {cartdata.length > 0 &&
-                          cartdata
-                            .reduce((acc, curr) => {
-                              return acc + curr.subtotal;
-                            }, 0)
-                            .toFixed(2)}{" "}
-                        SAR
-                      </span>
+                      <span className="price"> C SAR</span>
                     </div>
 
                     <div className="cart-action">
@@ -940,7 +944,7 @@ console.log(paytabinfo)
                             ...paytabinfo,
                             customer_details: {
                               ...paytabinfo.customer_details,
-                              ip: e.target.value,
+                              zip: e.target.value,
                             },
                           });
                         }}
@@ -957,6 +961,13 @@ console.log(paytabinfo)
                           setcheckoutform({
                             ...checkoutform,
                             phoneNumber: e.target.value,
+                          });
+                          setpaytabinfo({
+                            ...paytabinfo,
+                            customer_details: {
+                              ...paytabinfo.customer_details,
+                              phone: e.target.value,
+                            },
                           });
                         }}
                       />
@@ -1046,8 +1057,18 @@ console.log(paytabinfo)
                         </h4>
                         <div className="card">
                           <div className="card-header">
-                            <a href="#collapse1" className="collapse">
-                              Check payments
+                            <a
+                              href="#collapse1"
+                              className="collapse"
+                              onClick={() => {
+                                setpaytabinfo({
+                                  ...paytabinfo,
+                                  paymentMode: "online",
+                                });
+                                setcod(false);
+                              }}
+                            >
+                              Online
                             </a>
                           </div>
                           <div
@@ -1056,14 +1077,23 @@ console.log(paytabinfo)
                             style={{ display: "block" }}
                           >
                             <div className="card-body">
-                              Please send a check to Store Name, Store Street,
-                              Store Town, Store State / County, Store Postcode.
+                              Pay with debit/Credit card
                             </div>
                           </div>
                         </div>
                         <div className="card">
                           <div className="card-header">
-                            <a href="#collapse2" className="expand">
+                            <a
+                              href="#collapse2"
+                              className="expand"
+                              onClick={() => {
+                                setpaytabinfo({
+                                  ...paytabinfo,
+                                  paymentMode: "COD",
+                                });
+                                setcod(true);
+                              }}
+                            >
                               Cash on delivery
                             </a>
                           </div>

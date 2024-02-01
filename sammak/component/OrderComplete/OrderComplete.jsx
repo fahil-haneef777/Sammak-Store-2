@@ -1,10 +1,43 @@
-import React from 'react';
-import Header from '../Header';
+import React, { useEffect, useState } from "react";
+import Header from "../Header";
+import axios from "axios";
 function OrderComplete(props) {
-    return (
-      <>
- 
-        <div className="page-content pt-8 pb-10 mb-10">
+  const [cartdata, setcartdata] = useState("");
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ` + token,
+    }
+  }
+  
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
+          "userid"
+        )}`,
+        config
+      )
+      .then((res) => {
+        console.log(res.data.result.cartItemResponseList);
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(res.data.result.cartItemResponseList)
+        );
+        setcartdata(res.data.result.cartItemResponseList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+      
+  }, []);
+
+  return (
+    <>
+   
+      <div className="page-content pt-8 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
           <h3 className="title title-step">
             <a href="cart.html">1. Shopping Cart</a>
@@ -51,7 +84,9 @@ function OrderComplete(props) {
                   </g>
                 </svg>
               </div>
-              <h3 className="icon-box-title">Thank you. Your Order has been received.</h3>
+              <h3 className="icon-box-title">
+                Thank you. Your Order has been received.
+              </h3>
             </div>
           </div>
           <div className="order-results row cols-xl-6 cols-md-3 cols-sm-2 mt-10 pt-2 mb-4">
@@ -78,7 +113,15 @@ function OrderComplete(props) {
                   <td>
                     <h4 className="summary-subtitle">Subtotal:</h4>
                   </td>
-                  <td className="summary-value font-weight-normal">$325.99</td>
+                  <td className="summary-value font-weight-normal">
+                    {" "}
+                    {cartdata.length > 0 &&
+                      cartdata
+                        .reduce((acc, curr) => {
+                          return acc + curr.subtotal;
+                        }, 0)
+                        .toFixed(2)}{" "} SAR
+                  </td>
                 </tr>
                 <tr className="summary-subtotal">
                   <td>
@@ -91,7 +134,12 @@ function OrderComplete(props) {
                     <h4 className="summary-subtitle">Total:</h4>
                   </td>
                   <td>
-                    <p className="summary-total-price">$325.99</p>
+                    <p className="summary-total-price">{cartdata.length > 0 &&
+                      cartdata
+                        .reduce((acc, curr) => {
+                          return acc + curr.subtotal;
+                        }, 0)
+                        .toFixed(2)}{" "} SAR</p>
                   </td>
                 </tr>
               </tbody>
@@ -99,9 +147,8 @@ function OrderComplete(props) {
           </div>
         </div>
       </div>
-      </>
-
-    );
+    </>
+  );
 }
 
 export default OrderComplete;

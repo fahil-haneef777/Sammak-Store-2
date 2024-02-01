@@ -24,7 +24,7 @@ function SliderMain(props) {
         navigation={true}
         modules={[Autoplay, Navigation]}
         className="mySwiper"
-        style={{ height: "80vh" }}
+        style={{ height: "80vh", }}
       >
         {heroSilderData.length > 0 &&
           Array.isArray(heroSilderData) &&

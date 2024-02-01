@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "react-js-loader";
 import { RotatingLines } from "react-loader-spinner";
 import "../main.js";
+import { jwtDecode } from "jwt-decode";
 function Header() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -23,6 +24,7 @@ function Header() {
   });
   const [cartdata, setcartdata] = useState("");
   const [loading, setloading] = useState(false);
+  const [decode, setdecode] = useState("");
 
   const navigate = useNavigate();
   const {
@@ -177,6 +179,17 @@ function Header() {
       });
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const load = jwtDecode(localStorage.getItem("token"));
+      setdecode(load);
+      const expirationTime = decode.exp * 1000;
+      const currentTime = new Date().getTime();
+      const timeUntilExpiration = expirationTime - currentTime;
+      console.log(timeUntilExpiration);
+    }
+  }, []);
+
   const handleDelete = (index, id, cartid) => {
     let newCartdata =
       cartdata.length > 0 &&
@@ -208,8 +221,6 @@ function Header() {
 
   return (
     <>
-
-    
       <header className="header">
         <div className="header-top">
           <div className="container">
@@ -260,7 +271,12 @@ function Header() {
                 <i className="p-icon-bars-solid"></i>
               </a>
               <a href="/" className="logo">
-                <img src="/images/logo.png" alt="logo" width="171" height="41" />
+                <img
+                  src="/images/logo.png"
+                  alt="logo"
+                  width="171"
+                  height="41"
+                />
               </a>
             </div>
             <div className="header-center">
@@ -586,7 +602,7 @@ function Header() {
                   <a href="#" className="cart-toggle link">
                     <i className="p-icon-cart-solid">
                       <span className="cart-count">
-                        {cartdata.length > 0? cartdata.length:0}
+                        {cartdata.length > 0 ? cartdata.length : 0}
                       </span>
                     </i>
                   </a>

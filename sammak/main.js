@@ -1,4 +1,3 @@
-
 var $ = jQuery.noConflict();
 $.extend($.easing, {
   def: "easeOutQuad",
@@ -1643,20 +1642,22 @@ window.Panda = {};
   })();
   Panda.initProductSinglePage = (function () {
     function alertCartAdded(e) {
-      var $product = $(e.currentTarget).closest(".product-single");
-      $(".cart-added-alert").remove();
-      $(
-        Panda.parseTemplate(Panda.defaults.templateCartAddedAlert, {
-          name: $product.find("h1.product-name").text(),
-        })
-      )
-        .insertBefore($product)
-        .fadeIn();
-      if ($(this).closest(".product-form-group").length > 0) {
-        $("html, body").animate({ scrollTop: 0 }, 600);
+      if (localStorage.getItem("token")) {
+        var $product = $(e.currentTarget).closest(".product-single");
+        $(".cart-added-alert").remove();
+        $(
+          Panda.parseTemplate(Panda.defaults.templateCartAddedAlert, {
+            name: $product.find("h1.product-name").text(),
+          })
+        )
+          .insertBefore($product)
+          .fadeIn();
+        if ($(this).closest(".product-form-group").length > 0) {
+          $("html, body").animate({ scrollTop: 0 }, 600);
+        }
+        $(".sticky-sidebar ").trigger("recalc.pin");
+        e.preventDefault();
       }
-      $(".sticky-sidebar ").trigger("recalc.pin");
-      e.preventDefault();
     }
     function compareAdded(e) {
       var $product = $(e.currentTarget).closest(".product-single");
@@ -2297,6 +2298,8 @@ window.Panda = {};
         });
       });
     },
+
+    // mobile menu active/close found here!!!!
     initMobileMenu: function () {
       function showMobileMenu(e) {
         e.preventDefault();
@@ -2322,6 +2325,7 @@ window.Panda = {};
       $(".mobile-menu-close").on("click", hideMobileMenu);
       Panda.$window.on("resize", hideMobileMenu);
     },
+    // ends
     initFilterMenu: function () {
       $(".search-ul li").each(function () {
         if (this.lastElementChild && this.lastElementChild.tagName === "UL") {
@@ -2550,16 +2554,16 @@ window.Panda = {};
     init: function () {
       this.initProductsQuickview();
       this.initProductsCartAction();
-      this.initRemoveData();
-      this.initProductsCompareAction();
+      // this.initRemoveData();
+      // this.initProductsCompareAction();
       this.initProductsLoginAction();
-      this.initProductsLoad();
-      this.initProductsScrollLoad(".scroll-load");
-      this.initProductType("slideup");
-      this.initWishlistButton(".product:not(.product-single) .btn-wishlist");
-      Panda.call(Panda.ratingTooltip, 500);
-      this.initSelectMenu(".select-menu");
-      Panda.priceSlider(".filter-price-slider");
+      // this.initProductsLoad();
+      // this.initProductsScrollLoad(".scroll-load");
+      // this.initProductType("slideup");
+      // this.initWishlistButton(".product:not(.product-single) .btn-wishlist");
+      // Panda.call(Panda.ratingTooltip, 500);
+      // this.initSelectMenu(".select-menu");
+      // Panda.priceSlider(".filter-price-slider");
     },
     initProductType: function (type) {
       if (type === "slideup") {
@@ -2595,115 +2599,117 @@ window.Panda = {};
           });
       }
     },
-    initSelectMenu: function () {
-      Panda.$body
-        .on("click", ".select-menu", function (e) {
-          var $this = $(this);
-          if (!$this.hasClass("toolbox-sort")) {
-            var $selectMenu = $(e.currentTarget),
-              $target = $(e.target),
-              isOpened = $selectMenu.hasClass("opened"),
-              $menuItem = $target.closest("li");
-            if ($selectMenu.hasClass("fixed")) {
-              e.stopPropagation();
-            } else {
-              if ($this.closest(".sidebar-content").length != 0) {
-                $(".select-menu").removeClass("opened");
-              }
-            }
-            if ($selectMenu.is($target.parent())) {
-              isOpened || $selectMenu.addClass("opened");
-              e.stopPropagation();
-            } else {
-              $menuItem.toggleClass("active");
-              if ($menuItem.hasClass("active")) {
-                $(".select-items").show();
-                $(
-                  '<a href="#" class="select-item">' +
-                    $target.text() +
-                    '<i class="p-icon-times"></i></a>'
-                )
-                  .insertBefore(".select-items .filter-clean")
-                  .hide()
-                  .fadeIn()
-                  .data("link", $menuItem);
-              } else {
-                $(".select-items > .select-item")
-                  .filter(function (i, el) {
-                    return el.innerText == $target.text();
-                  })
-                  .fadeOut(function () {
-                    $(this).remove();
-                    if ($(".select-items").children().length < 2) {
-                      $(".select-items").hide();
-                    }
-                  });
-              }
-            }
-          }
-          e.preventDefault();
-        })
-        .on("click", function (e) {
-          if (
-            $(e.target).closest(".filter-items").length == 0 ||
-            $(e.target).hasClass("select-menu")
-          ) {
-            $(".select-menu").removeClass("opened");
-          }
-        })
-        .on("click", ".select-items .filter-clean", function (e) {
-          var $clean = $(this);
-          $clean.siblings().each(function () {
-            var $link = $(this).data("link");
-            $link && $link.removeClass("active");
-          });
-          $clean.parent().fadeOut(function () {
-            $clean.siblings().remove();
-          });
-          e.preventDefault();
-        })
-        .on("click", ".select-item i", function (e) {
-          $(e.currentTarget)
-            .parent()
-            .fadeOut(function () {
-              var $this = $(this),
-                $link = $this.data("link");
-              $link && $link.toggleClass("active");
-              $this.remove();
-              if ($(".select-items").children().length < 2) {
-                $(".select-items").hide();
-              }
-            });
-          e.preventDefault();
-        })
-        .on("click", ".filter-clean", function (e) {
-          $(".shop-sidebar .filter-items .active").removeClass("active");
-          e.preventDefault();
-        })
-        .on("click", ".filter-items li", function (e) {
-          var $this = $(this),
-            $ul = $this.closest(".filter-items");
-          if ($(this).closest(".summary").length) {
-            $ul.find(".active").removeClass("active");
-            $this.closest("li").addClass("active");
-            e.preventDefault();
-            return;
-          }
-          if (
-            !$ul.hasClass("search-ul") &&
-            !$ul.parent().hasClass("select-menu")
-          ) {
-            if ($ul.hasClass("filter-price")) {
-              $this.parent().siblings().removeClass("active");
-              $this.parent().toggleClass("active");
-              e.preventDefault();
-            } else {
-              $this.closest("li").toggleClass("active");
-              e.preventDefault();
-            }
-          }
-        });
-    },
+
+    // initSelectMenu: function () {
+    //   Panda.$body
+    //     .on("click", ".select-menu", function (e) {
+
+    //       var $this = $(this);
+    //       if (!$this.hasClass("toolbox-sort")) {
+    //         var $selectMenu = $(e.currentTarget),
+    //           $target = $(e.target),
+    //           isOpened = $selectMenu.hasClass("opened"),
+    //           $menuItem = $target.closest("li");
+    //         if ($selectMenu.hasClass("fixed")) {
+    //           e.stopPropagation();
+    //         } else {
+    //           if ($this.closest(".sidebar-content").length != 0) {
+    //             $(".select-menu").removeClass("opened");
+    //           }
+    //         }
+    //         if ($selectMenu.is($target.parent())) {
+    //           isOpened || $selectMenu.addClass("opened");
+    //           e.stopPropagation();
+    //         } else {
+    //           $menuItem.toggleClass("active");
+    //           if ($menuItem.hasClass("active")) {
+    //             $(".select-items").show();
+    //             $(
+    //               '<a href="#" class="select-item">' +
+    //                 $target.text() +
+    //                 '<i class="p-icon-times"></i></a>'
+    //             )
+    //               .insertBefore(".select-items .filter-clean")
+    //               .hide()
+    //               .fadeIn()
+    //               .data("link", $menuItem);
+    //           } else {
+    //             $(".select-items > .select-item")
+    //               .filter(function (i, el) {
+    //                 return el.innerText == $target.text();
+    //               })
+    //               .fadeOut(function () {
+    //                 $(this).remove();
+    //                 if ($(".select-items").children().length < 2) {
+    //                   $(".select-items").hide();
+    //                 }
+    //               });
+    //           }
+    //         }
+    //       }
+    //       e.preventDefault();
+    //     })
+    //     .on("click", function (e) {
+    //       if (
+    //         $(e.target).closest(".filter-items").length == 0 ||
+    //         $(e.target).hasClass("select-menu")
+    //       ) {
+    //         $(".select-menu").removeClass("opened");
+    //       }
+    //     })
+    //     .on("click", ".select-items .filter-clean", function (e) {
+    //       var $clean = $(this);
+    //       $clean.siblings().each(function () {
+    //         var $link = $(this).data("link");
+    //         $link && $link.removeClass("active");
+    //       });
+    //       $clean.parent().fadeOut(function () {
+    //         $clean.siblings().remove();
+    //       });
+    //       e.preventDefault();
+    //     })
+    //     .on("click", ".select-item i", function (e) {
+    //       $(e.currentTarget)
+    //         .parent()
+    //         .fadeOut(function () {
+    //           var $this = $(this),
+    //             $link = $this.data("link");
+    //           $link && $link.toggleClass("active");
+    //           $this.remove();
+    //           if ($(".select-items").children().length < 2) {
+    //             $(".select-items").hide();
+    //           }
+    //         });
+    //       e.preventDefault();
+    //     })
+    //     .on("click", ".filter-clean", function (e) {
+    //       $(".shop-sidebar .filter-items .active").removeClass("active");
+    //       e.preventDefault();
+    //     })
+    //     .on("click", ".filter-items li", function (e) {
+    //       var $this = $(this),
+    //         $ul = $this.closest(".filter-items");
+    //       if ($(this).closest(".summary").length) {
+    //         $ul.find(".active").removeClass("active");
+    //         $this.closest("li").addClass("active");
+    //         e.preventDefault();
+    //         return;
+    //       }
+    //       if (
+    //         !$ul.hasClass("search-ul") &&
+    //         !$ul.parent().hasClass("select-menu")
+    //       ) {
+    //         if ($ul.hasClass("filter-price")) {
+    //           $this.parent().siblings().removeClass("active");
+    //           $this.parent().toggleClass("active");
+    //           e.preventDefault();
+    //         } else {
+    //           $this.closest("li").toggleClass("active");
+    //           e.preventDefault();
+    //         }
+    //       }
+    //     });
+    // },
     initProductsQuickview: function () {
       Panda.$body.on("click", ".btn-quickview", function (e) {
         e.preventDefault();
@@ -2723,6 +2729,8 @@ window.Panda = {};
         Panda.quantityInput(".quantity");
       });
     },
+
+    // add to cart
     initProductsCartAction: function () {
       Panda.$body
         .on("click", ".off-canvas .cart-toggle", function (e) {
@@ -2865,52 +2873,10 @@ window.Panda = {};
           });
         });
     },
-    initRemoveData: function () {
-      Panda.$body.on(
-        "click",
-        ".shop-table .product-remove .remove",
-        function (e) {
-          var $this = $(this),
-            $parent = $this.closest("tbody");
-          $this.closest("tr").remove();
-          if ($parent.find("tr").length == 0) {
-            if ($parent.closest(".shop-table").hasClass("wishlist-table"))
-              document.location.href = "wishlist-empty.html";
-            else if ($parent.closest(".shop-table").hasClass("cart-table"))
-              document.location.href = "cart-empty.html";
-          }
-          e.preventDefault();
-        }
-      );
-    },
-    initProductsCompareAction: function () {
-      Panda.$body.on(
-        "click",
-        ".product .btn-product-icon.btn-compare:not(.open)",
-        function (e) {
-          e.preventDefault();
-          var $product = $(this).closest(".product");
-          $product.hasClass("product-single") ||
-            Panda.Minipopup.open({
-              message: "Added To Compare List",
-              productClass: "product-mini",
-              name: $product.find(".product-name").text(),
-              nameLink: $product.find(".product-name > a").attr("href"),
-              imageSrc: $product.find(".product-media img").attr("src"),
-              imageLink: $product.find(".product-name > a").attr("href"),
-              price: $product
-                .find(".product-price .new-price, .product-price .price")
-                .html(),
-              actionTemplate:
-                '<div class="action-group d-flex"><a href="#" class="btn btn-sm btn-outline btn-primary btn-block btn-cart">Add to Cart</a><a href="compare.html" class="btn btn-sm btn-primary btn-block">Compare List</a></div>',
-            });
-          $(this).addClass("open");
-          $(this).html('<i class="p-icon-check-solid"></i>');
-          $(this).attr("title", "Browse compare");
-          $(this).attr("href", "compare.html");
-        }
-      );
-    },
+
+    // ends
+
+    //  found login js
     initProductsLoginAction: function () {
       Panda.$body
         .on("click", ".login-toggle", function (e) {
@@ -2929,120 +2895,7 @@ window.Panda = {};
           e.preventDefault();
         });
     },
-    initProductsLoad: function () {
-      $(".btn-load").on("click", function (e) {
-        var $this = $(this),
-          $wrapper = $($this.data("load-to")),
-          loadText = $this.html(),
-          countlimit;
-        if ($this.data("load-type") == "load") {
-          countlimit = 2;
-        } else {
-          countlimit = 1;
-        }
-        $this.text("Loading ...");
-        $this.addClass("btn-loading");
-        $(".loading").css("display", "block");
-        e.preventDefault();
-        $.ajax({
-          url: $this.attr("href"),
-          success: function (result) {
-            var $newItems = $(result);
-            setTimeout(function () {
-              if ($.fn.isotope) {
-                $wrapper.isotope("insert", $newItems);
-              } else {
-                $wrapper.append($newItems);
-              }
-              $this.html(loadText);
-              var loadCount = parseInt(
-                $this.data("load-count") ? $this.data("load-count") : 0
-              );
-              $this.data("load-count", ++loadCount);
-              $this.removeClass("btn-loading");
-              $(".loading").css("display", "none");
-              loadCount >= countlimit && $this.hide();
-              Panda.Shop.initProductType("slideup");
-            }, 350);
-          },
-          failure: function () {
-            $this.text("Sorry something went wrong.");
-          },
-        });
-      });
-    },
-    initProductsScrollLoad: function ($obj) {
-      var $wrapper = Panda.$($obj),
-        top;
-      var url = $($obj).data("url");
-      if (!url) {
-        url = "ajax/ajax-products.html";
-      }
-      var loadProducts = function (e) {
-        if (
-          window.pageYOffset >
-            top + $wrapper.outerHeight() - window.innerHeight - 150 &&
-          "loading" != $wrapper.data("load-state")
-        ) {
-          $.ajax({
-            url: url,
-            success: function (result) {
-              var $newItems = $(result);
-              $wrapper.data("load-state", "loading");
-              if (!$wrapper.next().hasClass("load-more-overlay")) {
-                $(
-                  '<div class="mt-4 mb-4 load-more-overlay loading"></div>'
-                ).insertAfter($wrapper);
-              } else {
-                $wrapper.next().addClass("loading");
-              }
-              setTimeout(function () {
-                $wrapper.next().removeClass("loading");
-                $wrapper.append($newItems);
-                setTimeout(function () {
-                  $wrapper.find(".product-wrap.fade:not(.in)").addClass("in");
-                }, 200);
-                $wrapper.data("load-state", "loaded");
-              }, 500);
-              var loadCount = parseInt(
-                $wrapper.data("load-count") ? $wrapper.data("load-count") : 0
-              );
-              $wrapper.data("load-count", ++loadCount);
-              loadCount > 2 &&
-                window.removeEventListener("scroll", loadProducts, {
-                  passive: true,
-                });
-            },
-            failure: function () {
-              $this.text("Sorry something went wrong.");
-            },
-          });
-        }
-      };
-      if ($wrapper.length > 0) {
-        top = $wrapper.offset().top;
-        window.addEventListener("scroll", loadProducts, { passive: true });
-      }
-    },
-    initWishlistButton: function (selector) {
-      Panda.$body.on("click", selector, function (e) {
-        var $this = $(this);
-        $this.toggleClass("added").addClass("load-more-overlay loading");
-        setTimeout(function () {
-          $this
-            .removeClass("load-more-overlay loading")
-            .find("i")
-            .toggleClass("p-icon-heart-solid")
-            .toggleClass("p-icon-heart-fill");
-          if ($this.hasClass("added")) {
-            $this.attr("title", "Remove from wishlist");
-          } else {
-            $this.attr("title", "Add to wishlist");
-          }
-        }, 500);
-        e.preventDefault();
-      });
-    },
+    // ends
   };
   Panda.prepare = function () {
     if (
