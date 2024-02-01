@@ -60,8 +60,15 @@ function Herohome() {
               <h2 className="title-underline2 text-center mb-2">
                 <span>Top Products</span>
               </h2>
-              <div className={style.topProductContainer} id="productContainer">
-                {data.length > 0 &&
+              <div className="tab tab-nav-center product-tab product-tab-type2">
+                <div className="tab-content">
+                  <div className="tab-pane active" id="canned">
+                    <div className="page-content mb-10 shop-page shop-horizontal">
+                      <div className="container">
+                        <div
+                          className="row product-wrapper cols-lg-5 cols-md-4 cols-sm-3 cols-2"
+                        >
+                            {data.length > 0 &&
                   Array.isArray(data) &&
                   data
                     .map((field, index) => (
@@ -89,19 +96,41 @@ function Herohome() {
                                     : ""
                                 }
                                 alt="product"
-                                style={{ width: "290px", height: "369px" }}
+                               style={{  width:"295",height:"369" }}
                                 className="homelistingimg"
                               />
                               <img
-                                src="images/products/5-2-295x369.jpg"
+                                src={field.images.length > 0
+                                  ? field.images[0].imageUrl
+                                  : ""}
                                 alt="product"
-                                style={{ width: "295px", height: "369px" }}
+                                style={{  width:"295",height:"369" }}
                               />
                             </a>
+                            <div className="product-action-vertical">
+                                <a href="#" className="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to Cart">
+                                  <i className="p-icon-cart-solid"></i>
+                                </a>
+                                <a href="#" className="btn-product-icon btn-wishlist" title="Add to Wishlist">
+                                  <i className="p-icon-heart-solid"></i>
+                                </a>
+                                <a href="#" className="btn-product-icon btn-compare" title="Compare">
+                                  <i className="p-icon-compare-solid"></i>
+                                </a>
+                                <a href="#" className="btn-product-icon btn-quickview" title="Quick View">
+                                  <i className="p-icon-search-solid"></i>
+                                </a>
+                              </div>
                             {/* Product actions */}
                           </figure>
                           <div className="product-details">
-                            <div className="ratings-container"></div>
+                          <div className="ratings-container">
+                                <div className="ratings-full">
+                                  <span className="ratings" style={{width: "60%"}}></span>
+                                  <span className="tooltiptext tooltip-top">3.00</span>
+                                </div>
+                                <a href="javascript:void(0);" className="rating-reviews">(12)</a>
+                              </div>
                             <h5 className="product-name">
                               <a
                                 href="product-simple.html"
@@ -129,10 +158,18 @@ function Herohome() {
                         </div>
                       </div>
                     ))
-                    .slice(0, 4)}
+                    .slice(0, 5)}
+                
+                
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <SpecialSection />
             </section>
+            <SpecialSection />
           </div>
         </main>
       )}

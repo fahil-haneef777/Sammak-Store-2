@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import '../../main.js'
+import './slider.css'
 function SliderMain(props) {
   const onAutoplayTimeLeft = (s, time, progress) => {};
   const { heroSilderData, setheroSliderData } = useContext(AllContext);
@@ -36,17 +37,17 @@ function SliderMain(props) {
                   alt="img"
                   style={{ width: "100%", height: "80vh" }}
                 />
-                <div style={{ position: "relative", bottom: "30vh" }}>
-                  <h1
-                    style={{
-                      position: "relative",
-                      bottom: "5vh",
-                      color: "white",
-                    }}
-                  >
-                    {data.heroTitle}
-                  </h1>
-                  <h2>{data.description}</h2>
+                <div className="cuz-slider-cnt">
+                 <div className="cuz-slider-wrapper" >
+                 <h1
+                    
+                    >
+                      {data.heroTitle}
+                    </h1>
+                    <h2>{data.description}</h2>
+
+                    <a className="cuz-hero-shop-btn">Shop</a>
+                 </div>
                 </div>
               </SwiperSlide>
             );

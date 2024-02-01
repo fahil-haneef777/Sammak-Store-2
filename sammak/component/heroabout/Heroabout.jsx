@@ -19,6 +19,7 @@ function Heroabout() {
         </div>
       </nav>
       <div className="page-content about-page">
+
         <div className="container">
           <section className="row align-items-center">
             <div className="col-lg-6">
@@ -58,6 +59,7 @@ function Heroabout() {
             </div>
           </section>
         </div>
+
         <section className="pb-6" style={{ backgroundColor: "#f9f8f4" }}>
           <div className="container text-center">
             <h4 className="text-uppercase text-body font-weight-normal ls-1 mb-3">
@@ -126,6 +128,7 @@ function Heroabout() {
             </div>
           </div>
         </section>
+
         <div className="container">
           <section className="row align-items-center">
             <div className="col-lg-6">
@@ -154,6 +157,7 @@ function Heroabout() {
             </div>
           </section>
         </div>
+        
         <section style={{ backgroundColor: "#f9f8f4", paddingBottom: "8rem" }}>
           <div className="container text-center">
             <h4 className="text-uppercase text-body font-weight-normal ls-1 mb-3">
@@ -166,18 +170,7 @@ function Heroabout() {
             </div>
           </div>
         </section>
-        <div className="container">
-          <section className="text-center pb-10 pt-10 mb-6">
-            <h4 className="text-uppercase text-body font-weight-normal ls-1 mt-7 mb-3">
-              our staffs
-            </h4>
-            <h2 className="desc-title mb-9">Panda Shop Members</h2>
-            <div className="owl-carousel owl-theme row cols-lg-4 cols-md-3 cols-sm-2 cols-1">
-              {/* Staff members */}
-              {/* You can replace this with actual content */}
-            </div>
-          </section>
-        </div>
+        
       </div>
     </main>
   );

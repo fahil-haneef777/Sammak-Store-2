@@ -22,7 +22,7 @@ const SpecialSection = () => {
   return (
     <section
       className="benefit-section appear-animate fadeIn appear-animation-visible"
-      style={{ background: "rgb(250, 250, 248)", animationDuration: "1.2s" }}
+      style={{ background: "rgb(250, 250, 248)" }}
     >
       <div className="container">
         <h4 className="subtitle title-underline2 text-uppercase text-center">

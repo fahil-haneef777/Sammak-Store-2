@@ -7842,11 +7842,12 @@ figure:hover .overlay-visible {
 
 .product-action-vertical {
   position: absolute;
-  top: 2.1rem;
-  right: 2rem;
+  top: 0.1rem;
+  right: 1rem;
   transition: opacity 0.3s;
   opacity: 0;
   visibility: hidden;
+  transform: scale(.9);
 }
 
 .product-action-vertical .btn-wishlist.loading {
@@ -11174,11 +11175,13 @@ ul.pagination {
 }
 
 .header-top {
-  color: #54524d;
+  color: white;
   border-bottom: 1px solid #e0dede;
   font-size: 0.75em;
   text-transform: uppercase;
+  background: #001d33;
 }
+
 
 .header-top .header-right > * {
   margin-left: 2.3rem;
@@ -11212,6 +11215,7 @@ ul.pagination {
 .header-top .social-links {
   margin-left: 2rem;
   font-size: 1.167em;
+  color: white;
 }
 
 .header-top .social-links .social-link:last-child {
@@ -16130,3 +16134,14 @@ ul.pagination {
   border: 1px solid #e0dede;
   border-width: 0 1px 1px;
 }
+
+/* glass morph */
+#morph{
+  z-index: 1060;
+  color: black;
+  background: rgba(39, 39, 39, 0.1);
+  backdrop-filter: blur(60px);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 80px;
+  margin-top: 0px;
+}
+/* ends */
