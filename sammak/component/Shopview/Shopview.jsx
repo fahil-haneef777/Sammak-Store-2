@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "react-js-loader";
 import { RotatingLines } from "react-loader-spinner";
 import "../../main.js";
+import "../../css/style.css";
 function Shopview() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -245,7 +246,7 @@ function Shopview() {
         <div className="header-middle has-center sticky-header fix-top sticky-content">
           <div className="container">
             <div className="header-left">
-              <a  className="mobile-menu-toggle" title="Mobile Menu">
+              <a className="mobile-menu-toggle" title="Mobile Menu">
                 <i className="p-icon-bars-solid"></i>
               </a>
               <a className="logo">

@@ -40,7 +40,7 @@ function Checkout() {
     cart_amount:'11',
     cart_currency: "SAR",
     cart_description: "Fish",
-    cart_id: "17,18",
+    cart_id: "34",
     customer_details: {
       city: "",
       country: "",
