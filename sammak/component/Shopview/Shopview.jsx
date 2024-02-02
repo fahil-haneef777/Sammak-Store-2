@@ -15,6 +15,8 @@ import Loader from "react-js-loader";
 import { RotatingLines } from "react-loader-spinner";
 import "../../main.js";
 import "../../css/style.css";
+import Footer from "../Footer.jsx";
+
 function Shopview() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -698,6 +700,7 @@ function Shopview() {
       ) : (
         ""
       )}
+      <Footer />
     </>
   );
 }

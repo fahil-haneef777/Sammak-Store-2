@@ -871,35 +871,11 @@ function Herocart() {
                               key={index}
                               data-zoom-image={data1.imageUrl}
                               alt="1"
-                              style={{ width: 800, height: 1000 }}
+                              style={{ width: 800, height: 600 }}
                             />
                           </figure>
                         );
                       })}
-                    {/* <figure className="product-image">
-                      <img
-                        src="images/products/product-single/2-800x1000.jpg"
-                        data-zoom-image="images/products/product-single/2-800x1000.jpg"
-                        alt="2"
-                        style={{ width: 800, height: 1000 }}
-                      />
-                    </figure>
-                    <figure className="product-image">
-                      <img
-                        src="images/products/product-single/3-800x1000.jpg"
-                        data-zoom-image="images/products/product-single/3-800x1000.jpg"
-                        alt="3"
-                        style={{ width: 800, height: 1000 }}
-                      />
-                    </figure>
-                    <figure className="product-image">
-                      <img
-                        src="images/products/product-single/4-800x1000.jpg"
-                        data-zoom-image="images/products/product-single/4-800x1000.jpg"
-                        alt="4"
-                        style={{ width: 800, height: 1000 }}
-                      />
-                    </figure> */}
                   </div>
                   <div className="product-thumbs-wrap">
                     <div className="product-thumbs">
@@ -918,7 +894,7 @@ function Herocart() {
                               <img
                                 src={data1.imageUrl}
                                 alt="product thumbnail"
-                                style={{ width: 240, height: 300 }}
+                                style={{ width: 240 }}
                               />
                             </div>
                           );
@@ -952,6 +928,10 @@ function Herocart() {
                   <p className="product-short-desc">
                     {data.length > 0 && data[0].productDescription}
                   </p>
+                  <p className="product-short-desc" >
+                    {data.length > 0 && data[0].smallDescription}
+                  </p>
+                  
 
                   <div className="product-form mb-2 pt-1">
                     <select name="cleaning" id="cl-method">
