@@ -41,6 +41,8 @@ function Header() {
     cart,
     search,
     setsearch,
+    loginopen,
+    setloginopen
   } = useContext(AllContext);
 
   const home1 = () => {
@@ -219,6 +221,7 @@ function Header() {
 
   console.log(import.meta.env.VITE_URL);
 
+
   return (
     <>
       <header className="header">
@@ -235,7 +238,7 @@ function Header() {
                 <span>Saudi Arabia,Jazan, KSA</span>
               </a>
             </div>
-            <div className="header-right">
+            <div className="header-right" >
               <span className="divider"></span>
 
               <div className="social-links">
@@ -297,7 +300,7 @@ function Header() {
                 </ul>
               </nav>
             </div>
-            <div className="header-right">
+            <div className="header-right" >
               <div className="header-search hs-toggle">
                 <a className="search-toggle" title="Search">
                   <i className="p-icon-search-solid"></i>
@@ -323,6 +326,7 @@ function Header() {
                     onClick={() => {
                       localStorage.clear();
                       window.location.reload();
+
                     }}
                     style={{
                       position: "relative",
@@ -341,7 +345,9 @@ function Header() {
                     }}
                   >
                     {" "}
-                    <a className="login-toggle" data-toggle="login-modal">
+                    <a className="login-toggle" data-toggle="login-modal"
+                     
+                    >
                       <i className="p-icon-user-solid mr-2"></i>
                       <span>login/Signup</span>
                     </a>
@@ -349,7 +355,9 @@ function Header() {
                 )}
 
                 <div className="canvas-overlay"></div>
-                <a className="btn-close"></a>
+                <a className="btn-close"
+                
+                ></a>
                 <div className="dropdown-box scrollable">
                   <div className="login-popup">
                     <div className="form-box">

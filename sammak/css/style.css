@@ -452,6 +452,7 @@ body:not(.loaded) * {
 .page-wrapper {
   position: relative;
   transition: margin 0.4s;
+  overflow: hidden;
 }
 
 table {
@@ -11762,6 +11763,7 @@ ul.pagination {
   visibility: visible;
 }
 
+
 .off-canvas {
   font-weight: 300;
 }
@@ -16143,5 +16145,14 @@ ul.pagination {
   backdrop-filter: blur(60px);
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 80px;
   margin-top: 0px;
+}
+/* ends */
+/* customized */
+.sticky-content-wrapper{
+  position: relative;
+  z-index: 4999;
+}
+.cuz-slider-wrapper p{
+  color: #b6b6b6;
 }
 /* ends */

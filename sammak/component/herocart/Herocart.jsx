@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RotatingLines } from "react-loader-spinner";
 import "../../main.js";
+import "../../vendor/owl-carousel/owl.carousel.min.js"
 function Herocart() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -853,35 +854,34 @@ function Herocart() {
                   <div className="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no">
                     <figure
                       className="product-image"
-                      style={{ position: "relative", bottom: "32vh" }}
                     >
                       <img
-                        src="images/products/product-resize1.jpg"
-                        data-zoom-image="images/products/product-resize1.jpg"
+                        src="images/products/product-single/1-800x1000.jpg"
+                        data-zoom-image="iimages/products/product-single/1-800x1000.jpg"
                         alt="1"
                         style={{ width: 800, height: 1000 }}
                       />
                     </figure>
                     <figure className="product-image">
                       <img
-                        src="images/products/product-resize2.jpg"
-                        data-zoom-image="images/products/product-resize2.jpg"
+                        src="images/products/product-single/2-800x1000.jpg"
+                        data-zoom-image="images/products/product-single/2-800x1000.jpg"
                         alt="2"
                         style={{ width: 800, height: 1000 }}
                       />
                     </figure>
                     <figure className="product-image">
                       <img
-                        src="images/products/product-resize3.jpg"
-                        data-zoom-image="images/products/product-resize3.jpg"
+                        src="images/products/product-single/3-800x1000.jpg"
+                        data-zoom-image="images/products/product-single/3-800x1000.jpg"
                         alt="3"
                         style={{ width: 800, height: 1000 }}
                       />
                     </figure>
                     <figure className="product-image">
                       <img
-                        src="images/products/product-resize4.jpg"
-                        data-zoom-image="images/products/product-resize4.jpg"
+                        src="images/products/product-single/4-800x1000.jpg"
+                        data-zoom-image="images/products/product-single/4-800x1000.jpg"
                         alt="4"
                         style={{ width: 800, height: 1000 }}
                       />
@@ -889,16 +889,16 @@ function Herocart() {
                   </div>
                   <div className="product-thumbs-wrap">
                     <div className="product-thumbs">
-                      <div className="product-thumb productco">
+                      <div className="product-thumb active">
                         <img
-                          src="images/products/product-resize1.jpg"
+                          src="images/products/product-single/fruit-7-1-240x300.jpg"
                           alt="product thumbnail"
                           style={{ width: 240, height: 300 }}
                         />
                       </div>
                       <div className="product-thumb">
                         <img
-                          src="images/products/product-resize2.jpg"
+                          src="images/products/product-single/fruit-7-2-240x300.jpg"
                           alt="product thumbnail"
                           style={{ width: 240, height: 300 }}
                         />
@@ -906,14 +906,14 @@ function Herocart() {
 
                       <div className="product-thumb">
                         <img
-                          src="images/products/product-resize3.jpg"
+                          src="images/products/product-single/fruit-7-3-240x300.jpg"
                           alt="product thumbnail"
                           style={{ width: 240, height: 300 }}
                         />
                       </div>
                       <div className="product-thumb">
                         <img
-                          src="images/products/product-resize4.jpg"
+                          src="images/products/product-single/fruit-7-4-240x300.jpg"
                           alt="product thumbnail"
                           style={{ width: 240, height: 300 }}
                         />

@@ -44,7 +44,7 @@ function SliderMain(props) {
                     >
                       {data.heroTitle}
                     </h1>
-                    <h2>{data.description}</h2>
+                    <p>{data.description}</p>
 
                     <a className="cuz-hero-shop-btn">Shop</a>
                  </div>
