@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RotatingLines } from "react-loader-spinner";
 import "../../main.js";
-import "../../vendor/owl-carousel/owl.carousel.min.js"
+import "../../vendor/owl-carousel/owl.carousel.min.js";
 function Herocart() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -253,6 +253,10 @@ function Herocart() {
       });
   };
 
+  if (data) {
+    console.log(data[0].images);
+  }
+
   return (
     <>
       <header className="header">
@@ -355,7 +359,12 @@ function Herocart() {
                 <i className="p-icon-bars-solid"></i>
               </a>
               <a href="/" className="logo">
-                <img src="/images/logo.png" alt="logo" width="171" height="41" />
+                <img
+                  src="/images/logo.png"
+                  alt="logo"
+                  width="171"
+                  height="41"
+                />
               </a>
             </div>
             <div className="header-center">
@@ -852,17 +861,22 @@ function Herocart() {
               <div className="col-md-7">
                 <div className="product-gallery">
                   <div className="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no">
-                    <figure
-                      className="product-image"
-                    >
-                      <img
-                        src="images/products/product-single/1-800x1000.jpg"
-                        data-zoom-image="iimages/products/product-single/1-800x1000.jpg"
-                        alt="1"
-                        style={{ width: 800, height: 1000 }}
-                      />
-                    </figure>
-                    <figure className="product-image">
+                    {data &&
+                      data.length > 0 &&
+                      data[0].images.map((data1, index) => {
+                        return (
+                          <figure className="product-image">
+                            <img
+                              src={data1.imageUrl}
+                              key={index}
+                              data-zoom-image={data1.imageUrl}
+                              alt="1"
+                              style={{ width: 800, height: 1000 }}
+                            />
+                          </figure>
+                        );
+                      })}
+                    {/* <figure className="product-image">
                       <img
                         src="images/products/product-single/2-800x1000.jpg"
                         data-zoom-image="images/products/product-single/2-800x1000.jpg"
@@ -885,39 +899,30 @@ function Herocart() {
                         alt="4"
                         style={{ width: 800, height: 1000 }}
                       />
-                    </figure>
+                    </figure> */}
                   </div>
                   <div className="product-thumbs-wrap">
                     <div className="product-thumbs">
-                      <div className="product-thumb active">
-                        <img
-                          src="images/products/product-single/fruit-7-1-240x300.jpg"
-                          alt="product thumbnail"
-                          style={{ width: 240, height: 300 }}
-                        />
-                      </div>
-                      <div className="product-thumb">
-                        <img
-                          src="images/products/product-single/fruit-7-2-240x300.jpg"
-                          alt="product thumbnail"
-                          style={{ width: 240, height: 300 }}
-                        />
-                      </div>
-
-                      <div className="product-thumb">
-                        <img
-                          src="images/products/product-single/fruit-7-3-240x300.jpg"
-                          alt="product thumbnail"
-                          style={{ width: 240, height: 300 }}
-                        />
-                      </div>
-                      <div className="product-thumb">
-                        <img
-                          src="images/products/product-single/fruit-7-4-240x300.jpg"
-                          alt="product thumbnail"
-                          style={{ width: 240, height: 300 }}
-                        />
-                      </div>
+                      {data &&
+                        data.length > 0 &&
+                        data[0].images.map((data1, index) => {
+                          return (
+                            <div
+                              className={
+                                index === 0
+                                  ? "product-thumb active"
+                                  : "product-thumb"
+                              }
+                              key={index}
+                            >
+                              <img
+                                src={data1.imageUrl}
+                                alt="product thumbnail"
+                                style={{ width: 240, height: 300 }}
+                              />
+                            </div>
+                          );
+                        })}
                     </div>
                     <button className="thumb-up disabled">
                       <i className="fas fa-chevron-left"></i>
