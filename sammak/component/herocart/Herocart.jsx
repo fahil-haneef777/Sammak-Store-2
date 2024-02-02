@@ -918,11 +918,13 @@ function Herocart() {
                   <p className="product-price mb-1">
                     <del className="old-price">
                       {" "}
-                      {data.length > 0 && data[0].originalPrice}{" "}
+                   
+                      SAR  {data.length > 0 && data[0].originalPrice}{" "}   
+                      
                     </del>
                     <ins className="new-price">
                       {" "}
-                      {data.length > 0 && data[0].sellingPrice} SAR
+                      SAR{data.length > 0 && data[0].sellingPrice} 
                     </ins>
                   </p>
                   <p className="product-short-desc">

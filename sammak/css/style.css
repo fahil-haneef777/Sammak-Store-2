@@ -10593,7 +10593,8 @@ button.mfp-arrow {
 }
 
 .product-single .old-price {
-  font-size: 0.6em;
+  font-size: 0.5em;
+  color: tomato;
 }
 
 .product-single .ratings-container {

@@ -193,7 +193,7 @@ window.Panda = {};
       zoomWindowFadeIn: 750,
       zoomWindowFadeOut: 500,
       borderSize: 0,
-      zoomType: "inner",
+      zoomType: "outer",
       cursor: "crosshair",
     },
   };
@@ -1555,12 +1555,12 @@ window.Panda = {};
       }
       $slider
         .on("initialized.owl.carousel", function (e) {
-          if (!document.body.classList.contains("home")) {
-            self.isQuickview ||
-              $slider.append(
-                '<a href="#" class="product-image-full"><i class="p-icon-zoom"></i></a>'
-              );
-          }
+          // if (!document.body.classList.contains("home")) {
+          //   self.isQuickview ||
+          //     $slider.append(
+          //       '<a href="#" class="product-image-full"><i class="p-icon-zoom"></i></a>'
+          //     );
+          // }
           thumbsInit(self);
         })
         .on("translate.owl.carousel", function (e) {
@@ -1707,7 +1707,7 @@ window.Panda = {};
               return {
                 src: $this.attr("data-zoom-image"),
                 w: 800,
-                h: 899,
+                h: 600,
                 title: $this.attr("alt"),
               };
             })

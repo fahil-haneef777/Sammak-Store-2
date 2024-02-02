@@ -34,7 +34,7 @@ const SpecialSection = () => {
         <figure className="img-back floating">
           <img
             className="layer"
-            src={data?data[0].images[0].url:''}
+            src="./"
             width="674"
             height="514"
             alt="banner"

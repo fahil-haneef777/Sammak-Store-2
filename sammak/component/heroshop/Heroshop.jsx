@@ -46,8 +46,8 @@ function Heroshop() {
     <main className="main">
       {/* page Header */}
       <div
-        className="page-header cph-header pl-4 pr-4"
-        style={{ backgroundColor: "#f9f8f4" }}
+        className="page-header shop-hero cph-header pl-4 pr-4"
+        
       >
         <h1 className="page-title font-weight-light text-capitalize">
           Sammak Shop
@@ -93,66 +93,91 @@ function Heroshop() {
               Array.isArray(data) &&
               data.map((field, index) => (
                 <div
-                  className="product-wrap"
-                  key={index}
-                  onClick={() => {
-                    setid(field.id);
-                    localStorage.setItem("id", field.id);
-                    onCart();
-                    window.location.reload();
-                  }}
-                >
-                  <div className="product shadow-media text-center">
-                    <figure
-                      className="product-media"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <a>
-                        <img
-                          src={
-                            field.images.length > 0
-                              ? field.images[0].imageUrl
-                              : ""
-                          }
-                          alt="product"
-                          style={{ width: "269px", height: "369px" }}
-                        />
-                        <img
-                          src="public/images/products/5-2-295x369.jpg"
-                          alt="product"
-                          style={{ width: "269px", height: "369px" }}
-                        />
-                      </a>
-                      {/* Product actions */}
-                    </figure>
-                    <div className="product-details">
-                      <div className="ratings-container"></div>
-                      <h5 className="product-name">
-                        <a
-                          href="product-simple.html"
-                          style={{
-                            color: "#163b4d",
-                            fontWeight: "600",
-                            scale: "1.1",
-                          }}
-                        >
-                          {field.productName}
+                className="product-wrap"
+                style={{ display: "flex", flexDirection: "row" }}
+                key={index}
+                onClick={() => {
+                  setid(field.id);
+                  localStorage.setItem("id", field.id);
+                  onCart();
+                  window.location.reload();
+                }}
+              >
+                <div className="product shadow-media text-center">
+                  <figure
+                    className="product-media"
+                    style={{ cursor: "pointer" }}
+                  >
+                  
+                    <a>
+                      <img
+                        src={
+                          field.images.length > 0
+                            ? field.images[0].imageUrl
+                            : ""
+                        }
+                        alt="product"
+                       style={{  width:"295",height:"369" }}
+                        className="homelistingimg"
+                      />
+                      <img
+                        src={field.images.length > 0
+                          ? field.images[0].imageUrl
+                          : ""}
+                        alt="product"
+                        style={{  width:"295",height:"369" }}
+                      />
+                    </a>
+                    <div className="product-action-vertical">
+                        <a href="#" className="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to Cart">
+                          <i className="p-icon-cart-solid"></i>
                         </a>
-                      </h5>
-                      <span className="product-price">
-                        <del className="old-price">
-                          {field.originalPrice} SAR
-                        </del>
-                        <ins
-                          className="new-price"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          &nbsp; {field.sellingPrice} SAR
-                        </ins>
-                      </span>
-                    </div>
+                        <a href="#" className="btn-product-icon btn-wishlist" title="Add to Wishlist">
+                          <i className="p-icon-heart-solid"></i>
+                        </a>
+                        <a href="#" className="btn-product-icon btn-compare" title="Compare">
+                          <i className="p-icon-compare-solid"></i>
+                        </a>
+                        <a href="#" className="btn-product-icon btn-quickview" title="Quick View">
+                          <i className="p-icon-search-solid"></i>
+                        </a>
+                      </div>
+                    {/* Product actions */}
+                  </figure>
+                  <div className="product-details">
+                  <div className="ratings-container">
+                        <div className="ratings-full">
+                          <span className="ratings" style={{width: "60%"}}></span>
+                          <span className="tooltiptext tooltip-top">3.00</span>
+                        </div>
+                        <a href="javascript:void(0);" className="rating-reviews">(12)</a>
+                      </div>
+                    <h5 className="product-name">
+                      <a
+                        href="product-simple.html"
+                        style={{
+                          color: "#163b4d",
+                          fontWeight: "600",
+                          scale: "1.1",
+                        }}
+                      >
+                        {field.productName}
+                      </a>
+                    </h5>
+                    <span className="product-price">
+                      <del className="old-price">
+                        {field.originalPrice} SAR
+                      </del>
+                      <ins
+                        className="new-price"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        &nbsp; {field.sellingPrice} SAR
+                      </ins>
+                    </span>
                   </div>
                 </div>
+              </div>
               ))}
 
             {/* Product 2 */}
