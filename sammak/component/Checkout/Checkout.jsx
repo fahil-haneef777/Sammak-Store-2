@@ -206,7 +206,11 @@ function Checkout() {
           handlepaytabs();
         })
         .catch((err) => {
-          console.log(err);
+          toast.error("Oops! Something went wrong", {
+            autoClose: 700,
+            position: "top-center",
+            closeOnClick: true,
+          });
         });
     }
   };
