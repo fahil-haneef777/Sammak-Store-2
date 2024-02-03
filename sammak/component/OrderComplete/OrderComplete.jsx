@@ -5,37 +5,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 function OrderComplete(props) {
-  const [cartdata, setcartdata] = useState("");
-  const token = localStorage.getItem("token");
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const handlePageLoad = () => {
-      // Reload the page when it is loaded
-      window.location.reload();
-    };
-
-    // Attach the event listener to handle page load
-    window.addEventListener('load', handlePageLoad);
-
-    // Cleanup the listener when the component is unmounted
-    return () => {
-      window.removeEventListener('load', handlePageLoad);
-    };
-  }, []);
-
-  const config = {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ` + token,
-    },
-  };
-  let cart = JSON.parse(localStorage.getItem("cart"));
+  let cart1 = JSON.parse(localStorage.getItem("cart"));
 
   return (
     <>
       <ToastContainer />
+
+      
       <div className="page-content pt-8 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
           <h3 className="title title-step">
@@ -114,8 +90,9 @@ function OrderComplete(props) {
                   </td>
                   <td className="summary-value font-weight-normal">
                     {" "}
-                    {cart.length > 0 &&
-                      cart
+                    {cart1 &&
+                      cart1.length > 0 &&
+                      cart1
                         .reduce((acc, curr) => {
                           return acc + curr.subtotal;
                         }, 0)
@@ -135,8 +112,9 @@ function OrderComplete(props) {
                   </td>
                   <td>
                     <p className="summary-total-price">
-                      {cart.length > 0 &&
-                        cart
+                      {cart1 &&
+                        cart1.length > 0 &&
+                        cart1
                           .reduce((acc, curr) => {
                             return acc + curr.subtotal;
                           }, 0)
