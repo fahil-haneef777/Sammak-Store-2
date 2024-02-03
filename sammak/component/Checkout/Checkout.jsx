@@ -1160,6 +1160,25 @@ function Checkout() {
           </div>
         </div>
       </main>
+
+      <div className="mobile-menu-wrapper">
+        <div className="mobile-menu-overlay"></div>
+
+        <a className="mobile-menu-close" href="#">
+          <i className="p-icon-times"></i>
+        </a>
+
+        <div className="mobile-menu-container scrollable">
+          <ul className="mobile-menu mmenu-anim">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/shopview">Shop</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 }

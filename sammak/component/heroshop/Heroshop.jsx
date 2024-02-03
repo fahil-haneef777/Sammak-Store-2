@@ -5,11 +5,19 @@ import Herocart from "../herocart/Herocart";
 import { useNavigate } from "react-router-dom";
 import Loader from "react-js-loader";
 import style from "./Heroshop.module.css";
-import '../../main.js'
+import "../../main.js";
 function Heroshop() {
   const [data, setdata] = useState("");
-  const { id, setid, cart, setcart, productinfo, setproductinfo } =
-    useContext(AllContext);
+  const {
+    id,
+    setid,
+    cart,
+    setcart,
+    productinfo,
+    setproductinfo,
+    search,
+    setsearch,
+  } = useContext(AllContext);
 
   const navigate = useNavigate();
 
@@ -27,15 +35,14 @@ function Heroshop() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   const newdata =
-  //     data.length > 0 &&
-  //     data.filter((fil) => {
-  //       return fil.id === id;
-  //     });
-
-  //   setproductinfo(newdata);
-  // }, [id, data]);
+  useEffect(() => {
+    let newdata =
+      data.length > 0 &&
+      data.filter((info) => {
+        info.productName.includes(search);
+      });
+    setdata(newdata);
+  }, [search]);
 
   const onCart = () => {
     navigate("/shop");
@@ -45,10 +52,7 @@ function Heroshop() {
   return (
     <main className="main">
       {/* page Header */}
-      <div
-        className="page-header shop-hero cph-header pl-4 pr-4"
-        
-      >
+      <div className="page-header shop-hero cph-header pl-4 pr-4">
         <h1 className="page-title font-weight-light text-capitalize">
           Sammak Shop
         </h1>
@@ -77,7 +81,7 @@ function Heroshop() {
             {data.length === 0 && (
               <div className={style.beforeload}>
                 {" "}
-                <div className={style.loader_content  }>
+                <div className={style.loader_content}>
                   {" "}
                   <Loader
                     type="bubble-scale"
@@ -93,91 +97,118 @@ function Heroshop() {
               Array.isArray(data) &&
               data.map((field, index) => (
                 <div
-                className="product-wrap"
-                style={{ display: "flex", flexDirection: "row" }}
-                key={index}
-                onClick={() => {
-                  setid(field.id);
-                  localStorage.setItem("id", field.id);
-                  onCart();
-                  window.location.reload();
-                }}
-              >
-                <div className="product shadow-media text-center">
-                  <figure
-                    className="product-media"
-                    style={{ cursor: "pointer" }}
-                  >
-                  
-                    <a>
-                      <img
-                        src={
-                          field.images.length > 0
-                            ? field.images[0].imageUrl
-                            : ""
-                        }
-                        alt="product"
-                       style={{  width:"295",height:"369" }}
-                        className="homelistingimg"
-                      />
-                      <img
-                        src={field.images.length > 0
-                          ? field.images[0].imageUrl
-                          : ""}
-                        alt="product"
-                        style={{  width:"295",height:"369" }}
-                      />
-                    </a>
-                    <div className="product-action-vertical">
-                        <a href="#" className="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to Cart">
+                  className="product-wrap"
+                  style={{ display: "flex", flexDirection: "row" }}
+                  key={index}
+                  onClick={() => {
+                    setid(field.id);
+                    localStorage.setItem("id", field.id);
+                    onCart();
+                    window.location.reload();
+                  }}
+                >
+                  <div className="product shadow-media text-center">
+                    <figure
+                      className="product-media"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <a>
+                        <img
+                          src={
+                            field.images.length > 0
+                              ? field.images[0].imageUrl
+                              : ""
+                          }
+                          alt="product"
+                          style={{ width: "295", height: "369" }}
+                          className="homelistingimg"
+                        />
+                        <img
+                          src={
+                            field.images.length > 0
+                              ? field.images[0].imageUrl
+                              : ""
+                          }
+                          alt="product"
+                          style={{ width: "295", height: "369" }}
+                        />
+                      </a>
+                      <div className="product-action-vertical">
+                        <a
+                          href="#"
+                          className="btn-product-icon btn-cart"
+                          data-toggle="modal"
+                          data-target="#addCartModal"
+                          title="Add to Cart"
+                        >
                           <i className="p-icon-cart-solid"></i>
                         </a>
-                        <a href="#" className="btn-product-icon btn-wishlist" title="Add to Wishlist">
+                        <a
+                          href="#"
+                          className="btn-product-icon btn-wishlist"
+                          title="Add to Wishlist"
+                        >
                           <i className="p-icon-heart-solid"></i>
                         </a>
-                        <a href="#" className="btn-product-icon btn-compare" title="Compare">
+                        <a
+                          href="#"
+                          className="btn-product-icon btn-compare"
+                          title="Compare"
+                        >
                           <i className="p-icon-compare-solid"></i>
                         </a>
-                        <a href="#" className="btn-product-icon btn-quickview" title="Quick View">
+                        <a
+                          href="#"
+                          className="btn-product-icon btn-quickview"
+                          title="Quick View"
+                        >
                           <i className="p-icon-search-solid"></i>
                         </a>
                       </div>
-                    {/* Product actions */}
-                  </figure>
-                  <div className="product-details">
-                  <div className="ratings-container">
+                      {/* Product actions */}
+                    </figure>
+                    <div className="product-details">
+                      <div className="ratings-container">
                         <div className="ratings-full">
-                          <span className="ratings" style={{width: "60%"}}></span>
+                          <span
+                            className="ratings"
+                            style={{ width: "60%" }}
+                          ></span>
                           <span className="tooltiptext tooltip-top">3.00</span>
                         </div>
-                        <a href="javascript:void(0);" className="rating-reviews">(12)</a>
+                        <a
+                          href="javascript:void(0);"
+                          className="rating-reviews"
+                        >
+                          (12)
+                        </a>
                       </div>
-                    <h5 className="product-name">
-                      <a
-                        href="product-simple.html"
-                        style={{
-                          color: "#163b4d",
-                          fontWeight: "600",
-                          scale: "1.1",
-                        }}
-                      >
-                        {field.productName}
-                      </a>
-                    </h5>
-                    <span className="product-price">
-                      <del className="old-price">
-                        {field.originalPrice} SAR
-                      </del>
-                      <ins
-                        className="new-price"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        &nbsp; {field.sellingPrice} SAR
-                      </ins>
-                    </span>
+                      <h5 className="product-name">
+                        <a
+                          href="product-simple.html"
+                          style={{
+                            color: "#163b4d",
+                            fontWeight: "600",
+                            scale: "1.1",
+                          }}
+                        >
+                          {field.productName}
+                        </a>
+                      </h5>
+                      <span className="product-price">
+                        <del className="old-price">
+                          {field.originalPrice} SAR
+                        </del>
+                        <ins
+                          className="new-price"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          &nbsp; {field.sellingPrice} SAR
+                        </ins>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
               ))}
 
             {/* Product 2 */}

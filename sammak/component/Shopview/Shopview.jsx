@@ -175,6 +175,7 @@ function Shopview() {
         console.log(err);
       });
   }, []);
+  useEffect(() => {}, [search]);
 
   const handleDelete = (index, id, cartid) => {
     let newCartdata =
@@ -547,7 +548,7 @@ function Shopview() {
                   <a href="#" className="cart-toggle link">
                     <i className="p-icon-cart-solid">
                       <span className="cart-count">
-                        {cartdata.length > 0 && cartdata.length}
+                        {cartdata.length > 0 ? cartdata.length : 0}
                       </span>
                     </i>
                   </a>

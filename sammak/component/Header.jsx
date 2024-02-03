@@ -42,7 +42,7 @@ function Header() {
     search,
     setsearch,
     loginopen,
-    setloginopen
+    setloginopen,
   } = useContext(AllContext);
 
   const home1 = () => {
@@ -221,7 +221,6 @@ function Header() {
 
   console.log(import.meta.env.VITE_URL);
 
-
   return (
     <>
       <header className="header">
@@ -238,7 +237,7 @@ function Header() {
                 <span>Saudi Arabia,Jazan, KSA</span>
               </a>
             </div>
-            <div className="header-right" >
+            <div className="header-right">
               <span className="divider"></span>
 
               <div className="social-links">
@@ -267,7 +266,10 @@ function Header() {
           </div>
         </div>
 
-        <div className="header-middle has-center sticky-header fix-top sticky-content" id="morph">
+        <div
+          className="header-middle has-center sticky-header fix-top sticky-content"
+          id="morph"
+        >
           <div className="container">
             <div className="header-left">
               <a className="mobile-menu-toggle" title="Mobile Menu">
@@ -291,16 +293,22 @@ function Header() {
                   <li className={shop ? "active" : ""}>
                     <a href="/shopview">Shop</a>
                   </li>
-                  <li className={about ? "active" : ""}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className={about ? "active" : ""}
+                  >
                     <a onClick={about1}>About Us</a>
                   </li>
-                  <li className={contact ? "active" : ""}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className={contact ? "active" : ""}
+                  >
                     <a onClick={contact1}>Contact Us</a>
                   </li>
                 </ul>
               </nav>
             </div>
-            <div className="header-right" >
+            <div className="header-right">
               <div className="header-search hs-toggle">
                 <a className="search-toggle" title="Search">
                   <i className="p-icon-search-solid"></i>
@@ -326,7 +334,6 @@ function Header() {
                     onClick={() => {
                       localStorage.clear();
                       window.location.reload();
-
                     }}
                     style={{
                       position: "relative",
@@ -345,9 +352,7 @@ function Header() {
                     }}
                   >
                     {" "}
-                    <a className="login-toggle" data-toggle="login-modal"
-                     
-                    >
+                    <a className="login-toggle" data-toggle="login-modal">
                       <i className="p-icon-user-solid mr-2"></i>
                       <span>login/Signup</span>
                     </a>
@@ -355,9 +360,7 @@ function Header() {
                 )}
 
                 <div className="canvas-overlay"></div>
-                <a className="btn-close"
-                
-                ></a>
+                <a className="btn-close"></a>
                 <div className="dropdown-box scrollable">
                   <div className="login-popup">
                     <div className="form-box">
@@ -742,7 +745,7 @@ function Header() {
                 <a href="/shopview">Shop</a>
               </li>
               <li>
-                <a className="mobile-menu-overlay" onClick={about1}>
+                <a className="mobile-menu-overlay" style={{}} onClick={about1}>
                   About Us
                 </a>
               </li>
