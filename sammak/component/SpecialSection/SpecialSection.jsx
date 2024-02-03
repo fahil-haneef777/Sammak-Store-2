@@ -34,7 +34,7 @@ const SpecialSection = () => {
         <figure className="img-back floating">
           <img
             className="layer"
-            src="./"
+            src="images/demos/demo1/banner/banner1.jpg"
             width="674"
             height="514"
             alt="banner"
@@ -54,9 +54,7 @@ const SpecialSection = () => {
               </span>
               <div className="icon-box-content">
                 <h4 className="icon-box-title">Good for Health</h4>
-                <p>
-               {data?data[3].images[0].url:''}
-                </p>
+                <p>{data ? data[3].images[0].url : ""}</p>
               </div>
             </div>
           </div>
