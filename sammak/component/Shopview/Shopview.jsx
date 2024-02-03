@@ -262,13 +262,13 @@ function Shopview() {
                   <li className={home ? "active" : ""}>
                     <a href="/">Home</a>
                   </li>
-                  <li className={shop ? "active" : ""}>
+                  <li style={{ cursor:'pointer' }} className={shop ? "active" : ""}>
                     <a onClick={shop1}>Shop</a>
                   </li>
-                  <li className={about ? "active" : ""}>
+                  <li  style={{ cursor:'pointer' }} className={about ? "active" : ""}>
                     <a onClick={about1}>About Us</a>
                   </li>
-                  <li className={contact ? "active" : ""}>
+                  <li  style={{ cursor:'pointer' }} className={contact ? "active" : ""}>
                     <a onClick={contact1}>Contact Us</a>
                   </li>
                 </ul>

@@ -39,13 +39,13 @@ function Checkout() {
   const parseCartid = JSON.parse(cartid);
   const parseUserid = JSON.parse(userid);
   console.log(parseUserid);
-  let cardidparse = parseCartid
+  let cardidparse =parseCartid && parseCartid.length>0 && parseCartid
     .map((id) => {
       return id.cartId;
     })
     .join(",");
 
-  let totalcart = parseCartid.reduce((acc, curr) => {
+  let totalcart =parseCartid && parseCartid.length>0 && parseCartid.reduce((acc, curr) => {
     return acc + curr.subtotal;
   }, 0);
 
@@ -261,7 +261,7 @@ function Checkout() {
   };
   useEffect(() => {
     if (!loggedin) {
-      navigate(-1);
+      navigate("/");
     }
   }, []);
   const headers = {
@@ -954,7 +954,7 @@ function Checkout() {
                     <div className="col-xs-6">
                       <label>Postcode / ZIP*</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         name="zip"
                         onInput={(e) => {
@@ -975,7 +975,7 @@ function Checkout() {
                     <div className="col-xs-6">
                       <label>Phone*</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         name="phone"
                         onInput={(e) => {
@@ -996,7 +996,7 @@ function Checkout() {
                   </div>
                   <label>Email Address*</label>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     name="email-address"
                     onInput={(e) => {
