@@ -177,7 +177,6 @@ function Heroabout() {
           </section>
         </div>
       </main>
-      <Footer/>
     </>
   );
 }

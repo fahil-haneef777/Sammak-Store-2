@@ -819,7 +819,7 @@ function Checkout() {
             </h3>
           </div>
           <div className="container mt-7">
-            <form onSubmit={handlePlace} className="form">
+            <form onSubmit={handlePlace} className="form" autoComplete="off">
               <div className="row">
                 <div className="col-lg-7 mb-6 mb-lg-0 check-detail">
                   <h3 className="title text-left mt-3 mb-6">Billing Details</h3>
@@ -851,7 +851,6 @@ function Checkout() {
                         type="text"
                         className="form-control"
                         name="last-name"
-                        required=""
                         onInput={(e) => {
                           setcheckoutform({
                             ...checkoutform,
@@ -868,7 +867,6 @@ function Checkout() {
                       type="text"
                       className="form-control"
                       name="country"
-                      required=""
                       onInput={(e) => {
                         setcheckoutform({
                           ...checkoutform,
@@ -889,7 +887,6 @@ function Checkout() {
                     type="text"
                     className="form-control"
                     name="address1"
-                    required=""
                     placeholder="House number and street name"
                     onInput={(e) => {
                       setcheckoutform({
@@ -912,7 +909,6 @@ function Checkout() {
                         type="text"
                         className="form-control"
                         name="city"
-                        required=""
                         onInput={(e) => {
                           setcheckoutform({
                             ...checkoutform,
@@ -934,7 +930,6 @@ function Checkout() {
                         type="text"
                         className="form-control"
                         name="state"
-                        required=""
                         onInput={(e) => {
                           setcheckoutform({
                             ...checkoutform,
@@ -958,7 +953,6 @@ function Checkout() {
                         type="text"
                         className="form-control"
                         name="zip"
-                        required=""
                         onInput={(e) => {
                           setcheckoutform({
                             ...checkoutform,
@@ -980,7 +974,6 @@ function Checkout() {
                         type="text"
                         className="form-control"
                         name="phone"
-                        required=""
                         onInput={(e) => {
                           setcheckoutform({
                             ...checkoutform,
@@ -1002,7 +995,6 @@ function Checkout() {
                     type="text"
                     className="form-control"
                     name="email-address"
-                    required=""
                     onInput={(e) => {
                       setcheckoutform({
                         ...checkoutform,

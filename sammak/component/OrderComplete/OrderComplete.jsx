@@ -1,42 +1,41 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 function OrderComplete(props) {
   const [cartdata, setcartdata] = useState("");
   const token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handlePageLoad = () => {
+      // Reload the page when it is loaded
+      window.location.reload();
+    };
+
+    // Attach the event listener to handle page load
+    window.addEventListener('load', handlePageLoad);
+
+    // Cleanup the listener when the component is unmounted
+    return () => {
+      window.removeEventListener('load', handlePageLoad);
+    };
+  }, []);
+
   const config = {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ` + token,
-    }
-  }
-  
-  useEffect(() => {
-    axios
-      .get(
-        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
-          "userid"
-        )}`,
-        config
-      )
-      .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(res.data.result.cartItemResponseList)
-        );
-        setcartdata(res.data.result.cartItemResponseList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-      
-  }, []);
+    },
+  };
+  let cart = JSON.parse(localStorage.getItem("cart"));
 
   return (
     <>
-   
+      <ToastContainer />
       <div className="page-content pt-8 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
           <h3 className="title title-step">
@@ -115,12 +114,13 @@ function OrderComplete(props) {
                   </td>
                   <td className="summary-value font-weight-normal">
                     {" "}
-                    {cartdata.length > 0 &&
-                      cartdata
+                    {cart.length > 0 &&
+                      cart
                         .reduce((acc, curr) => {
                           return acc + curr.subtotal;
                         }, 0)
-                        .toFixed(2)}{" "} SAR
+                        .toFixed(2)}{" "}
+                    SAR
                   </td>
                 </tr>
                 <tr className="summary-subtotal">
@@ -134,12 +134,15 @@ function OrderComplete(props) {
                     <h4 className="summary-subtitle">Total:</h4>
                   </td>
                   <td>
-                    <p className="summary-total-price">{cartdata.length > 0 &&
-                      cartdata
-                        .reduce((acc, curr) => {
-                          return acc + curr.subtotal;
-                        }, 0)
-                        .toFixed(2)}{" "} SAR</p>
+                    <p className="summary-total-price">
+                      {cart.length > 0 &&
+                        cart
+                          .reduce((acc, curr) => {
+                            return acc + curr.subtotal;
+                          }, 0)
+                          .toFixed(2)}{" "}
+                      SAR
+                    </p>
                   </td>
                 </tr>
               </tbody>
