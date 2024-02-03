@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-js-loader";
 import "../../main.js";
+import { RotatingLines } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Checkout() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -16,6 +19,7 @@ function Checkout() {
   const [cartdata, setcartdata] = useState("");
   const [cod, setcod] = useState(false);
   const [total, settotal] = useState("");
+  const [loading, setloading] = useState(false);
 
   const [checkoutform, setcheckoutform] = useState({
     additionalInfo: "non",
@@ -178,8 +182,16 @@ function Checkout() {
   };
   const handlePlace = (e) => {
     e.preventDefault();
+    setloading(true);
     if (isAnyfieldEmpty()) {
-      console.log("please fill all the field");
+      toast.error("Enter all the fields", {
+        autoClose: 700,
+        position: "top-center",
+        closeOnClick: true,
+      });
+      setTimeout(() => {
+        setloading(false);
+      }, 700);
     } else {
       axios
         .post(
@@ -190,7 +202,7 @@ function Checkout() {
           config
         )
         .then((res) => {
-          console.log(res.data);
+          setloading(false);
           handlepaytabs();
         })
         .catch((err) => {
@@ -273,6 +285,7 @@ function Checkout() {
   console.log(paytabinfo);
   return (
     <>
+      <ToastContainer />
       <header className="header">
         <div className="header-top">
           <div className="container">
@@ -1121,6 +1134,27 @@ function Checkout() {
                         onClick={handlePlace}
                       >
                         Place Order
+                        {loading && (
+                          <span
+                            style={{
+                              position: "relative",
+                              left: "4vh",
+                              top: "0.5vh",
+                            }}
+                          >
+                            <RotatingLines
+                              visible={true}
+                              height="20"
+                              width="25"
+                              color="	#87CEEB"
+                              strokeWidth="5"
+                              animationDuration="0.75"
+                              ariaLabel="rotating-lines-loading"
+                              wrapperStyle={{}}
+                              wrapperClass=""
+                            />
+                          </span>
+                        )}
                       </button>
                     </div>
                   </div>
