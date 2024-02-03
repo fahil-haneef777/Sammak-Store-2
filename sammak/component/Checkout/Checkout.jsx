@@ -31,16 +31,27 @@ function Checkout() {
   });
 
   const cartid = localStorage.getItem("cart");
+  const userid = localStorage.getItem("userid");
   const parseCartid = JSON.parse(cartid);
-  console.log(parseCartid);
+  const parseUserid = JSON.parse(userid);
+  console.log(parseUserid);
+  let cardidparse = parseCartid
+    .map((id) => {
+      return id.cartId;
+    })
+    .join(",");
+
+  let totalcart = parseCartid.reduce((acc, curr) => {
+    return acc + curr.subtotal;
+  }, 0);
 
   console.log(parseCartid);
   const [paytabinfo, setpaytabinfo] = useState({
     callback: "https://admin.sammak.store",
-    cart_amount:'11',
+    cart_amount: `${totalcart}`,
     cart_currency: "SAR",
     cart_description: "Fish",
-    cart_id: "34",
+    cart_id: `${cardidparse}`,
     customer_details: {
       city: "",
       country: "",
@@ -56,8 +67,8 @@ function Checkout() {
     paypage_lang: "en",
     profile_id: 0,
     tran_class: "ecom",
-    tran_type: "sale  ",
-    userId: 13,
+    tran_type: "sale",
+    userId: `${parseUserid}`,
   });
   console.log(paytabinfo);
   //
