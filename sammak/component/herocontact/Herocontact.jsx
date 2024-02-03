@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import '../../main.js'
+import '../../css/style.css'
 function Herocontact() {
   const [contactData, setcontactData] = useState({
     contactEmail: "",
@@ -38,7 +39,7 @@ function Herocontact() {
   return (
     <main className="main">
       <ToastContainer/>
-      <div className="page-header" style={{ backgroundColor: "#f9f8f4" }}>
+      <div className="page-header contact-hero">
         <h1 className="page-title font-weight-light text-capitalize pt-2">
           Contact Us
         </h1>
