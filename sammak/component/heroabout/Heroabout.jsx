@@ -1,11 +1,12 @@
 import React from "react";
 import "../../main.js";
+import "../../css/style.css"
 import Footer from "../Footer.jsx";
 function Heroabout() {
   return (
     <>
       <main className="main">
-        <div className="page-header" style={{ backgroundColor: "#f9f8f4" }}>
+        <div className="page-header about-hero" >
           <h1 className="page-title">About Us</h1>
         </div>
         <nav className="breadcrumb-nav has-border">

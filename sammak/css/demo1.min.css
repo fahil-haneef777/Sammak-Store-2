@@ -11637,7 +11637,8 @@ input.quantity {
 
 .benefit-section .icon-box p {
     max-width: 30rem;
-    line-height: 1.25
+    line-height: 1.25;
+    color: #373737;
 }
 
 .benefit-section .icon-box-icon {
@@ -11713,3 +11714,13 @@ input.quantity {
         object-position: 60%
     }
 }
+
+/* custome css */
+.spec-img{
+    width:674px;
+     height:514px;
+     border-radius: 10px;
+     filter: drop-shadow(0px 0px 500px  #4FC3F7);
+     color: #4FC3F7; 
+}
+/* ends */
