@@ -787,6 +787,17 @@ function Checkout() {
                 </div>
               )}
             </div>
+            {loggedin && (
+              <img
+                style={{ height: "40px" }}
+                src="images/settingiconpng.png"
+                alt="img"
+                className="settingimg"
+                onClick={() => {
+                  navigate("/setting");
+                }}
+              />
+            )}
           </div>
         </div>
         <div className="mobile-menu-wrapper">

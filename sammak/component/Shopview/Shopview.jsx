@@ -246,7 +246,10 @@ function Shopview() {
           </div>
         </div>
 
-        <div className="header-middle has-center sticky-header fix-top sticky-content" id="morph">
+        <div
+          className="header-middle has-center sticky-header fix-top sticky-content"
+          id="morph"
+        >
           <div className="container">
             <div className="header-left">
               <a className="mobile-menu-toggle" title="Mobile Menu">
@@ -262,13 +265,22 @@ function Shopview() {
                   <li className={home ? "active" : ""}>
                     <a href="/">Home</a>
                   </li>
-                  <li style={{ cursor:'pointer' }} className={shop ? "active" : ""}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className={shop ? "active" : ""}
+                  >
                     <a onClick={shop1}>Shop</a>
                   </li>
-                  <li  style={{ cursor:'pointer' }} className={about ? "active" : ""}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className={about ? "active" : ""}
+                  >
                     <a onClick={about1}>About Us</a>
                   </li>
-                  <li  style={{ cursor:'pointer' }} className={contact ? "active" : ""}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className={contact ? "active" : ""}
+                  >
                     <a onClick={contact1}>Contact Us</a>
                   </li>
                 </ul>
@@ -661,6 +673,17 @@ function Shopview() {
                 </div>
               )}
             </div>
+            {loggedin && (
+              <img
+                style={{ height: "40px" }}
+                src="images/settingiconpng.png"
+                alt="img"
+                className="settingimg"
+                onClick={() => {
+                  navigate("/setting");
+                }}
+              />
+            )}
           </div>
         </div>
 

@@ -330,19 +330,21 @@ function Header() {
               </div>
               <div className="dropdown login-dropdown off-canvas">
                 {loggedin ? (
-                  <button
-                    onClick={() => {
-                      localStorage.clear();
-                      window.location.reload();
-                    }}
-                    style={{
-                      position: "relative",
-                      left: "-1vh",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Logout
-                  </button>
+                  <>
+                    <button
+                      onClick={() => {
+                        localStorage.clear();
+                        window.location.reload();
+                      }}
+                      style={{
+                        position: "relative",
+                        left: "-1vh",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </>
                 ) : (
                   <button
                     style={{
@@ -617,7 +619,9 @@ function Header() {
                       </span>
                     </i>
                   </a>
+
                   <div className="canvas-overlay"></div>
+
                   <div className="dropdown-box">
                     <div className="canvas-header">
                       <h4 className="canvas-title">Shopping Cart</h4>
@@ -726,6 +730,17 @@ function Header() {
                 </div>
               )}
             </div>
+            {loggedin && (
+              <img
+                style={{ height: "40px" }}
+                src="images/settingiconpng.png"
+                alt="img"
+                className="settingimg"
+                onClick={() => {
+                  navigate("/setting");
+                }}
+              />
+            )}
           </div>
         </div>
 

@@ -835,6 +835,17 @@ function Herocart() {
                 </div>
               )}
             </div>
+            {loggedin && (
+              <img
+                style={{ height: "40px" }}
+                src="images/settingiconpng.png"
+                alt="img"
+                className="settingimg"
+                onClick={() => {
+                  navigate("/setting");
+                }}
+              />
+            )}
           </div>
         </div>
       </header>
@@ -918,22 +929,19 @@ function Herocart() {
                   <p className="product-price mb-1">
                     <del className="old-price">
                       {" "}
-                   
-                      SAR  {data.length > 0 && data[0].originalPrice}{" "}   
-                      
+                      SAR {data.length > 0 && data[0].originalPrice}{" "}
                     </del>
                     <ins className="new-price">
                       {" "}
-                      SAR{data.length > 0 && data[0].sellingPrice} 
+                      SAR{data.length > 0 && data[0].sellingPrice}
                     </ins>
                   </p>
                   <p className="product-short-desc">
                     {data.length > 0 && data[0].productDescription}
                   </p>
-                  <p className="product-short-desc" >
+                  <p className="product-short-desc">
                     {data.length > 0 && data[0].smallDescription}
                   </p>
-                  
 
                   <div className="product-form mb-2 pt-1">
                     <select name="cleaning" id="cl-method">

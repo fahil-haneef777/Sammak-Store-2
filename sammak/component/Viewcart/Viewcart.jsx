@@ -235,13 +235,16 @@ function Viewcart() {
       quantity: updatedCartData[index].quantity + 1,
     };
     updatedCartData[index].subtotal =
-    updatedCartData[index].quantity * updatedCartData[index].productResponse.sellingPrice;
+      updatedCartData[index].quantity *
+      updatedCartData[index].productResponse.sellingPrice;
 
     setcartdata(updatedCartData);
 
     axios
       .put(
-        `${import.meta.env.VITE_URL}/CartMaster/UpdateCart/${id}/${localStorage.getItem(
+        `${
+          import.meta.env.VITE_URL
+        }/CartMaster/UpdateCart/${id}/${localStorage.getItem(
           "userid"
         )}/${cartId}/${updatedCartData[index].quantity}`,
         {},
@@ -266,13 +269,16 @@ function Viewcart() {
       updatedCartData[index].quantity = 1;
     }
     updatedCartData[index].subtotal =
-    updatedCartData[index].quantity * updatedCartData[index].productResponse.sellingPrice;
+      updatedCartData[index].quantity *
+      updatedCartData[index].productResponse.sellingPrice;
 
     setcartdata(updatedCartData);
     console.log(updatedCartData[index].quantity);
     axios
       .put(
-        `${import.meta.env.VITE_URL}/CartMaster/UpdateCart/${id}/${localStorage.getItem(
+        `${
+          import.meta.env.VITE_URL
+        }/CartMaster/UpdateCart/${id}/${localStorage.getItem(
           "userid"
         )}/${cartId}/${updatedCartData[index].quantity}`,
         {},
@@ -845,6 +851,17 @@ function Viewcart() {
                 </div>
               )}
             </div>
+            {loggedin && (
+              <img
+                style={{ height: "40px" }}
+                src="images/settingiconpng.png"
+                alt="img"
+                className="settingimg"
+                onClick={() => {
+                  navigate("/setting");
+                }}
+              />
+            )}
           </div>
         </div>
         <div className="mobile-menu-wrapper">
