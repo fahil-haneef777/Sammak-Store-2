@@ -57,7 +57,7 @@ function Checkout() {
 
   console.log(parseCartid);
   const [paytabinfo, setpaytabinfo] = useState({
-    callback: "https://admin.sammak.store",
+    callback: "String",
     cart_amount: `${totalcart}`,
     cart_currency: "SAR",
     cart_description: "Fish",

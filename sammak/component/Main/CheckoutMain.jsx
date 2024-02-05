@@ -13,6 +13,7 @@ function CheckoutMain() {
   };
 
   useEffect(() => {
+    //orderapi
     axios
       .get(
         `${
@@ -22,8 +23,23 @@ function CheckoutMain() {
       )
       .then((res) => {
         localStorage.setItem("orders", JSON.stringify(res.data.result));
+        console.log(res);
       })
       .catch((err) => {});
+    //address api
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_URL
+        }/Address/getAddressByUserId/${localStorage.getItem("userid")}`,
+        config
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   let orders = JSON.parse(localStorage.getItem("orders"));
@@ -160,141 +176,34 @@ function CheckoutMain() {
                   <table className="order-table">
                     <thead>
                       <tr>
-                        <th>Order</th>
+                        <th>Order id</th>
 
-                        <th>Product Name</th>
-                        <th></th>
+                        <th>Product name</th>
+
+                        <th>Quantity</th>
                       </tr>
                     </thead>
                     <tbody>
-                     
-                      <tr>
-                        <td className="order-number">
-                          <a href="#">#3596</a>
-                        </td>
-                        <td className="order-date">
-                          <span>September 23, 2021</span>
-                        </td>
-                        <td className="order-status">
-                          <span>On hold</span>
-                        </td>
-                        <td className="order-total">
-                          <span>$147.00 for 4 items</span>
-                        </td>
-                        <td className="order-action">
-                        <img src="" alt="img"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="order-number">
-                          <a href="#">#3593</a>
-                        </td>
-                        <td className="order-date">
-                          <span>February 21, 2021</span>
-                        </td>
-                        <td className="order-status">
-                          <span>On hold</span>
-                        </td>
-                        <td className="order-total">
-                          <span>$290.00 for 2 items</span>
-                        </td>
-                        <td className="order-action">
-                          <a
-                            href="#orders-view"
-                            className="btn btn-secondary btn-outline btn-block btn-rounded btn-sm"
-                          >
-                            View
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="order-number">
-                          <a href="#">#2547</a>
-                        </td>
-                        <td className="order-date">
-                          <span>January 4, 2021</span>
-                        </td>
-                        <td className="order-status">
-                          <span>On hold</span>
-                        </td>
-                        <td className="order-total">
-                          <span>$480.00 for 8 items</span>
-                        </td>
-                        <td className="order-action">
-                          <a
-                            href="#orders-view"
-                            className="btn btn-secondary btn-outline btn-block btn-rounded btn-sm"
-                          >
-                            View
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="order-number">
-                          <a href="#">#2549</a>
-                        </td>
-                        <td className="order-date">
-                          <span>January 19, 2021</span>
-                        </td>
-                        <td className="order-status">
-                          <span>On hold</span>
-                        </td>
-                        <td className="order-total">
-                          <span>$680.00 for 5 items</span>
-                        </td>
-                        <td className="order-action">
-                          <a
-                            href="#orders-view"
-                            className="btn btn-secondary btn-outline btn-block btn-rounded btn-sm"
-                          >
-                            View
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="order-number">
-                          <a href="#">#4523</a>
-                        </td>
-                        <td className="order-date">
-                          <span>Jun 6, 2021</span>
-                        </td>
-                        <td className="order-status">
-                          <span>On hold</span>
-                        </td>
-                        <td className="order-total">
-                          <span>$564.00 for 3 items</span>
-                        </td>
-                        <td className="order-action">
-                          <a
-                            href="#orders-view"
-                            className="btn btn-secondary btn-outline btn-block btn-rounded btn-sm"
-                          >
-                            View
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="order-number">
-                          <a href="#">#4526</a>
-                        </td>
-                        <td className="order-date">
-                          <span>Jun 19, 2021</span>
-                        </td>
-                        <td className="order-status">
-                          <span>On hold</span>
-                        </td>
-                        <td className="order-total">
-                          <span>$123.00 for 8 items</span>
-                        </td>
-                        <td className="order-action">
-                          <a
-                            href="#orders-view"
-                            className="btn btn-secondary btn-outline btn-block btn-rounded btn-sm"
-                          >
-                            View
-                          </a>
-                        </td>
-                      </tr>
+                      {orders?.map((order, index) => (
+                        <tr key={index}>
+                          <td className="order-number">
+                            <a href="#">{order.orderId}</a>
+                          </td>
+                          <td className="order-date">
+                            <span>{order.productName}</span>
+                          </td>
+                          <td className="order-status">
+                            <span>{order.quantity}</span>
+                          </td>
+                          <td className="order-action">
+                            <img
+                              src={order.imageUrl}
+                              style={{ height: "11vh", width: "10vw" }}
+                              alt="img"
+                            />
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
