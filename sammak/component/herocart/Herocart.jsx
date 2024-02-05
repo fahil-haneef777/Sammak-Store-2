@@ -24,6 +24,7 @@ function Herocart() {
   const [quantity, setquantity] = useState(1);
   const [cartdata, setcartdata] = useState("");
   const [data, setdata] = useState("");
+  const [cleaning, setcleaning] = useState("Cleaning Method 1");
   const navigate = useNavigate();
   useEffect(() => {
     let storedProduct = localStorage.getItem("products");
@@ -185,7 +186,7 @@ function Herocart() {
       .post(
         `${import.meta.env.VITE_URL}/cart/addToCart/${localStorage.getItem(
           "id"
-        )}/${localStorage.getItem("userid")}/${quantity}`,
+        )}/${localStorage.getItem("userid")}/${quantity}/${cleaning}`,
         {},
         config
       )
@@ -256,7 +257,7 @@ function Herocart() {
   if (data) {
     console.log(data[0].images);
   }
-
+  console.log(cleaning);
   return (
     <>
       <header className="header">
@@ -944,8 +945,15 @@ function Herocart() {
                   </p>
 
                   <div className="product-form mb-2 pt-1">
-                    <select name="cleaning" id="cl-method">
-                      <option value="Cleaning Method 1">
+                    <select
+                      name="cleaning"
+                      id="cl-method"
+                      onChange={(e) => {
+                        setcleaning(e.target.value);
+                      }}
+                      value={cleaning}
+                    >
+                      <option selected value="Cleaning Method 1">
                         Cleaning method 1
                       </option>
                       <option value="Cleaning Method 2">
