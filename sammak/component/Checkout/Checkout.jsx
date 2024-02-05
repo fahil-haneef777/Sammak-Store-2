@@ -33,6 +33,29 @@ function Checkout() {
     pinCode: "",
     state: "",
   });
+  useEffect(() => {
+    if (!loggedin) {
+      navigate("/");
+    }
+    axios
+      .get(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
+          "userid"
+        )}`,
+        config
+      )
+      .then((res) => {
+        console.log(res.data.result.cartItemResponseList);
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(res.data.result.cartItemResponseList)
+        );
+        setcartdata(res.data.result.cartItemResponseList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [])
 
   const cartid = localStorage.getItem("cart");
   const userid = localStorage.getItem("userid");

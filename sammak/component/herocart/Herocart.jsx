@@ -953,7 +953,7 @@ function Herocart() {
                       }}
                       value={cleaning}
                     >
-                      <option selected value="Cleaning Method 1">
+                      <option value="Cleaning Method 1">
                         Cleaning method 1
                       </option>
                       <option value="Cleaning Method 2">

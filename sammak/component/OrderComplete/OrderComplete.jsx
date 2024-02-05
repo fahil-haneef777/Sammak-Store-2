@@ -42,6 +42,8 @@ function OrderComplete() {
     setsearch,
   } = useContext(AllContext);
 
+
+  
   let cart1 = JSON.parse(localStorage.getItem("cart"));
   let newdata = JSON.stringify(registeruser);
   const register = () => {
