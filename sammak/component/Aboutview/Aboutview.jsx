@@ -1,21 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Herohome from "./herohome/Herohome";
-import Heroshop from "./heroshop/Heroshop";
-import Heroabout from "./heroabout/Heroabout";
-import Herocontact from "./herocontact/Herocontact";
+import Herohome from "../herohome/Herohome";
+import Heroshop from "../heroshop/Heroshop";
+import Heroabout from "../heroabout/Heroabout";
+import Herocontact from "../herocontact/Herocontact";
 import axios from "axios";
 import { useContext } from "react";
-import AllContext from "../src/Context/Context";
-import Herocart from "./herocart/Herocart";
+import AllContext from "../../src/Context/Context";
+import Herocart from "../herocart/Herocart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Loader from "react-js-loader";
 import { RotatingLines } from "react-loader-spinner";
-import "../main.js";
-import { jwtDecode } from "jwt-decode";
-function Header() {
+import "../../main.js";
+import "../../css/style.css";
+import Footer from "../Footer.jsx";
+
+function Aboutview() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
     emailId: "",
@@ -23,26 +25,20 @@ function Header() {
     userName: "",
   });
   const [cartdata, setcartdata] = useState("");
+  const [about, setabout] = useState(true);
+  const [shop, setshop] = useState(false);
+  const [home, sethome] = useState(false);
   const [loading, setloading] = useState(false);
-  const [decode, setdecode] = useState("");
-
   const navigate = useNavigate();
   const {
     loggedin,
     setloggedin,
-    home,
-    sethome,
-    shop,
-    setshop,
-    about,
-    setabout,
+
     contact,
     setcontact,
     cart,
     search,
     setsearch,
-    loginopen,
-    setloginopen,
   } = useContext(AllContext);
 
   const home1 = () => {
@@ -81,13 +77,11 @@ function Header() {
         closeOnClick: true,
         position: "top-right",
       });
-      setloading(false);
     } else {
       axios
         .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
         .then((res) => {
-          setloading(false);
-          console.log(res);
+          console.log(res.data);
           if (res.data.status === 200) {
             toast.success("Registered successfully", {
               position: "top-right",
@@ -107,10 +101,10 @@ function Header() {
         })
         .catch((err) => {
           console.log(err);
-          setloading(false);
         });
     }
   };
+
   const login = () => {
     console.log(loginuser);
     if (loginuser.email === "" || loginuser.password === "") {
@@ -180,17 +174,7 @@ function Header() {
         console.log(err);
       });
   }, []);
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const load = jwtDecode(localStorage.getItem("token"));
-      setdecode(load);
-      const expirationTime = decode.exp * 1000;
-      const currentTime = new Date().getTime();
-      const timeUntilExpiration = expirationTime - currentTime;
-      console.log(timeUntilExpiration);
-    }
-  }, []);
+  useEffect(() => {}, [search]);
 
   const handleDelete = (index, id, cartid) => {
     let newCartdata =
@@ -215,11 +199,6 @@ function Header() {
         console.log(err);
       });
   };
-
-  const onSearch = () => {};
-  console.log(search);
-
-  console.log(import.meta.env.VITE_URL);
 
   return (
     <>
@@ -275,13 +254,8 @@ function Header() {
               <a className="mobile-menu-toggle" title="Mobile Menu">
                 <i className="p-icon-bars-solid"></i>
               </a>
-              <a href="/" className="logo">
-                <img
-                  src="/images/logo.png"
-                  alt="logo"
-                  width="171"
-                  height="41"
-                />
+              <a className="logo">
+                <img src="images/logo.png" alt="logo" width="171" height="41" />
               </a>
             </div>
             <div className="header-center">
@@ -296,7 +270,10 @@ function Header() {
                       Home
                     </a>
                   </li>
-                  <li className={shop ? "active" : ""}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className={shop ? "active" : ""}
+                  >
                     <a
                       onClick={() => {
                         navigate("/shopview");
@@ -334,7 +311,7 @@ function Header() {
             </div>
             <div className="header-right">
               <div className="header-search hs-toggle">
-                <a className="search-toggle" title="Search">
+                <a className="search-toggle" href="#" title="Search">
                   <i className="p-icon-search-solid"></i>
                 </a>
                 <form action="#" className="form-simple">
@@ -354,39 +331,28 @@ function Header() {
               </div>
               <div className="dropdown login-dropdown off-canvas">
                 {loggedin ? (
-                  <>
-                    <button
-                      onClick={() => {
-                        localStorage.clear();
-                        window.location.reload();
-                      }}
-                      style={{
-                        position: "relative",
-                        left: "-1vh",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
                   <button
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.reload();
+                    }}
                     style={{
                       position: "relative",
                       left: "-1vh",
                       cursor: "pointer",
                     }}
                   >
-                    {" "}
-                    <a className="login-toggle" data-toggle="login-modal">
-                      <i className="p-icon-user-solid mr-2"></i>
-                      <span>login/Signup</span>
-                    </a>
+                    Logout
                   </button>
+                ) : (
+                  <a className="login-toggle" href="" data-toggle="login-modal">
+                    <i className="p-icon-user-solid mr-2"></i>
+                    <span className="">login/Signup</span>
+                  </a>
                 )}
 
                 <div className="canvas-overlay"></div>
-                <a className="btn-close"></a>
+                <a href="#" className="btn-close"></a>
                 <div className="dropdown-box scrollable">
                   <div className="login-popup">
                     <div className="form-box">
@@ -457,7 +423,7 @@ function Header() {
                                     Remember me
                                   </label>
                                 </div>
-                                <a href="" className="lost-link">
+                                <a href="#" className="lost-link">
                                   Lost your password?
                                 </a>
                               </div>
@@ -514,7 +480,6 @@ function Header() {
                             <form
                               onSubmit={(e) => {
                                 e.preventDefault();
-                                setloading(true);
                                 register();
                               }}
                             >
@@ -577,27 +542,6 @@ function Header() {
                                 type="submit"
                               >
                                 Register
-                                {loading && (
-                                  <span
-                                    style={{
-                                      position: "relative",
-                                      left: "4vh",
-                                      top: "0.5vh",
-                                    }}
-                                  >
-                                    <RotatingLines
-                                      visible={true}
-                                      height="20"
-                                      width="25"
-                                      color="	#87CEEB"
-                                      strokeWidth="5"
-                                      animationDuration="0.75"
-                                      ariaLabel="rotating-lines-loading"
-                                      wrapperStyle={{}}
-                                      wrapperClass=""
-                                    />
-                                  </span>
-                                )}
                               </button>
                             </form>
                             <div className="form-choice text-center">
@@ -643,9 +587,7 @@ function Header() {
                       </span>
                     </i>
                   </a>
-
                   <div className="canvas-overlay"></div>
-
                   <div className="dropdown-box">
                     <div className="canvas-header">
                       <h4 className="canvas-title">Shopping Cart</h4>
@@ -780,7 +722,7 @@ function Header() {
               <li>
                 <a
                   onClick={() => {
-                    navigate("/");
+                    navigate("/contact");
                   }}
                 >
                   Home
@@ -797,8 +739,6 @@ function Header() {
               </li>
               <li>
                 <a
-                  className="mobile-menu-overlay"
-                  style={{}}
                   onClick={() => {
                     navigate("/about");
                   }}
@@ -808,7 +748,6 @@ function Header() {
               </li>
               <li>
                 <a
-                  className="mobile-menu-overlay"
                   onClick={() => {
                     navigate("/contact");
                   }}
@@ -824,7 +763,7 @@ function Header() {
       {home ? (
         <Herohome />
       ) : shop ? (
-        <Heroshop />
+        <Heroshop search={search} setseatch={setsearch} />
       ) : about ? (
         <Heroabout />
       ) : contact ? (
@@ -832,8 +771,9 @@ function Header() {
       ) : (
         ""
       )}
+      <Footer />
     </>
   );
 }
 
-export default Header;
+export default Aboutview;

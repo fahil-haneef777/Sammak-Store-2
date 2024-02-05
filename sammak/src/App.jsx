@@ -11,6 +11,8 @@ import Shopview from "../component/Shopview/Shopview";
 import SliderMain from "../component/SliderMain/SliderMain";
 import OrderComplete from "../component/OrderComplete/OrderComplete";
 import CheckoutMain from "../component/Main/CheckoutMain";
+import Aboutview from "../component/Aboutview/Aboutview";
+import Contactview from "../component/Contactview/Contactview";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,10 +23,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Herocart />} />
+          <Route path="/about" element={<Aboutview />} />
           <Route path="/viewcart" element={<Viewcart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/shopview" element={<Shopview />} />
+          <Route path="/contact" element={<Contactview />} />
           <Route path="/orderComplete" element={<OrderComplete />} />
           <Route path="/setting" element={<CheckoutMain />} />
         </Routes>

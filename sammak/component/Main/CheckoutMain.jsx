@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../main.js";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 function CheckoutMain() {
   const navigate = useNavigate();
+
+  const config = {
+    headers: {
+      Accept: "*/*",
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    },
+  };
+
+  useEffect(() => {
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_URL
+        }/orderMaster/getAllOrdersById/${localStorage.getItem("userid")}`,
+        config
+      )
+      .then((res) => {
+        localStorage.setItem("orders", JSON.stringify(res.data.result));
+      })
+      .catch((err) => {});
+  }, []);
+
+  let orders = JSON.parse(localStorage.getItem("orders"));
+  console.log(orders);
 
   return (
     <>
@@ -136,13 +161,13 @@ function CheckoutMain() {
                     <thead>
                       <tr>
                         <th>Order</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Actions</th>
+
+                        <th>Product Name</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
+                     
                       <tr>
                         <td className="order-number">
                           <a href="#">#3596</a>
@@ -157,12 +182,7 @@ function CheckoutMain() {
                           <span>$147.00 for 4 items</span>
                         </td>
                         <td className="order-action">
-                          <a
-                            href="#orders-view"
-                            className="btn btn-secondary btn-outline btn-block btn-rounded btn-sm"
-                          >
-                            View
-                          </a>
+                        <img src="" alt="img"/>
                         </td>
                       </tr>
                       <tr>

@@ -39,15 +39,21 @@ function Checkout() {
   const parseCartid = JSON.parse(cartid);
   const parseUserid = JSON.parse(userid);
   console.log(parseUserid);
-  let cardidparse =parseCartid && parseCartid.length>0 && parseCartid
-    .map((id) => {
-      return id.cartId;
-    })
-    .join(",");
+  let cardidparse =
+    parseCartid &&
+    parseCartid.length > 0 &&
+    parseCartid
+      .map((id) => {
+        return id.cartId;
+      })
+      .join(",");
 
-  let totalcart =parseCartid && parseCartid.length>0 && parseCartid.reduce((acc, curr) => {
-    return acc + curr.subtotal;
-  }, 0);
+  let totalcart =
+    parseCartid &&
+    parseCartid.length > 0 &&
+    parseCartid.reduce((acc, curr) => {
+      return acc + curr.subtotal;
+    }, 0);
 
   console.log(parseCartid);
   const [paytabinfo, setpaytabinfo] = useState({
@@ -60,7 +66,8 @@ function Checkout() {
       city: "",
       country: "",
       email: "",
-      name: "",
+      firstName: "",
+      lastName: "",
       phone: "",
       state: "",
       street1: "",
@@ -854,7 +861,7 @@ function Checkout() {
                             ...paytabinfo,
                             customer_details: {
                               ...paytabinfo.customer_details,
-                              name: e.target.value,
+                              firstName: e.target.value,
                             },
                           });
                         }}
@@ -870,6 +877,13 @@ function Checkout() {
                           setcheckoutform({
                             ...checkoutform,
                             lastName: e.target.value,
+                          });
+                          setpaytabinfo({
+                            ...paytabinfo,
+                            customer_details: {
+                              ...paytabinfo.customer_details,
+                              lastName: e.target.value,
+                            },
                           });
                         }}
                       />

@@ -263,25 +263,49 @@ function Shopview() {
               <nav className="main-nav">
                 <ul className="menu">
                   <li className={home ? "active" : ""}>
-                    <a href="/">Home</a>
+                    <a
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                    >
+                      Home
+                    </a>
                   </li>
                   <li
                     style={{ cursor: "pointer" }}
                     className={shop ? "active" : ""}
                   >
-                    <a onClick={shop1}>Shop</a>
+                    <a
+                      onClick={() => {
+                        navigate("/shopview");
+                      }}
+                    >
+                      Shop
+                    </a>
                   </li>
                   <li
                     style={{ cursor: "pointer" }}
                     className={about ? "active" : ""}
                   >
-                    <a onClick={about1}>About Us</a>
+                    <a
+                      onClick={() => {
+                        navigate("/about");
+                      }}
+                    >
+                      About Us
+                    </a>
                   </li>
                   <li
                     style={{ cursor: "pointer" }}
                     className={contact ? "active" : ""}
                   >
-                    <a onClick={contact1}>Contact Us</a>
+                    <a
+                      onClick={() => {
+                        navigate("/contact");
+                      }}
+                    >
+                      Contact Us
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -697,16 +721,40 @@ function Shopview() {
           <div className="mobile-menu-container scrollable">
             <ul className="mobile-menu mmenu-anim">
               <li>
-                <a href="/">Home</a>
+                <a
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  Home
+                </a>
               </li>
               <li>
-                <a href="/shopview">Shop</a>
+                <a
+                  onClick={() => {
+                    navigate("/shopview");
+                  }}
+                >
+                  Shop
+                </a>
               </li>
               <li>
-                <a onClick={about1}>About Us</a>
+                <a
+                  onClick={() => {
+                    navigate("/about");
+                  }}
+                >
+                  About Us
+                </a>
               </li>
               <li>
-                <a onClick={contact1}>Contact Us</a>
+                <a
+                  onClick={() => {
+                    navigate("/contact");
+                  }}
+                >
+                  Contact Us
+                </a>
               </li>
             </ul>
           </div>
