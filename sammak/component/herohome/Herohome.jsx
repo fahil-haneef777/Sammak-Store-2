@@ -7,7 +7,7 @@ import AllContext from "../../src/Context/Context";
 import { useNavigate } from "react-router-dom";
 import SliderMain from "../SliderMain/SliderMain";
 import SpecialSection from "../SpecialSection/SpecialSection";
-import '../../main.js'
+import "../../main.js";
 function Herohome() {
   const [data, setdata] = useState([]);
   const { id, setid, cart, setcart, productinfo, setproductinfo } =
@@ -17,14 +17,11 @@ function Herohome() {
     axios
       .get(`${import.meta.env.VITE_URL}/Product/post`)
       .then((res) => {
-        console.log(res.data.result);
         setdata(res.data.result);
         setproductinfo(res.data.result);
         localStorage.setItem("products", JSON.stringify(res.data.result));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   const onCart = () => {
@@ -65,103 +62,135 @@ function Herohome() {
                   <div className="tab-pane active" id="canned">
                     <div className="page-content mb-10 shop-page shop-horizontal">
                       <div className="container">
-                        <div
-                          className="row product-wrapper cols-lg-5 cols-md-4 cols-sm-3 cols-2"
-                        >
-                            {data.length > 0 &&
-                  Array.isArray(data) &&
-                  data
-                    .map((field, index) => (
-                      <div
-                        className="product-wrap"
-                        style={{ display: "flex", flexDirection: "row" }}
-                        key={index}
-                        onClick={() => {
-                          setid(field.id);
-                          localStorage.setItem("id", field.id);
-                          onCart();
-                          window.location.reload();
-                        }}
-                      >
-                        <div className="product shadow-media text-center">
-                          <figure
-                            className="product-media"
-                            style={{ cursor: "pointer" }}
-                          >
-                            <a>
-                              <img
-                                src={
-                                  field.images.length > 0
-                                    ? field.images[0].imageUrl
-                                    : ""
-                                }
-                                alt="product"
-                               style={{  width:"295",height:"369" }}
-                                className="homelistingimg"
-                              />
-                              <img
-                                src={field.images.length > 0
-                                  ? field.images[0].imageUrl
-                                  : ""}
-                                alt="product"
-                                style={{  width:"295",height:"369" }}
-                              />
-                            </a>
-                            <div className="product-action-vertical">
-                                <a href="#" className="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to Cart">
-                                  <i className="p-icon-cart-solid"></i>
-                                </a>
-                                <a href="#" className="btn-product-icon btn-wishlist" title="Add to Wishlist">
-                                  <i className="p-icon-heart-solid"></i>
-                                </a>
-                                <a href="#" className="btn-product-icon btn-compare" title="Compare">
-                                  <i className="p-icon-compare-solid"></i>
-                                </a>
-                                <a href="#" className="btn-product-icon btn-quickview" title="Quick View">
-                                  <i className="p-icon-search-solid"></i>
-                                </a>
-                              </div>
-                            {/* Product actions */}
-                          </figure>
-                          <div className="product-details">
-                          <div className="ratings-container">
-                                <div className="ratings-full">
-                                  <span className="ratings" style={{width: "60%"}}></span>
-                                  <span className="tooltiptext tooltip-top">3.00</span>
+                        <div className="row product-wrapper cols-lg-5 cols-md-4 cols-sm-3 cols-2">
+                          {data.length > 0 &&
+                            Array.isArray(data) &&
+                            data
+                              .map((field, index) => (
+                                <div
+                                  className="product-wrap"
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                  }}
+                                  key={index}
+                                  onClick={() => {
+                                    setid(field.id);
+                                    localStorage.setItem("id", field.id);
+                                    onCart();
+                                    window.location.reload();
+                                  }}
+                                >
+                                  <div className="product shadow-media text-center">
+                                    <figure
+                                      className="product-media"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <a>
+                                        <img
+                                          src={
+                                            field.images.length > 0
+                                              ? field.images[0].imageUrl
+                                              : ""
+                                          }
+                                          alt="product"
+                                          style={{
+                                            width: "295",
+                                            height: "369",
+                                          }}
+                                          className="homelistingimg"
+                                        />
+                                        <img
+                                          src={
+                                            field.images.length > 0
+                                              ? field.images[0].imageUrl
+                                              : ""
+                                          }
+                                          alt="product"
+                                          style={{
+                                            width: "295",
+                                            height: "369",
+                                          }}
+                                        />
+                                      </a>
+                                      <div className="product-action-vertical">
+                                        <a
+                                          href="#"
+                                          className="btn-product-icon btn-cart"
+                                          data-toggle="modal"
+                                          data-target="#addCartModal"
+                                          title="Add to Cart"
+                                        >
+                                          <i className="p-icon-cart-solid"></i>
+                                        </a>
+                                        <a
+                                          href="#"
+                                          className="btn-product-icon btn-wishlist"
+                                          title="Add to Wishlist"
+                                        >
+                                          <i className="p-icon-heart-solid"></i>
+                                        </a>
+                                        <a
+                                          href="#"
+                                          className="btn-product-icon btn-compare"
+                                          title="Compare"
+                                        >
+                                          <i className="p-icon-compare-solid"></i>
+                                        </a>
+                                        <a
+                                          href="#"
+                                          className="btn-product-icon btn-quickview"
+                                          title="Quick View"
+                                        >
+                                          <i className="p-icon-search-solid"></i>
+                                        </a>
+                                      </div>
+                                      {/* Product actions */}
+                                    </figure>
+                                    <div className="product-details">
+                                      <div className="ratings-container">
+                                        <div className="ratings-full">
+                                          <span
+                                            className="ratings"
+                                            style={{ width: "60%" }}
+                                          ></span>
+                                          <span className="tooltiptext tooltip-top"></span>
+                                        </div>
+                                        <a
+                                          href="javascript:void(0);"
+                                          className="rating-reviews"
+                                        >
+                                          ({Math.floor(Math.random() * 20 + 5)})
+                                        </a>
+                                      </div>
+                                      <h5 className="product-name">
+                                        <a
+                                          href="product-simple.html"
+                                          style={{
+                                            color: "#163b4d",
+                                            fontWeight: "600",
+                                            scale: "1.1",
+                                          }}
+                                        >
+                                          {field.productName}
+                                        </a>
+                                      </h5>
+                                      <span className="product-price">
+                                        <del className="old-price">
+                                          {field.originalPrice} SAR
+                                        </del>
+                                        <ins
+                                          className="new-price"
+                                          style={{ fontWeight: "bold" }}
+                                        >
+                                          &nbsp; {field.sellingPrice} SAR
+                                        </ins>
+                                      </span>
+                                    </div>
+                                  </div>
                                 </div>
-                                <a href="javascript:void(0);" className="rating-reviews">(12)</a>
-                              </div>
-                            <h5 className="product-name">
-                              <a
-                                href="product-simple.html"
-                                style={{
-                                  color: "#163b4d",
-                                  fontWeight: "600",
-                                  scale: "1.1",
-                                }}
-                              >
-                                {field.productName}
-                              </a>
-                            </h5>
-                            <span className="product-price">
-                              <del className="old-price">
-                                {field.originalPrice} SAR
-                              </del>
-                              <ins
-                                className="new-price"
-                                style={{ fontWeight: "bold" }}
-                              >
-                                &nbsp; {field.sellingPrice} SAR
-                              </ins>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                    .slice(0, 5)}
-                
-                
-
+                              ))
+                              .slice(0, 5)}
                         </div>
                       </div>
                     </div>

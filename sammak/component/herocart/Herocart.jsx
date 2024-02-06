@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { RotatingLines } from "react-loader-spinner";
 import "../../main.js";
 import "../../vendor/owl-carousel/owl.carousel.min.js";
+import { jwtDecode } from "jwt-decode";
 function Herocart() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -25,6 +26,7 @@ function Herocart() {
   const [cartdata, setcartdata] = useState("");
   const [data, setdata] = useState("");
   const [cleaning, setcleaning] = useState("Cleaning Method 1");
+  const [data1, setdata1] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     let storedProduct = localStorage.getItem("products");
@@ -35,10 +37,19 @@ function Herocart() {
       let filterproduct = parseProduct.filter((fil) => {
         return fil.id === productId;
       });
-      console.log(filterproduct);
-      console.log(productId);
+
       setdata(filterproduct);
     }
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_URL}/Product/post`)
+      .then((res) => {
+        setdata1(res.data.result);
+
+        localStorage.setItem("products", JSON.stringify(res.data.result));
+      })
+      .catch((err) => {});
   }, []);
 
   const {
@@ -99,7 +110,7 @@ function Herocart() {
         .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
         .then((res) => {
           setloading(false);
-          console.log(res);
+
           if (res.data.status === 200) {
             toast.success("Registered successfully", {
               position: "top-right",
@@ -118,14 +129,12 @@ function Herocart() {
           }
         })
         .catch((err) => {
-          console.log(err);
           setloading(false);
         });
     }
   };
 
   const login = () => {
-    console.log(loginuser);
     if (loginuser.email === "" || loginuser.password === "") {
       toast.error("Enter both Password and Email", {
         autoClose: 700,
@@ -167,7 +176,7 @@ function Herocart() {
   };
 
   const token = localStorage.getItem("token");
-  console.log(token);
+
   const config = {
     headers: {
       Accept: "*/*",
@@ -190,12 +199,8 @@ function Herocart() {
         {},
         config
       )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   const addquantity = () => {
@@ -218,16 +223,13 @@ function Herocart() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   const handleDelete = (index, id) => {
@@ -246,18 +248,40 @@ function Herocart() {
         )}`,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   if (data) {
-    console.log(data[0].images);
   }
-  console.log(cleaning);
+
+  function isTokenExpired(token) {
+    const expiration = new Date(token.exp * 1000);
+    return Date.now() >= expiration;
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const load = jwtDecode(localStorage.getItem("token"));
+
+      if (!isTokenExpired(load)) {
+        const expiration = new Date(load.exp * 1000).getTime();
+        const currentTime = Date.now();
+        const timeUntilExpiration = expiration - currentTime;
+        setTimeout(logout, timeUntilExpiration);
+      } else {
+        logout();
+      }
+    }
+  }, []);
+
+  const products = JSON.parse(localStorage.getItem("products"));
+
   return (
     <>
       <header className="header">
@@ -1009,15 +1033,11 @@ function Herocart() {
                 <ul className="list-none">
                   <li>
                     <label>WEIGHT</label>
-                    <p>5 kg</p>
+                    <p>1 kg</p>
                   </li>
                   <li>
                     <label>DIMENSIONS</label>
                     <p>10 × 10 × 10 cm</p>
-                  </li>
-                  <li>
-                    <label>WEIGHT UNIT</label>
-                    <p>1KG, 1LB, 500G, Bound, Each</p>
                   </li>
                 </ul>
               </div>
@@ -1027,298 +1047,146 @@ function Herocart() {
         <div className="container">
           <section className="mt-3">
             <h2 className="text-center mb-7">Related Products</h2>
-            <div
-              className="owl-carousel owl-theme owl-nav-outer slider-brand row cols-lg-4 cols-md-3 cols-2"
-              data-owl-options="{
-                        'nav': true,
-                        'dots': false,
-                        'margin': 20,
-                        'loop': false,
-                        'responsive': {
-                            '0': {
-                                'items': 2,
-                                'autoplay': true,
-                                'nav': false
-                            },
-                            '768': {
-                                'items': 3,
-                                'nav': false
-                            },
-                            '992': {
-                                'items': 4
-                            }
-                        }
-                    }"
-            >
-              <div className="product-wrap">
-                <div className="product text-center">
-                  <figure className="product-media">
-                    <a href="#">
-                      <img
-                        src="images/products/5-295x369.jpg"
-                        alt="product"
-                        style={{ width: 240, height: 300 }}
-                      />
-                    </a>
-
-                    <div className="product-action-vertical">
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-cart"
-                        data-toggle="modal"
-                        data-target="#addCartModal"
-                        title="Add to Cart"
-                      >
-                        <i className="p-icon-cart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-wishlist"
-                        title="Add to Wishlist"
-                      >
-                        <i className="p-icon-heart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-compare"
-                        title="Compare"
-                      >
-                        <i className="p-icon-compare-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-quickview"
-                        title="Quick View"
-                      >
-                        <i className="p-icon-search-solid"></i>
-                      </a>
-                    </div>
-                  </figure>
-                  <div className="product-details">
-                    <div className="ratings-container">
-                      <div className="ratings-full">
-                        <span
-                          className="ratings"
-                          style={{ width: "60%" }}
-                        ></span>
-                        <span className="tooltiptext tooltip-top"></span>
+            <div className="tab tab-nav-center product-tab product-tab-type2">
+              <div className="tab-content">
+                <div className="tab-pane active" id="canned">
+                  <div className="page-content mb-10 shop-page shop-horizontal">
+                    <div className="container">
+                      <div className="row product-wrapper cols-lg-5 cols-md-4 cols-sm-3 cols-2">
+                        {data1.length > 0 && Array.isArray(data1) ? (
+                          data1
+                            .map((field, index) => (
+                              <div
+                                className="product-wrap"
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                }}
+                                key={index}
+                                onClick={() => {
+                                  setid(field.id);
+                                  localStorage.setItem("id", field.id);
+                                  onCart();
+                                  window.location.reload();
+                                }}
+                              >
+                                <div className="product shadow-media text-center">
+                                  <figure
+                                    className="product-media"
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <a>
+                                      <img
+                                        src={
+                                          field.images.length > 0
+                                            ? field.images[0].imageUrl
+                                            : ""
+                                        }
+                                        alt="product"
+                                        style={{ width: "295", height: "369" }}
+                                        className="homelistingimg"
+                                      />
+                                      <img
+                                        src={
+                                          field.images.length > 0
+                                            ? field.images[0].imageUrl
+                                            : ""
+                                        }
+                                        alt="product"
+                                        style={{ width: "295", height: "369" }}
+                                      />
+                                    </a>
+                                    <div className="product-action-vertical">
+                                      <a
+                                        href="#"
+                                        className="btn-product-icon btn-cart"
+                                        data-toggle="modal"
+                                        data-target="#addCartModal"
+                                        title="Add to Cart"
+                                      >
+                                        <i className="p-icon-cart-solid"></i>
+                                      </a>
+                                      <a
+                                        href="#"
+                                        className="btn-product-icon btn-wishlist"
+                                        title="Add to Wishlist"
+                                      >
+                                        <i className="p-icon-heart-solid"></i>
+                                      </a>
+                                      <a
+                                        href="#"
+                                        className="btn-product-icon btn-compare"
+                                        title="Compare"
+                                      >
+                                        <i className="p-icon-compare-solid"></i>
+                                      </a>
+                                      <a
+                                        href="#"
+                                        className="btn-product-icon btn-quickview"
+                                        title="Quick View"
+                                      >
+                                        <i className="p-icon-search-solid"></i>
+                                      </a>
+                                    </div>
+                                    {/* Product actions */}
+                                  </figure>
+                                  <div className="product-details">
+                                    <div className="ratings-container">
+                                      <div className="ratings-full">
+                                        <span
+                                          className="ratings"
+                                          style={{ width: "60%" }}
+                                        ></span>
+                                        <span className="tooltiptext tooltip-top">
+                                          3.00
+                                        </span>
+                                      </div>
+                                      <a
+                                        href="javascript:void(0);"
+                                        className="rating-reviews"
+                                      >
+                                        ({Math.floor(Math.random() * 20 + 5)})
+                                      </a>
+                                    </div>
+                                    <h5 className="product-name">
+                                      <a
+                                        href="product-simple.html"
+                                        style={{
+                                          color: "#163b4d",
+                                          fontWeight: "600",
+                                          scale: "1.1",
+                                        }}
+                                      >
+                                        {field.productName}
+                                      </a>
+                                    </h5>
+                                    <span className="product-price">
+                                      <del className="old-price">
+                                        {field.originalPrice} SAR
+                                      </del>
+                                      <ins
+                                        className="new-price"
+                                        style={{ fontWeight: "bold" }}
+                                      >
+                                        &nbsp; {field.sellingPrice} SAR
+                                      </ins>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                            .slice(0, 5)
+                        ) : (
+                          <div style={{ marginLeft: "30vw" }}>
+                            <Loader
+                              type="bubble-scale"
+                              bgColor={"#163b4d"}
+                              color={"blue"}
+                              size={30}
+                            />
+                          </div>
+                        )}
                       </div>
-                      <a
-                        href="product-simple.html#content-reviews"
-                        className="rating-reviews hash-scroll"
-                      >
-                        (12)
-                      </a>
-                    </div>
-                    <h5 className="product-name">
-                      <a href="#"> Lorem. </a>
-                    </h5>
-                    <div className="product-price">
-                      <ins className="new-price">$00.00</ins>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="product-wrap">
-                <div className="product text-center">
-                  <figure className="product-media">
-                    <a href="#">
-                      <img
-                        src="images/products/6-295x369.jpg"
-                        alt="product"
-                        style={{ width: 240, height: 300 }}
-                      />
-                    </a>
-
-                    <div className="product-action-vertical">
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-cart"
-                        data-toggle="modal"
-                        data-target="#addCartModal"
-                        title="Add to Cart"
-                      >
-                        <i className="p-icon-cart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-wishlist"
-                        title="Add to Wishlist"
-                      >
-                        <i className="p-icon-heart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-compare"
-                        title="Compare"
-                      >
-                        <i className="p-icon-compare-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-quickview"
-                        title="Quick View"
-                      >
-                        <i className="p-icon-search-solid"></i>
-                      </a>
-                    </div>
-                  </figure>
-                  <div className="product-details">
-                    <div className="ratings-container">
-                      <div className="ratings-full">
-                        <span
-                          className="ratings"
-                          style={{ width: "60%" }}
-                        ></span>
-                        <span className="tooltiptext tooltip-top"></span>
-                      </div>
-                      <a
-                        href="product-simple.html#content-reviews"
-                        className="rating-reviews hash-scroll"
-                      >
-                        (12)
-                      </a>
-                    </div>
-                    <h5 className="product-name">
-                      <a href="#"> Lorem, ipsum. </a>
-                    </h5>
-                    <div className="product-price">
-                      <del className="old-price">$0.00</del>
-                      <ins className="new-price">$0.00</ins>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="product-wrap">
-                <div className="product text-center">
-                  <figure className="product-media">
-                    <a href="#">
-                      <img
-                        src="images/products/7-295x369.jpg"
-                        alt="product"
-                        style={{ width: 295, height: 369 }}
-                      />
-                    </a>
-
-                    <div className="product-action-vertical">
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-cart"
-                        data-toggle="modal"
-                        data-target="#addCartModal"
-                        title="Add to Cart"
-                      >
-                        <i className="p-icon-cart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-wishlist"
-                        title="Add to Wishlist"
-                      >
-                        <i className="p-icon-heart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-compare"
-                        title="Compare"
-                      >
-                        <i className="p-icon-compare-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-quickview"
-                        title="Quick View"
-                      >
-                        <i className="p-icon-search-solid"></i>
-                      </a>
-                    </div>
-                  </figure>
-                  <div className="product-details">
-                    <div className="ratings-container">
-                      <div className="ratings-full">
-                        <span
-                          className="ratings"
-                          style={{ width: "60%" }}
-                        ></span>
-                        <span className="tooltiptext tooltip-top"></span>
-                      </div>
-                      <a
-                        href="product-simple.html#content-reviews"
-                        className="rating-reviews hash-scroll"
-                      >
-                        (12)
-                      </a>
-                    </div>
-                    <h5 className="product-name">
-                      <a href="#"> Lorem, ipsum dolor. </a>
-                    </h5>
-                    <div className="product-price">
-                      <ins className="new-price">$0.00</ins>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="product-wrap">
-                <div className="product text-center">
-                  <figure className="product-media">
-                    <a href="#">
-                      <img
-                        src="images/products/fish10.jpg"
-                        alt="product"
-                        style={{ width: 295, height: 369 }}
-                      />
-                    </a>
-                    <div className="product-action-vertical">
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-cart"
-                        data-toggle="modal"
-                        data-target="#addCartModal"
-                        title="Add to Cart"
-                      >
-                        <i className="p-icon-cart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-wishlist"
-                        title="Add to Wishlist"
-                      >
-                        <i className="p-icon-heart-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-compare"
-                        title="Compare"
-                      >
-                        <i className="p-icon-compare-solid"></i>
-                      </a>
-                      <a
-                        href="#"
-                        className="btn-product-icon btn-quickview"
-                        title="Quick View"
-                      >
-                        <i className="p-icon-search-solid"></i>
-                      </a>
-                    </div>
-                  </figure>
-                  <div className="product-details">
-                    <div className="ratings-container">
-                      <div className="ratings-full">
-                        <span
-                          className="ratings"
-                          style={{ width: "60%" }}
-                        ></span>
-                        <span className="tooltiptext tooltip-top"></span>
-                      </div>
-                      <a href="" className="rating-reviews hash-scroll">
-                        (12)
-                      </a>
-                    </div>
-                    <h5 className="product-name">
-                      <a href="#"> Lorem. </a>
-                    </h5>
-                    <div className="product-price">
-                      <ins className="new-price">$0.00</ins>
                     </div>
                   </div>
                 </div>

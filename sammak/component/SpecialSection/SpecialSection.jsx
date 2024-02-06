@@ -9,11 +9,11 @@ const SpecialSection = () => {
     axios
       .get("http://localhost:3000/getallproducts")
       .then((res) => {
-        console.log(res.data.allproducts);
+       
         setdata(res.data.allproducts);
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   }, []);
   axios

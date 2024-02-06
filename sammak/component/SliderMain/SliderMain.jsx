@@ -11,7 +11,7 @@ import './slider.css'
 function SliderMain(props) {
   const onAutoplayTimeLeft = (s, time, progress) => {};
   const { heroSilderData, setheroSliderData } = useContext(AllContext);
-  console.log(heroSilderData);
+
   return (
     <div>
       <Swiper

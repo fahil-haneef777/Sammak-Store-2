@@ -1,9 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Herohome from "../herohome/Herohome";
-import Heroshop from "../heroshop/Heroshop";
-import Heroabout from "../heroabout/Heroabout";
-import Herocontact from "../herocontact/Herocontact";
 import axios from "axios";
 import { useContext } from "react";
 import AllContext from "../../src/Context/Context";
@@ -16,6 +12,7 @@ import { RotatingLines } from "react-loader-spinner";
 import "../../main.js";
 import "../../css/style.css";
 import Footer from "../Footer.jsx";
+import { jwtDecode } from "jwt-decode";
 
 function OrderComplete() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
@@ -42,8 +39,6 @@ function OrderComplete() {
     setsearch,
   } = useContext(AllContext);
 
-
-  
   let cart1 = JSON.parse(localStorage.getItem("cart"));
   let newdata = JSON.stringify(registeruser);
   const register = () => {
@@ -61,7 +56,6 @@ function OrderComplete() {
       axios
         .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
         .then((res) => {
-          console.log(res.data);
           if (res.data.status === 200) {
             toast.success("Registered successfully", {
               position: "top-right",
@@ -79,14 +73,11 @@ function OrderComplete() {
             }, 1000);
           }
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     }
   };
 
   const login = () => {
-    console.log(loginuser);
     if (loginuser.email === "" || loginuser.password === "") {
       toast.error("Enter both Password and Email", {
         autoClose: 700,
@@ -143,16 +134,13 @@ function OrderComplete() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   useEffect(() => {}, [search]);
 
@@ -172,13 +160,34 @@ function OrderComplete() {
         )}/${cartid}`,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
+
+  function isTokenExpired(token) {
+    const expiration = new Date(token.exp * 1000);
+    return Date.now() >= expiration;
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const load = jwtDecode(localStorage.getItem("token"));
+
+      if (!isTokenExpired(load)) {
+        const expiration = new Date(load.exp * 1000).getTime();
+        const currentTime = Date.now();
+        const timeUntilExpiration = expiration - currentTime;
+        setTimeout(logout, timeUntilExpiration);
+      } else {
+        logout();
+      }
+    }
+  }, []);
 
   return (
     <>

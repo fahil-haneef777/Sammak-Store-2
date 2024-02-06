@@ -9,6 +9,7 @@ import "../../main.js";
 import { RotatingLines } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { jwtDecode } from "jwt-decode";
 function Checkout() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
   const [registeruser, setregisteruser] = useState({
@@ -45,7 +46,7 @@ function Checkout() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
+      
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
@@ -53,7 +54,7 @@ function Checkout() {
         setcartdata(res.data.result.cartItemResponseList);
       })
       .catch((err) => {
-        console.log(err);
+      
       });
   }, []);
 
@@ -61,7 +62,7 @@ function Checkout() {
   const userid = localStorage.getItem("userid");
   const parseCartid = JSON.parse(cartid);
   const parseUserid = JSON.parse(userid);
-  console.log(parseCartid);
+
   let cardidparse =
     parseCartid &&
     parseCartid.length > 0 &&
@@ -79,8 +80,7 @@ function Checkout() {
         return acc + curr.subtotal;
       }, 0)
       .toFixed(2);
-  console.log(totalcart);
-  console.log(parseCartid);
+
   const [paytabinfo, setpaytabinfo] = useState({
     callback: "String",
     cart_amount: `${totalcart}`,
@@ -106,7 +106,7 @@ function Checkout() {
     tran_type: "sale",
     userId: `${parseUserid}`,
   });
-  console.log(paytabinfo);
+
   //
 
   const [data, setdata] = useState("");
@@ -120,12 +120,11 @@ function Checkout() {
       let filterproduct = parseProduct.filter((fil) => {
         return fil.id === productId;
       });
-      console.log(filterproduct);
-      console.log(productId);
+   
       setdata(filterproduct);
     }
   }, []);
-  console.log(JSON.parse(localStorage.getItem("cart")));
+
   const {
     loggedin,
     setloggedin,
@@ -167,30 +166,29 @@ function Checkout() {
     setcontact(true);
   };
   const register = () => {
-    console.log(registeruser);
+
     axios
       .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
       .then((res) => {
-        console.log(res.data);
+       
       })
       .catch((err) => {
-        console.log(err);
+   
       });
   };
 
   const login = () => {
-    console.log(loginuser);
+
     axios
       .post(`${import.meta.env.VITE_URL}/v1/auth/login`, loginuser)
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.result.emailId);
+  
         localStorage.setItem("userid", res.data.result.userId);
         localStorage.setItem("token", res.data.result.accessToken);
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+  
       });
   };
   useEffect(() => {
@@ -256,7 +254,7 @@ function Checkout() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
+
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
@@ -264,7 +262,7 @@ function Checkout() {
         setcartdata(res.data.result.cartItemResponseList);
       })
       .catch((err) => {
-        console.log(err);
+      
       });
   }, []);
 
@@ -285,10 +283,10 @@ function Checkout() {
         config
       )
       .then((res) => {
-        console.log(res);
+       
       })
       .catch((err) => {
-        console.log(err);
+       
       });
   };
   useEffect(() => {
@@ -302,14 +300,14 @@ function Checkout() {
   };
 
   const handlepaytabs = () => {
-    console.log(paytabinfo);
+   
     axios
       .post(`${import.meta.env.VITE_URL}/checkOut/fromCart`, paytabinfo, config)
       .then((response) => {
-        console.log(response.data);
+       
         if (cod) {
           navigate("/ordercomplete");
-          console.log("cod");
+          
         } else {
           window.location.href = response.data.result;
         }
@@ -318,7 +316,30 @@ function Checkout() {
         console.error("Error:", error);
       });
   };
-  console.log(paytabinfo);
+  function isTokenExpired(token) {
+    const expiration = new Date(token.exp * 1000);
+    return Date.now() >= expiration;
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const load = jwtDecode(localStorage.getItem("token"));
+
+      if (!isTokenExpired(load)) {
+        const expiration = new Date(load.exp * 1000).getTime();
+        const currentTime = Date.now();
+        const timeUntilExpiration = expiration - currentTime;
+        setTimeout(logout, timeUntilExpiration);
+      } else {
+        logout();
+      }
+    }
+  }, []);
   return (
     <>
       <ToastContainer />

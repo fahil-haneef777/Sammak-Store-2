@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import '../../main.js'
-import '../../css/style.css'
+import "../../main.js";
+import "../../css/style.css";
 function Herocontact() {
   const [contactData, setcontactData] = useState({
     contactEmail: "",
@@ -24,21 +24,18 @@ function Herocontact() {
     axios
       .post(`${import.meta.env.VITE_URL}/contactUs/post`, contactData, config)
       .then((res) => {
-        console.log(res.data);
-        if(res.data.status===200){
-          toast.success('Comment Sent Successfully ',{
-            autoClose:2000,
-            position:'top-center'
-          })
+        if (res.data.status === 200) {
+          toast.success("Comment Sent Successfully ", {
+            autoClose: 2000,
+            position: "top-center",
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
   return (
     <main className="main">
-      <ToastContainer/>
+      <ToastContainer />
       <div className="page-header contact-hero">
         <h1 className="page-title font-weight-light text-capitalize pt-2">
           Contact Us
@@ -94,39 +91,40 @@ function Herocontact() {
                 </div>
               </div>
               <div className="icon-box text-center">
-                  <span className="icon-box-icon mb-4">
-                    <i className="p-icon-phone-solid"></i>
-                  </span>
-                  <div className="icon-box-content">
-                    <h4 className="icon-box-title">Phone Number</h4>
-                    <p className="text-dim">+1 (456) 789 000</p>
-                  </div>
+                <span className="icon-box-icon mb-4">
+                  <i className="p-icon-phone-solid"></i>
+                </span>
+                <div className="icon-box-content">
+                  <h4 className="icon-box-title">Phone Number</h4>
+                  <p className="text-dim">+1 (456) 789 000</p>
                 </div>
-                <div className="icon-box text-center">
-                  <span className="icon-box-icon mb-4">
-                    <i className="p-icon-message"></i>
-                  </span>
-                  <div className="icon-box-content">
-                    <h4 className="icon-box-title">E-mail Address</h4>
-                    <p className="text-dim">
-                      <a
-                        href="/cdn-cgi/l/email-protection"
-                        className="__cf_email__"
-                        data-cfemail="bdd0dcd4d1fdd8c5dcd0cdd1d893ded2d0"
-                        >[email&#160;protected]</a
-                      >
-                    </p>
-                  </div>
+              </div>
+              <div className="icon-box text-center">
+                <span className="icon-box-icon mb-4">
+                  <i className="p-icon-message"></i>
+                </span>
+                <div className="icon-box-content">
+                  <h4 className="icon-box-title">E-mail Address</h4>
+                  <p className="text-dim">
+                    <a
+                      href="/cdn-cgi/l/email-protection"
+                      className="__cf_email__"
+                      data-cfemail="bdd0dcd4d1fdd8c5dcd0cdd1d893ded2d0"
+                    >
+                      [email&#160;protected]
+                    </a>
+                  </p>
                 </div>
-                <div className="icon-box text-center">
-                  <span className="icon-box-icon mb-4">
-                    <i className="p-icon-clock"></i>
-                  </span>
-                  <div className="icon-box-content">
-                    <h4 className="icon-box-title">Opening Hours</h4>
-                    <p className="text-dim">Mon-Fri: 10:00 - 18:00</p>
-                  </div>
+              </div>
+              <div className="icon-box text-center">
+                <span className="icon-box-icon mb-4">
+                  <i className="p-icon-clock"></i>
+                </span>
+                <div className="icon-box-content">
+                  <h4 className="icon-box-title">Opening Hours</h4>
+                  <p className="text-dim">Mon-Fri: 10:00 - 18:00</p>
                 </div>
+              </div>
             </div>
             <hr />
           </section>

@@ -37,8 +37,7 @@ function Viewcart() {
       let filterproduct = parseProduct.filter((fil) => {
         return fil.id === productId;
       });
-      console.log(filterproduct);
-      console.log(productId);
+
       setdata(filterproduct);
     }
   }, []);
@@ -104,7 +103,6 @@ function Viewcart() {
     axios
       .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
       .then((res) => {
-        console.log(res.data);
         if (res.data.status === 200) {
           toast.success("Registered successfully", {
             position: "top-right",
@@ -122,14 +120,11 @@ function Viewcart() {
           }, 1000);
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   //
   const login = () => {
-    console.log(loginuser);
     if (loginuser.email === "" || loginuser.password === "") {
       toast.error("Enter both Password and Email", {
         autoClose: 700,
@@ -140,9 +135,6 @@ function Viewcart() {
     axios
       .post(`${import.meta.env.VITE_URL}/v1/auth/login`, loginuser)
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.result.emailId);
-
         localStorage.setItem("userid", res.data.result.userId);
         localStorage.setItem("token", res.data.result.accessToken);
         if (res.data.result.accessToken) {
@@ -157,9 +149,7 @@ function Viewcart() {
           }, 1000);
         }
       })
-      .catch((err) => {
-        console.log(err.response.status);
-      });
+      .catch((err) => {});
   };
 
   // get items for the cart
@@ -184,16 +174,13 @@ function Viewcart() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   //
@@ -209,8 +196,7 @@ function Viewcart() {
         return cartIndex !== index;
       })
     );
-    console.log(productid);
-    console.log(parseInt(localStorage.getItem("userid")));
+
     axios
       .delete(
         `${
@@ -220,12 +206,8 @@ function Viewcart() {
         )}/${cartid}`,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
   const onIncrement = (index, id, cartId) => {
     const updatedCartData = [...cartdata];
@@ -250,12 +232,8 @@ function Viewcart() {
         {},
         config
       )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   const onDecrement = (index, id, cartId) => {
@@ -273,7 +251,7 @@ function Viewcart() {
       updatedCartData[index].productResponse.sellingPrice;
 
     setcartdata(updatedCartData);
-    console.log(updatedCartData[index].quantity);
+
     axios
       .put(
         `${
@@ -284,12 +262,8 @@ function Viewcart() {
         {},
         config
       )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -301,16 +275,13 @@ function Viewcart() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   const handleDelete = (index, id, cartid) => {
@@ -327,12 +298,8 @@ function Viewcart() {
         )}/${cartid}`,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   return (

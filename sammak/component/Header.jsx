@@ -45,30 +45,6 @@ function Header() {
     setloginopen,
   } = useContext(AllContext);
 
-  const home1 = () => {
-    sethome(true);
-    setshop(false);
-    setabout(false);
-    setcontact(false);
-  };
-  const shop1 = () => {
-    sethome(false);
-    setshop(true);
-    setabout(false);
-    setcontact(false);
-  };
-  const about1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(true);
-    setcontact(false);
-  };
-  const contact1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(false);
-    setcontact(true);
-  };
   let newdata = JSON.stringify(registeruser);
   const register = () => {
     if (
@@ -87,7 +63,7 @@ function Header() {
         .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
         .then((res) => {
           setloading(false);
-          console.log(res);
+
           if (res.data.status === 200) {
             toast.success("Registered successfully", {
               position: "top-right",
@@ -106,13 +82,11 @@ function Header() {
           }
         })
         .catch((err) => {
-          console.log(err);
           setloading(false);
         });
     }
   };
   const login = () => {
-    console.log(loginuser);
     if (loginuser.email === "" || loginuser.password === "") {
       toast.error("Enter both Password and Email", {
         autoClose: 700,
@@ -169,26 +143,37 @@ function Header() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
+
+  function isTokenExpired(token) {
+    const expiration = new Date(token.exp * 1000);
+    return Date.now() >= expiration;
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       const load = jwtDecode(localStorage.getItem("token"));
-      setdecode(load);
-      const expirationTime = decode.exp * 1000;
-      const currentTime = new Date().getTime();
-      const timeUntilExpiration = expirationTime - currentTime;
-      console.log(timeUntilExpiration);
+
+      if (!isTokenExpired(load)) {
+        const expiration = new Date(load.exp * 1000).getTime();
+        const currentTime = Date.now();
+        const timeUntilExpiration = expiration - currentTime;
+        setTimeout(logout, timeUntilExpiration);
+      } else {
+        logout();
+      }
     }
   }, []);
 
@@ -208,18 +193,11 @@ function Header() {
         )}/${cartid}`,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   const onSearch = () => {};
-  console.log(search);
-
-  console.log(import.meta.env.VITE_URL);
 
   return (
     <>

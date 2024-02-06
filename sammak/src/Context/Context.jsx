@@ -16,17 +16,14 @@ const Provider = ({ children }) => {
   const [heroSilderData, setheroSliderData] = useState({});
   const [cartdata, setcartdata] = useState("");
   const [search, setsearch] = useState("");
-  const [loginopen,setloginopen] = useState(false)
+  const [loginopen, setloginopen] = useState(false);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_URL}/HeroSlider/getAll`)
       .then((res) => {
-        console.log(res.data.result);
         setheroSliderData(res.data.result);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   const config = {
@@ -45,16 +42,13 @@ const Provider = ({ children }) => {
         config
       )
       .then((res) => {
-        console.log(res);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   const valuetoshare = {
@@ -81,7 +75,7 @@ const Provider = ({ children }) => {
     search,
     setsearch,
     loginopen,
-    setloginopen
+    setloginopen,
   };
   return (
     <AllContext.Provider value={valuetoshare}>{children}</AllContext.Provider>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../../main.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 function CheckoutMain() {
   const navigate = useNavigate();
 
@@ -23,7 +24,6 @@ function CheckoutMain() {
       )
       .then((res) => {
         localStorage.setItem("orders", JSON.stringify(res.data.result));
-        console.log(res);
       })
       .catch((err) => {});
     //address api
@@ -34,16 +34,11 @@ function CheckoutMain() {
         }/Address/getAddressByUserId/${localStorage.getItem("userid")}`,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   }, []);
 
   let orders = JSON.parse(localStorage.getItem("orders"));
-  console.log(orders);
 
   return (
     <>

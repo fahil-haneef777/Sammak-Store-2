@@ -25,14 +25,11 @@ function Heroshop() {
     axios
       .get(`${import.meta.env.VITE_URL}/Product/post`)
       .then((res) => {
-        console.log(res.data.result);
         setdata(res.data.result);
         setproductinfo(res.data.result);
         localStorage.setItem("products", JSON.stringify(res.data.result));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   useEffect(() => {
@@ -47,7 +44,6 @@ function Heroshop() {
   const onCart = () => {
     navigate("/shop");
   };
-  console.log(id);
 
   return (
     <main className="main">

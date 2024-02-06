@@ -16,6 +16,7 @@ import { RotatingLines } from "react-loader-spinner";
 import "../../main.js";
 import "../../css/style.css";
 import Footer from "../Footer.jsx";
+import { jwtDecode } from "jwt-decode";
 
 function Shopview() {
   const [loginuser, setloginuser] = useState({ email: "", password: "" });
@@ -82,7 +83,6 @@ function Shopview() {
       axios
         .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
         .then((res) => {
-          console.log(res.data);
           if (res.data.status === 200) {
             toast.success("Registered successfully", {
               position: "top-right",
@@ -100,14 +100,11 @@ function Shopview() {
             }, 1000);
           }
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     }
   };
 
   const login = () => {
-    console.log(loginuser);
     if (loginuser.email === "" || loginuser.password === "") {
       toast.error("Enter both Password and Email", {
         autoClose: 700,
@@ -164,16 +161,13 @@ function Shopview() {
         config
       )
       .then((res) => {
-        console.log(res.data.result.cartItemResponseList);
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   useEffect(() => {}, [search]);
 
@@ -193,13 +187,33 @@ function Shopview() {
         )}/${cartid}`,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
+  function isTokenExpired(token) {
+    const expiration = new Date(token.exp * 1000);
+    return Date.now() >= expiration;
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const load = jwtDecode(localStorage.getItem("token"));
+
+      if (!isTokenExpired(load)) {
+        const expiration = new Date(load.exp * 1000).getTime();
+        const currentTime = Date.now();
+        const timeUntilExpiration = expiration - currentTime;
+        setTimeout(logout, timeUntilExpiration);
+      } else {
+        logout();
+      }
+    }
+  }, []);
 
   return (
     <>
