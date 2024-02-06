@@ -791,7 +791,7 @@ function Viewcart() {
                             .reduce((acc, curr) => {
                               return acc + curr.subtotal;
                             }, 0)
-                            .toFixed(2)}{" "}
+                            .toFixed(2)}
                         SAR
                       </span>
                     </div>
@@ -974,7 +974,9 @@ function Viewcart() {
                               </div>
                             </td>
                             <td className="product-price">
-                              <span className="amount">{cart.subtotal}</span>
+                              <span className="amount">
+                                {cart.subtotal.toFixed(2)}
+                              </span>
                             </td>
                             <td className="product-remove">
                               <a
@@ -1022,7 +1024,7 @@ function Viewcart() {
                                   </h4>
                                 </td>
                                 <td>
-                                  <p>{cart.subtotal} SAR</p>
+                                  <p>{cart.subtotal.toFixed(2)} SAR</p>
                                 </td>
                               </tr>
                             ))}
@@ -1038,9 +1040,11 @@ function Viewcart() {
                             <td>
                               <p className="summary-total-price ls-s">
                                 {cartdata.length > 0 &&
-                                  cartdata.reduce((acc, curr) => {
-                                    return acc + curr.subtotal;
-                                  }, 0)}{" "}
+                                  cartdata
+                                    .reduce((acc, curr) => {
+                                      return acc + curr.subtotal;
+                                    }, 0)
+                                    .toFixed(2)}{" "}
                                 SAR
                               </p>
                             </td>
