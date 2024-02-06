@@ -55,13 +55,13 @@ function Checkout() {
       .catch((err) => {
         console.log(err);
       });
-  }, [])
+  }, []);
 
   const cartid = localStorage.getItem("cart");
   const userid = localStorage.getItem("userid");
   const parseCartid = JSON.parse(cartid);
   const parseUserid = JSON.parse(userid);
-  console.log(parseUserid);
+  console.log(parseCartid);
   let cardidparse =
     parseCartid &&
     parseCartid.length > 0 &&
@@ -74,10 +74,12 @@ function Checkout() {
   let totalcart =
     parseCartid &&
     parseCartid.length > 0 &&
-    parseCartid.reduce((acc, curr) => {
-      return acc + curr.subtotal;
-    }, 0);
-
+    parseCartid
+      .reduce((acc, curr) => {
+        return acc + curr.subtotal;
+      }, 0)
+      .toFixed(2);
+  console.log(totalcart);
   console.log(parseCartid);
   const [paytabinfo, setpaytabinfo] = useState({
     callback: "String",
