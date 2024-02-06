@@ -10,7 +10,7 @@ import SpecialSection from "../SpecialSection/SpecialSection";
 import "../../main.js";
 function Herohome() {
   const [data, setdata] = useState([]);
-  const { id, setid, cart, setcart, productinfo, setproductinfo } =
+  const { id, setid, cart, setcart, productinfo, setproductinfo,data1,setdata1 } =
     useContext(AllContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,6 +18,7 @@ function Herohome() {
       .get(`${import.meta.env.VITE_URL}/Product/post`)
       .then((res) => {
         setdata(res.data.result);
+        setdata1(res.data.result)
         setproductinfo(res.data.result);
         localStorage.setItem("products", JSON.stringify(res.data.result));
       })

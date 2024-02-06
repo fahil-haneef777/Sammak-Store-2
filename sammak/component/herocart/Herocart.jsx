@@ -40,8 +40,6 @@ function Herocart() {
 
       setdata(filterproduct);
     }
-  }, []);
-  useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_URL}/Product/post`)
       .then((res) => {

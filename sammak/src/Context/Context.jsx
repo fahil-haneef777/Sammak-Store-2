@@ -17,6 +17,7 @@ const Provider = ({ children }) => {
   const [cartdata, setcartdata] = useState("");
   const [search, setsearch] = useState("");
   const [loginopen, setloginopen] = useState(false);
+  const [data1, setdata1] = useState("");
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_URL}/HeroSlider/getAll`)
@@ -76,6 +77,8 @@ const Provider = ({ children }) => {
     setsearch,
     loginopen,
     setloginopen,
+    setdata1,
+    data1,
   };
   return (
     <AllContext.Provider value={valuetoshare}>{children}</AllContext.Provider>
