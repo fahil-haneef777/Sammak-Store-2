@@ -763,7 +763,8 @@ function OrderComplete() {
         </div>
       </header>
 
-      <div className="page-content pt-8 pb-10 mb-10">
+<div className="main order">
+<div className="page-content pt-8 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
           <h3 className="title title-step">
             <a href="cart.html">1. Shopping Cart</a>
@@ -879,6 +880,8 @@ function OrderComplete() {
           </div>
         </div>
       </div>
+</div>
+  
       <Footer />
     </>
   );
