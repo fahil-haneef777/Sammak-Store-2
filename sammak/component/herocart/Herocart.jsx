@@ -48,7 +48,7 @@ function Herocart() {
         localStorage.setItem("products", JSON.stringify(res.data.result));
       })
       .catch((err) => {});
-  }, []);
+  }, [localStorage.getItem("id")]);
 
   const {
     loggedin,
@@ -65,6 +65,7 @@ function Herocart() {
     id,
     productinfo,
     isloggedin,
+    setid,
   } = useContext(AllContext);
 
   const home1 = () => {
@@ -278,6 +279,13 @@ function Herocart() {
     }
   }, []);
 
+  const onCart = () => {
+    navigate("/shop");
+
+    if (data) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
   const products = JSON.parse(localStorage.getItem("products"));
 
   return (
@@ -899,10 +907,9 @@ function Herocart() {
                       data.length > 0 &&
                       data[0].images.map((data1, index) => {
                         return (
-                          <figure className="product-image">
+                          <figure key={index} className="product-image">
                             <img
                               src={data1.imageUrl}
-                              key={index}
                               data-zoom-image={data1.imageUrl}
                               alt="1"
                               style={{ width: 800, height: 600 }}
@@ -1065,7 +1072,6 @@ function Herocart() {
                                   setid(field.id);
                                   localStorage.setItem("id", field.id);
                                   onCart();
-                                  window.location.reload();
                                 }}
                               >
                                 <div className="product shadow-media text-center">

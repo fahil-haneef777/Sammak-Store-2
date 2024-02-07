@@ -685,6 +685,15 @@ function Header() {
                             </div>
                           </div>
                         ))
+                      ) : cartdata.length === 0 ? (
+                        <div
+                          style={{
+                            marginTop: "2vh",
+                            marginLeft: "5vw",
+                          }}
+                        >
+                          No items are present
+                        </div>
                       ) : (
                         <span style={{ position: "relative", top: "2vh" }}>
                           {" "}

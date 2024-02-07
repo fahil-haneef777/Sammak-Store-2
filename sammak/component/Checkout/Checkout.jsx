@@ -46,16 +46,13 @@ function Checkout() {
         config
       )
       .then((res) => {
-      
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-      
-      });
+      .catch((err) => {});
   }, []);
 
   const cartid = localStorage.getItem("cart");
@@ -120,7 +117,7 @@ function Checkout() {
       let filterproduct = parseProduct.filter((fil) => {
         return fil.id === productId;
       });
-   
+
       setdata(filterproduct);
     }
   }, []);
@@ -166,30 +163,21 @@ function Checkout() {
     setcontact(true);
   };
   const register = () => {
-
     axios
       .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
-      .then((res) => {
-       
-      })
-      .catch((err) => {
-   
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   const login = () => {
-
     axios
       .post(`${import.meta.env.VITE_URL}/v1/auth/login`, loginuser)
       .then((res) => {
-  
         localStorage.setItem("userid", res.data.result.userId);
         localStorage.setItem("token", res.data.result.accessToken);
         window.location.reload();
       })
-      .catch((err) => {
-  
-      });
+      .catch((err) => {});
   };
   useEffect(() => {
     let cart = localStorage.getItem("cart");
@@ -254,16 +242,13 @@ function Checkout() {
         config
       )
       .then((res) => {
-
         localStorage.setItem(
           "cart",
           JSON.stringify(res.data.result.cartItemResponseList)
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {
-      
-      });
+      .catch((err) => {});
   }, []);
 
   const handleDelete = (index, id) => {
@@ -282,12 +267,8 @@ function Checkout() {
         )}`,
         config
       )
-      .then((res) => {
-       
-      })
-      .catch((err) => {
-       
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
   useEffect(() => {
     if (!loggedin) {
@@ -300,14 +281,11 @@ function Checkout() {
   };
 
   const handlepaytabs = () => {
-   
     axios
       .post(`${import.meta.env.VITE_URL}/checkOut/fromCart`, paytabinfo, config)
       .then((response) => {
-       
         if (cod) {
           navigate("/ordercomplete");
-          
         } else {
           window.location.href = response.data.result;
         }
@@ -800,6 +778,15 @@ function Checkout() {
                             </div>
                           </div>
                         ))
+                      ) : cartdata.length === 0 ? (
+                        <div
+                          style={{
+                            marginTop: "2vh",
+                            marginLeft: "5vw",
+                          }}
+                        >
+                          No items are present
+                        </div>
                       ) : (
                         <span style={{ position: "relative", top: "2vh" }}>
                           {" "}

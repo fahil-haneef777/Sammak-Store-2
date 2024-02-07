@@ -180,7 +180,9 @@ function Viewcart() {
         );
         setcartdata(res.data.result.cartItemResponseList);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        navigate("/");
+      });
   }, []);
 
   //
