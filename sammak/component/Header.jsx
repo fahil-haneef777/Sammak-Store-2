@@ -177,7 +177,6 @@ function Header() {
     }
   }, []);
 
-
   const handleDelete = (index, id, cartid) => {
     let newCartdata =
       cartdata.length > 0 &&
@@ -747,18 +746,15 @@ function Header() {
               )}
             </div>
             {loggedin && (
-              <a href="/setting">
-                <img
-                  style={{ height: "40px" }}
-                  src="images/settingiconpng.png"
-                  alt="img"
-                  className="settingimg"
-
-                  // onClick={() => {
-                  //   navigate("/setting");
-                  // }}
-                />{" "}
-              </a>
+              <img
+                style={{ height: "40px" }}
+                src="images/settingiconpng.png"
+                alt="img"
+                className="settingimg"
+                onClick={() => {
+                  navigate("/setting");
+                }}
+              />
             )}
           </div>
         </div>
