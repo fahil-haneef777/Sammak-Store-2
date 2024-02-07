@@ -274,6 +274,7 @@ function Contactview() {
                       onClick={() => {
                         navigate("/");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Home
                     </a>
@@ -286,6 +287,7 @@ function Contactview() {
                       onClick={() => {
                         navigate("/shopview");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Shop
                     </a>
@@ -298,6 +300,7 @@ function Contactview() {
                       onClick={() => {
                         navigate("/about");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       About Us
                     </a>
@@ -310,6 +313,7 @@ function Contactview() {
                       onClick={() => {
                         navigate("/contact");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Contact Us
                     </a>

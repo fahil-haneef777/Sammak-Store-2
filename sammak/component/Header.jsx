@@ -270,6 +270,7 @@ function Header() {
                       onClick={() => {
                         navigate("/");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Home
                     </a>
@@ -279,6 +280,7 @@ function Header() {
                       onClick={() => {
                         navigate("/shopview");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Shop
                     </a>
@@ -291,6 +293,7 @@ function Header() {
                       onClick={() => {
                         navigate("/about");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       About Us
                     </a>
@@ -303,6 +306,7 @@ function Header() {
                       onClick={() => {
                         navigate("/contact");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Contact Us
                     </a>
@@ -769,6 +773,7 @@ function Header() {
                   onClick={() => {
                     navigate("/");
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Home
                 </a>
@@ -778,6 +783,7 @@ function Header() {
                   onClick={() => {
                     navigate("/shopview");
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Shop
                 </a>
@@ -785,7 +791,7 @@ function Header() {
               <li>
                 <a
                   className="mobile-menu-overlay"
-                  style={{}}
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     navigate("/about");
                   }}
@@ -799,6 +805,7 @@ function Header() {
                   onClick={() => {
                     navigate("/contact");
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Contact Us
                 </a>

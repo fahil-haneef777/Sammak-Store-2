@@ -256,6 +256,7 @@ function OrderComplete() {
                       onClick={() => {
                         navigate("/");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Home
                     </a>
@@ -268,6 +269,7 @@ function OrderComplete() {
                       onClick={() => {
                         navigate("/shopview");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Shop
                     </a>
@@ -280,6 +282,7 @@ function OrderComplete() {
                       onClick={() => {
                         navigate("/about");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       About Us
                     </a>
@@ -292,6 +295,7 @@ function OrderComplete() {
                       onClick={() => {
                         navigate("/contact");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Contact Us
                     </a>
@@ -639,6 +643,15 @@ function OrderComplete() {
                             </div>
                           </div>
                         ))
+                      ) : cartdata.length === 0 ? (
+                        <div
+                          style={{
+                            marginTop: "2vh",
+                            marginLeft: "5vw",
+                          }}
+                        >
+                          No items are present
+                        </div>
                       ) : (
                         <span style={{ position: "relative", top: "2vh" }}>
                           {" "}

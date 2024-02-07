@@ -754,7 +754,7 @@ function Herocart() {
                   <a href="#" className="cart-toggle link">
                     <i className="p-icon-cart-solid">
                       <span className="cart-count">
-                        {cartdata.length > 0 && cartdata.length}
+                      {cartdata.length > 0 ? cartdata.length : 0}
                       </span>
                     </i>
                   </a>
@@ -819,6 +819,15 @@ function Herocart() {
                             </div>
                           </div>
                         ))
+                      ) : cartdata.length === 0 ? (
+                        <div
+                          style={{
+                            marginTop: "2vh",
+                            marginLeft: "5vw",
+                          }}
+                        >
+                          No items are present
+                        </div>
                       ) : (
                         <span style={{ position: "relative", top: "2vh" }}>
                           {" "}
