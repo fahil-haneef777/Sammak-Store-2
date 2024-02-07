@@ -14,6 +14,9 @@ function CheckoutMain() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/");
+    }
     //orderapi
     axios
       .get(
@@ -72,16 +75,11 @@ function CheckoutMain() {
                 </li>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="#address">
-                    Addresses
-                  </a>
-                </li>
-                <li className="nav-item">
                   <a
                     className="nav-link no-tab-item"
                     onClick={() => {
                       localStorage.clear();
-                      navigate("/");
+                      window.location.reload();
                     }}
                     style={{ cursor: "pointer" }}
                   >
@@ -96,12 +94,7 @@ function CheckoutMain() {
                     <a href="#orders" className="link-to-tab text-primary">
                       recent orders
                     </a>
-                    , manage your{" "}
-                    <a href="#address" className="link-to-tab text-primary">
-                      {" "}
-                      shipping and billing addresses
-                    </a>
-                    , and{" "}
+                    , manage your , and{" "}
                     <a href="#account" className="link-to-tab text-primary">
                       edit your password and account details
                     </a>
@@ -123,18 +116,6 @@ function CheckoutMain() {
 
                     <div className="ib-wrapper mb-4">
                       <div className="icon-box text-center ib-border">
-                        <a href="#address">
-                          <span className="icon-box-icon">
-                            <i className="p-icon-map"></i>
-                          </span>
-                          <div className="icon-box-content">
-                            <p>ADDRESSES</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="ib-wrapper mb-4">
-                      <div className="icon-box text-center ib-border">
                         <a href="#account">
                           <span className="icon-box-icon">
                             <i className="p-icon-user-solid"></i>
@@ -150,7 +131,7 @@ function CheckoutMain() {
                       className="ib-wrapper mb-4"
                       onClick={() => {
                         localStorage.clear();
-                        navigate("/");
+                        window.location.reload();
                       }}
                       style={{ cursor: "pointer" }}
                     >
