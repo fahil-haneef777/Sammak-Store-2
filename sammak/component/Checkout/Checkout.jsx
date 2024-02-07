@@ -433,6 +433,7 @@ function Checkout() {
                         home1();
                         navigate("/");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Home
                     </a>
@@ -443,6 +444,7 @@ function Checkout() {
                         shop1();
                         navigate("/");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Shop
                     </a>
@@ -453,6 +455,7 @@ function Checkout() {
                         about1();
                         navigate("/");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       About Us
                     </a>
@@ -463,6 +466,7 @@ function Checkout() {
                         contact1();
                         navigate("/");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Contact Us
                     </a>
