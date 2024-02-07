@@ -746,15 +746,18 @@ function Header() {
               )}
             </div>
             {loggedin && (
-              <img
-                style={{ height: "40px" }}
-                src="images/settingiconpng.png"
-                alt="img"
-                className="settingimg"
-                onClick={() => {
-                  navigate("/setting");
-                }}
-              />
+              <a href="/setting">
+                <img
+                  style={{ height: "40px" }}
+                  src="images/settingiconpng.png"
+                  alt="img"
+                  className="settingimg"
+
+                  // onClick={() => {
+                  //   navigate("/setting");
+                  // }}
+                />{" "}
+              </a>
             )}
           </div>
         </div>
