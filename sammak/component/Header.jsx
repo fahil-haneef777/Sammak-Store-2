@@ -177,6 +177,7 @@ function Header() {
     }
   }, []);
 
+
   const handleDelete = (index, id, cartid) => {
     let newCartdata =
       cartdata.length > 0 &&
