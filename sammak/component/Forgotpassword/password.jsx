@@ -3,11 +3,13 @@ import styles from "./password.module.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Password() {
   const [email, setEmail] = useState({
     email: "",
   });
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -40,6 +42,9 @@ function Password() {
         });
       });
   };
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <>
@@ -63,6 +68,10 @@ function Password() {
               Reset Password
             </button>
           </form>
+          <button className={styles["button-back"]} onClick={handleGoBack}>
+            Go Back
+          </button>{" "}
+          {/* Add the new button */}
         </div>
       </div>
     </>

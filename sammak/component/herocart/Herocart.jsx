@@ -214,6 +214,7 @@ function Herocart() {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     axios
       .get(
         `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
@@ -287,7 +288,7 @@ function Herocart() {
     navigate("/shop");
 
     if (data) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 100, behavior: "smooth" });
     }
   };
   const products = JSON.parse(localStorage.getItem("products"));
@@ -613,26 +614,6 @@ function Herocart() {
                                 )}
                               </button>
                             </form>
-                            <div className="form-choice text-center">
-                              <label>or Login With</label>
-                              <div className="social-links social-link-active">
-                                <a
-                                  href="#"
-                                  title="Facebook"
-                                  className="social-link social-facebook fab fa-facebook-f"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Twitter"
-                                  className="social-link social-twitter fab fa-twitter"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Linkedin"
-                                  className="social-link social-linkedin fab fa-linkedin-in"
-                                ></a>
-                              </div>
-                            </div>
                           </div>
                           <div className="tab-pane" id="register">
                             <form
@@ -690,7 +671,7 @@ function Herocart() {
                                     type="checkbox"
                                     id="register-agree"
                                     name="register-agree"
-                                    required=""
+                                    required="true"
                                   />
                                   <label htmlFor="register-agree">
                                     I agree to the privacy policy
@@ -725,26 +706,6 @@ function Herocart() {
                                 )}
                               </button>
                             </form>
-                            <div className="form-choice text-center">
-                              <label className="ls-m">or Register With</label>
-                              <div className="social-links social-link-active">
-                                <a
-                                  href="#"
-                                  title="Facebook"
-                                  className="social-link social-facebook fab fa-facebook-f"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Twitter"
-                                  className="social-link social-twitter fab fa-twitter"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Linkedin"
-                                  className="social-link social-linkedin fab fa-linkedin-in"
-                                ></a>
-                              </div>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -1120,38 +1081,7 @@ function Herocart() {
                                         style={{ width: "295", height: "369" }}
                                       />
                                     </a>
-                                    <div className="product-action-vertical">
-                                      <a
-                                        href="#"
-                                        className="btn-product-icon btn-cart"
-                                        data-toggle="modal"
-                                        data-target="#addCartModal"
-                                        title="Add to Cart"
-                                      >
-                                        <i className="p-icon-cart-solid"></i>
-                                      </a>
-                                      <a
-                                        href="#"
-                                        className="btn-product-icon btn-wishlist"
-                                        title="Add to Wishlist"
-                                      >
-                                        <i className="p-icon-heart-solid"></i>
-                                      </a>
-                                      <a
-                                        href="#"
-                                        className="btn-product-icon btn-compare"
-                                        title="Compare"
-                                      >
-                                        <i className="p-icon-compare-solid"></i>
-                                      </a>
-                                      <a
-                                        href="#"
-                                        className="btn-product-icon btn-quickview"
-                                        title="Quick View"
-                                      >
-                                        <i className="p-icon-search-solid"></i>
-                                      </a>
-                                    </div>
+                                    
                                     {/* Product actions */}
                                   </figure>
                                   <div className="product-details">

@@ -72,11 +72,6 @@ function CheckoutMain() {
                 </li>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="#address">
-                    Addresses
-                  </a>
-                </li>
-                <li className="nav-item">
                   <a
                     className="nav-link no-tab-item"
                     onClick={() => {
@@ -96,15 +91,6 @@ function CheckoutMain() {
                     <a href="#orders" className="link-to-tab text-primary">
                       recent orders
                     </a>
-                    , manage your{" "}
-                    <a href="#address" className="link-to-tab text-primary">
-                      {" "}
-                      shipping and billing addresses
-                    </a>
-                    , and{" "}
-                    <a href="#account" className="link-to-tab text-primary">
-                      edit your password and account details
-                    </a>
                     .
                   </p>
                   <div className="row cols-lg-3 cols-xs-2 cols-1 nav">
@@ -116,31 +102,6 @@ function CheckoutMain() {
                           </span>
                           <div className="icon-box-content">
                             <p>ORDERS</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="ib-wrapper mb-4">
-                      <div className="icon-box text-center ib-border">
-                        <a href="#address">
-                          <span className="icon-box-icon">
-                            <i className="p-icon-map"></i>
-                          </span>
-                          <div className="icon-box-content">
-                            <p>ADDRESSES</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="ib-wrapper mb-4">
-                      <div className="icon-box text-center ib-border">
-                        <a href="#account">
-                          <span className="icon-box-icon">
-                            <i className="p-icon-user-solid"></i>
-                          </span>
-                          <div className="icon-box-content">
-                            <p>ACCOUNT DETAILS</p>
                           </div>
                         </a>
                       </div>
