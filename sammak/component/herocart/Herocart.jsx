@@ -260,8 +260,12 @@ function Herocart() {
   }
 
   function logout() {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("orders");
+    localStorage.removeItem("userid");
+    localStorage.removeItem("cart");
     window.location.reload();
+    navigate("/");
   }
 
   useEffect(() => {
@@ -407,6 +411,7 @@ function Herocart() {
                         home1();
                         navigate("/");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Home
                     </a>
@@ -417,6 +422,7 @@ function Herocart() {
                         shop1();
                         navigate("/");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Shop
                     </a>
@@ -427,6 +433,7 @@ function Herocart() {
                         about1();
                         navigate("/");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       About Us
                     </a>
@@ -437,6 +444,7 @@ function Herocart() {
                         contact1();
                         navigate("/");
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Contact Us
                     </a>
@@ -469,7 +477,10 @@ function Herocart() {
                 {loggedin ? (
                   <button
                     onClick={() => {
-                      localStorage.clear();
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("orders");
+                      localStorage.removeItem("userid");
+                      localStorage.removeItem("cart");
                       window.location.reload();
                     }}
                     style={{
@@ -570,7 +581,7 @@ function Herocart() {
                                     Remember me
                                   </label>
                                 </div>
-                                <a href="#" className="lost-link">
+                                <a href="/forgotpassword" className="lost-link">
                                   Lost your password?
                                 </a>
                               </div>
@@ -754,7 +765,7 @@ function Herocart() {
                   <a href="#" className="cart-toggle link">
                     <i className="p-icon-cart-solid">
                       <span className="cart-count">
-                        {cartdata.length > 0 && cartdata.length}
+                        {cartdata.length > 0 ? cartdata.length : 0}
                       </span>
                     </i>
                   </a>
@@ -819,6 +830,15 @@ function Herocart() {
                             </div>
                           </div>
                         ))
+                      ) : cartdata.length === 0 ? (
+                        <div
+                          style={{
+                            marginTop: "2vh",
+                            marginLeft: "5vw",
+                          }}
+                        >
+                          No items are present
+                        </div>
                       ) : (
                         <span style={{ position: "relative", top: "2vh" }}>
                           {" "}
@@ -887,10 +907,10 @@ function Herocart() {
             <div className="product-navigation">
               <ul className="breadcrumb">
                 <li>
-                  <a href="index.html">Home</a>
+                  <a href="/">Home</a>
                 </li>
                 <li>
-                  <a href="product-simple.html">Products</a>
+                  <a href="/shop">Products</a>
                 </li>
                 <li>Product Name</li>
               </ul>

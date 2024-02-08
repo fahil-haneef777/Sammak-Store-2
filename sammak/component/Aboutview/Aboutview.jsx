@@ -281,6 +281,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Home
                     </a>
@@ -293,6 +294,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/shopview");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Shop
                     </a>
@@ -305,6 +307,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/about");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       About Us
                     </a>
@@ -317,6 +320,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/contact");
                       }}
+                      style={{ cursor:'pointer' }}
                     >
                       Contact Us
                     </a>
@@ -664,6 +668,15 @@ function Aboutview() {
                             </div>
                           </div>
                         ))
+                      ) : cartdata.length === 0 ? (
+                        <div
+                          style={{
+                            marginTop: "2vh",
+                            marginLeft: "5vw",
+                          }}
+                        >
+                          No items are present
+                        </div>
                       ) : (
                         <span style={{ position: "relative", top: "2vh" }}>
                           {" "}

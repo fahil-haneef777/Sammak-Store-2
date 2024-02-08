@@ -13,6 +13,7 @@ import OrderComplete from "../component/OrderComplete/OrderComplete";
 import CheckoutMain from "../component/Main/CheckoutMain";
 import Aboutview from "../component/Aboutview/Aboutview";
 import Contactview from "../component/Contactview/Contactview";
+import Password from "../component/Forgotpassword/password";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/contact" element={<Contactview />} />
           <Route path="/orderComplete" element={<OrderComplete />} />
           <Route path="/setting" element={<CheckoutMain />} />
+          <Route path="/forgotpassword" element={<Password />} />
         </Routes>
       </BrowserRouter>
     </Provider>
