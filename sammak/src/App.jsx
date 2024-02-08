@@ -32,7 +32,6 @@ function App() {
           <Route path="/contact" element={<Contactview />} />
           <Route path="/orderComplete" element={<OrderComplete />} />
           <Route path="/setting" element={<CheckoutMain />} />
-          <Route path="/paymentcomplete" element={<PaymentComplete />} />
         </Routes>
       </BrowserRouter>
     </Provider>
