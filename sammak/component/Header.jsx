@@ -471,26 +471,6 @@ function Header() {
                                 )}
                               </button>
                             </form>
-                            <div className="form-choice text-center">
-                              <label>or Login With</label>
-                              <div className="social-links social-link-active">
-                                <a
-                                  href="#"
-                                  title="Facebook"
-                                  className="social-link social-facebook fab fa-facebook-f"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Twitter"
-                                  className="social-link social-twitter fab fa-twitter"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Linkedin"
-                                  className="social-link social-linkedin fab fa-linkedin-in"
-                                ></a>
-                              </div>
-                            </div>
                           </div>
                           <div className="tab-pane" id="register">
                             <form
@@ -582,26 +562,6 @@ function Header() {
                                 )}
                               </button>
                             </form>
-                            <div className="form-choice text-center">
-                              <label className="ls-m">or Register With</label>
-                              <div className="social-links social-link-active">
-                                <a
-                                  href="#"
-                                  title="Facebook"
-                                  className="social-link social-facebook fab fa-facebook-f"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Twitter"
-                                  className="social-link social-twitter fab fa-twitter"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Linkedin"
-                                  className="social-link social-linkedin fab fa-linkedin-in"
-                                ></a>
-                              </div>
-                            </div>
                           </div>
                         </div>
                       </div>
