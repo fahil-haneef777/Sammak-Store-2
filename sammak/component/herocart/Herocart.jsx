@@ -238,7 +238,7 @@ function Herocart() {
         logout();
       }
     }
-  
+    window.scrollTo({ top: 0, behavior: "smooth" });
     axios
       .get(
         `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
