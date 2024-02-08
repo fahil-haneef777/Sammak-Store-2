@@ -214,7 +214,6 @@ function Herocart() {
   };
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     axios
       .get(
         `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
@@ -1081,7 +1080,7 @@ function Herocart() {
                                         style={{ width: "295", height: "369" }}
                                       />
                                     </a>
-                                    
+
                                     {/* Product actions */}
                                   </figure>
                                   <div className="product-details">

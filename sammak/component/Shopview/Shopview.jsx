@@ -43,30 +43,6 @@ function Shopview() {
     setsearch,
   } = useContext(AllContext);
 
-  const home1 = () => {
-    sethome(true);
-    setshop(false);
-    setabout(false);
-    setcontact(false);
-  };
-  const shop1 = () => {
-    sethome(false);
-    setshop(true);
-    setabout(false);
-    setcontact(false);
-  };
-  const about1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(true);
-    setcontact(false);
-  };
-  const contact1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(false);
-    setcontact(true);
-  };
   let newdata = JSON.stringify(registeruser);
   const register = () => {
     if (
