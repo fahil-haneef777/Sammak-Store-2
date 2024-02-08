@@ -50,6 +50,28 @@ const Provider = ({ children }) => {
         setcartdata(res.data.result.cartItemResponseList);
       })
       .catch((err) => {});
+    //orderapi
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_URL
+        }/orderMaster/getAllOrdersById/${localStorage.getItem("userid")}`,
+        config
+      )
+      .then((res) => {
+        localStorage.setItem("orders", JSON.stringify(res.data.result));
+      })
+      .catch((err) => {});
+    //address api
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_URL
+        }/Address/getAddressByUserId/${localStorage.getItem("userid")}`,
+        config
+      )
+      .then((res) => {})
+      .catch((err) => {});
   }, []);
 
   const valuetoshare = {
