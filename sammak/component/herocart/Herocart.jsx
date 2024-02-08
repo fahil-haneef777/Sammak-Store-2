@@ -238,7 +238,7 @@ function Herocart() {
         logout();
       }
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  
     axios
       .get(
         `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
@@ -378,7 +378,7 @@ function Herocart() {
             <div className="header-center">
               <nav className="main-nav">
                 <ul className="menu">
-                  <li className={home ? "active" : ""}>
+                  <li className={""}>
                     <a
                       onClick={() => {
                         navigate("/");
@@ -388,7 +388,7 @@ function Herocart() {
                       Home
                     </a>
                   </li>
-                  <li className={shop ? "active" : ""}>
+                  <li className={"active"}>
                     <a
                       onClick={() => {
                         navigate("/shopview");
