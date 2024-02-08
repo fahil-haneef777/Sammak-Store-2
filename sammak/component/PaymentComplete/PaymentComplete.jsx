@@ -8,16 +8,16 @@ import "react-toastify/dist/ReactToastify.css";
 const PaymentComplete = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    toast.success("Redirecting to home", {
-      position: "top-center",
-      autoClose: 4000,
-      closeOnClick: false,
-    });
-    setTimeout(() => {
-      navigate("/");
-    }, 4000);
-  }, []);
+  //   useEffect(() => {
+  //     toast.success("Redirecting to home", {
+  //       position: "top-center",
+  //       autoClose: 4000,
+  //       closeOnClick: false,
+  //     });
+  //     setTimeout(() => {
+  //       navigate("/");
+  //     }, 4000);
+  //   }, []);
 
   return (
     <>
