@@ -488,6 +488,7 @@ function Header() {
                               </div>
                             </div>
                           </div>
+                          
                           <div className="tab-pane" id="register">
                             <form
                               onSubmit={(e) => {
