@@ -191,7 +191,7 @@ function OrderComplete() {
 
   useEffect(() => {
     if (!loggedin) {
-      navigate(-1);
+      navigate('/');
     }
   });
   return (
