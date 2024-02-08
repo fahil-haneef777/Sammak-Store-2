@@ -138,30 +138,6 @@ function Checkout() {
     productinfo,
   } = useContext(AllContext);
 
-  const home1 = () => {
-    sethome(true);
-    setshop(false);
-    setabout(false);
-    setcontact(false);
-  };
-  const shop1 = () => {
-    sethome(false);
-    setshop(true);
-    setabout(false);
-    setcontact(false);
-  };
-  const about1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(true);
-    setcontact(false);
-  };
-  const contact1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(false);
-    setcontact(true);
-  };
   const register = () => {
     axios
       .post(`${import.meta.env.VITE_URL}/v1/auth/createUser`, registeruser)
@@ -430,10 +406,9 @@ function Checkout() {
                   <li className={home ? "active" : ""}>
                     <a
                       onClick={() => {
-                        home1();
                         navigate("/");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       Home
                     </a>
@@ -441,10 +416,9 @@ function Checkout() {
                   <li className={shop ? "active" : ""}>
                     <a
                       onClick={() => {
-                        shop1();
                         navigate("/");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       Shop
                     </a>
@@ -452,10 +426,9 @@ function Checkout() {
                   <li className={about ? "active" : ""}>
                     <a
                       onClick={() => {
-                        about1();
                         navigate("/");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       About Us
                     </a>
@@ -463,10 +436,9 @@ function Checkout() {
                   <li className={contact ? "active" : ""}>
                     <a
                       onClick={() => {
-                        contact1();
                         navigate("/");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       Contact Us
                     </a>
@@ -495,7 +467,9 @@ function Checkout() {
                 {loggedin ? (
                   <button
                     onClick={() => {
-                      localStorage.clear();
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("orders");
+                      localStorage.removeItem("userid");
                       window.location.reload();
                     }}
                     style={{
@@ -858,6 +832,12 @@ function Checkout() {
               </li>
               <li>
                 <a href="/shopview">Shop</a>
+              </li>
+              <li>
+                <a href="/contact">Contact</a>
+              </li>
+              <li>
+                <a href="/about">About</a>
               </li>
             </ul>
           </div>

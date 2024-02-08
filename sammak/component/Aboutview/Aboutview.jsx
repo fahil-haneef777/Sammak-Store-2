@@ -281,7 +281,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       Home
                     </a>
@@ -294,7 +294,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/shopview");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       Shop
                     </a>
@@ -307,7 +307,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/about");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       About Us
                     </a>
@@ -320,7 +320,7 @@ function Aboutview() {
                       onClick={() => {
                         navigate("/contact");
                       }}
-                      style={{ cursor:'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       Contact Us
                     </a>
@@ -474,7 +474,6 @@ function Aboutview() {
                                 )}
                               </button>
                             </form>
-                           
                           </div>
                           <div className="tab-pane" id="register">
                             <form
@@ -729,40 +728,16 @@ function Aboutview() {
           <div className="mobile-menu-container scrollable">
             <ul className="mobile-menu mmenu-anim">
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
-                >
-                  Home
-                </a>
+                <a href="/">Home</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/shopview");
-                  }}
-                >
-                  Shop
-                </a>
+                <a href="/shopview">Shop</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/about");
-                  }}
-                >
-                  About Us
-                </a>
+                <a href="/about">About Us</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
-                >
-                  Contact Us
-                </a>
+                <a href="/contact">Contact Us</a>
               </li>
             </ul>
           </div>

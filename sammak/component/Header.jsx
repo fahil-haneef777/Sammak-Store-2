@@ -472,7 +472,7 @@ function Header() {
                               </button>
                             </form>
                           </div>
-                          
+
                           <div className="tab-pane" id="register">
                             <form
                               onSubmit={(e) => {
@@ -730,22 +730,12 @@ function Header() {
           <div className="mobile-menu-container scrollable">
             <ul className="mobile-menu mmenu-anim">
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
+                <a href="/" style={{ cursor: "pointer" }}>
                   Home
                 </a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/shopview");
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
+                <a href="/shopview" style={{ cursor: "pointer" }}>
                   Shop
                 </a>
               </li>
@@ -753,9 +743,7 @@ function Header() {
                 <a
                   className="mobile-menu-overlay"
                   style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    navigate("/about");
-                  }}
+                  href="/about"
                 >
                   About Us
                 </a>
@@ -763,9 +751,7 @@ function Header() {
               <li>
                 <a
                   className="mobile-menu-overlay"
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
+                  href="/contact"
                   style={{ cursor: "pointer" }}
                 >
                   Contact Us

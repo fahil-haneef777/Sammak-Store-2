@@ -684,40 +684,16 @@ function Shopview() {
           <div className="mobile-menu-container scrollable">
             <ul className="mobile-menu mmenu-anim">
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                >
-                  Home
-                </a>
+                <a href="/">Home</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/shopview");
-                  }}
-                >
-                  Shop
-                </a>
+                <a href="/shopview">Shop</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/about");
-                  }}
-                >
-                  About Us
-                </a>
+                <a href="/about">About Us</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
-                >
-                  Contact Us
-                </a>
+                <a href="/contact">Contact Us</a>
               </li>
             </ul>
           </div>

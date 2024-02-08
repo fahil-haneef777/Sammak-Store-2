@@ -20,7 +20,6 @@ function Herocart() {
     userName: "",
   });
   const [loading, setloading] = useState(false);
-  const [ishover, setishovered] = useState(false);
   const [addCartLogin, setaddCartLogin] = useState(false);
   const [quantity, setquantity] = useState(1);
   const [cartdata, setcartdata] = useState("");
@@ -68,30 +67,6 @@ function Herocart() {
     setid,
   } = useContext(AllContext);
 
-  const home1 = () => {
-    sethome(true);
-    setshop(false);
-    setabout(false);
-    setcontact(false);
-  };
-  const shop1 = () => {
-    sethome(false);
-    setshop(true);
-    setabout(false);
-    setcontact(false);
-  };
-  const about1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(true);
-    setcontact(false);
-  };
-  const contact1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(false);
-    setcontact(true);
-  };
   const register = () => {
     if (
       registeruser.emailId === "" ||
@@ -213,25 +188,6 @@ function Herocart() {
     }
   };
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    axios
-      .get(
-        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
-          "userid"
-        )}`,
-        config
-      )
-      .then((res) => {
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(res.data.result.cartItemResponseList)
-        );
-        setcartdata(res.data.result.cartItemResponseList);
-      })
-      .catch((err) => {});
-  }, []);
-
   const handleDelete = (index, id) => {
     let newCartdata =
       cartdata.length > 0 &&
@@ -282,6 +238,22 @@ function Herocart() {
         logout();
       }
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    axios
+      .get(
+        `${import.meta.env.VITE_URL}/CartMaster/getAll/${localStorage.getItem(
+          "userid"
+        )}`,
+        config
+      )
+      .then((res) => {
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(res.data.result.cartItemResponseList)
+        );
+        setcartdata(res.data.result.cartItemResponseList);
+      })
+      .catch((err) => {});
   }, []);
 
   const onCart = () => {
@@ -409,7 +381,6 @@ function Herocart() {
                   <li className={home ? "active" : ""}>
                     <a
                       onClick={() => {
-                        home1();
                         navigate("/");
                       }}
                       style={{ cursor: "pointer" }}
@@ -420,8 +391,7 @@ function Herocart() {
                   <li className={shop ? "active" : ""}>
                     <a
                       onClick={() => {
-                        shop1();
-                        navigate("/");
+                        navigate("/shopview");
                       }}
                       style={{ cursor: "pointer" }}
                     >
@@ -431,8 +401,7 @@ function Herocart() {
                   <li className={about ? "active" : ""}>
                     <a
                       onClick={() => {
-                        about1();
-                        navigate("/");
+                        navigate("/about");
                       }}
                       style={{ cursor: "pointer" }}
                     >
@@ -442,8 +411,7 @@ function Herocart() {
                   <li className={contact ? "active" : ""}>
                     <a
                       onClick={() => {
-                        contact1();
-                        navigate("/");
+                        navigate("/contact");
                       }}
                       style={{ cursor: "pointer" }}
                     >
@@ -671,7 +639,7 @@ function Herocart() {
                                     type="checkbox"
                                     id="register-agree"
                                     name="register-agree"
-                                    required="true"
+                                    required={true}
                                   />
                                   <label htmlFor="register-agree">
                                     I agree to the privacy policy
@@ -1081,7 +1049,7 @@ function Herocart() {
                                         style={{ width: "295", height: "369" }}
                                       />
                                     </a>
-                                    
+
                                     {/* Product actions */}
                                   </figure>
                                   <div className="product-details">

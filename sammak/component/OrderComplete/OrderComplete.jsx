@@ -729,36 +729,27 @@ function OrderComplete() {
             <ul className="mobile-menu mmenu-anim">
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/");
-                  }}
+                  href="/"
                 >
                   Home
                 </a>
               </li>
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/shopview");
-                  }}
-                >
+                 href="/shopview">
                   Shop
                 </a>
               </li>
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/about");
-                  }}
+                href="/about"
                 >
                   About Us
                 </a>
               </li>
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
+                href="contact"
                 >
                   Contact Us
                 </a>

@@ -523,7 +523,7 @@ function Contactview() {
                                     type="checkbox"
                                     id="register-agree"
                                     name="register-agree"
-                                    required="true"
+                                    required={true}
                                   />
                                   <label htmlFor="register-agree">
                                     I agree to the privacy policy
