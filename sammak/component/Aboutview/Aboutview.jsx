@@ -196,7 +196,10 @@ function Aboutview() {
   }
 
   function logout() {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userid");
+    localStorage.removeItem("cart");
+    localStorage.removeItem("orders");
     window.location.reload();
   }
 

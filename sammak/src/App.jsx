@@ -8,7 +8,6 @@ import Viewcart from "../component/Viewcart/Viewcart";
 import Checkout from "../component/Checkout/Checkout";
 import ResetPassword from "../pages/home/ResetPassword/ResetPassword";
 import Shopview from "../component/Shopview/Shopview";
-import SliderMain from "../component/SliderMain/SliderMain";
 import OrderComplete from "../component/OrderComplete/OrderComplete";
 import CheckoutMain from "../component/Main/CheckoutMain";
 import Aboutview from "../component/Aboutview/Aboutview";
