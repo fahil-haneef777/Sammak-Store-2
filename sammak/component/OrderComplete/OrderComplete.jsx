@@ -170,7 +170,10 @@ function OrderComplete() {
   }
 
   function logout() {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userid");
+    localStorage.removeItem("cart");
+    localStorage.removeItem("orders");
     window.location.reload();
   }
 
@@ -729,36 +732,27 @@ function OrderComplete() {
             <ul className="mobile-menu mmenu-anim">
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/");
-                  }}
+                  href="/"
                 >
                   Home
                 </a>
               </li>
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/shopview");
-                  }}
-                >
+                 href="/shopview">
                   Shop
                 </a>
               </li>
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/about");
-                  }}
+                href="/about"
                 >
                   About Us
                 </a>
               </li>
               <li>
                 <a
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
+                href="contact"
                 >
                   Contact Us
                 </a>

@@ -10,15 +10,23 @@ import SpecialSection from "../SpecialSection/SpecialSection";
 import "../../main.js";
 function Herohome() {
   const [data, setdata] = useState([]);
-  const { id, setid, cart, setcart, productinfo, setproductinfo,data1,setdata1 } =
-    useContext(AllContext);
+  const {
+    id,
+    setid,
+    cart,
+    setcart,
+    productinfo,
+    setproductinfo,
+    data1,
+    setdata1,
+  } = useContext(AllContext);
   const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_URL}/Product/post`)
       .then((res) => {
         setdata(res.data.result);
-        setdata1(res.data.result)
+        setdata1(res.data.result);
         setproductinfo(res.data.result);
         localStorage.setItem("products", JSON.stringify(res.data.result));
       })
@@ -114,38 +122,7 @@ function Herohome() {
                                           }}
                                         />
                                       </a>
-                                      <div className="product-action-vertical">
-                                        <a
-                                          href="#"
-                                          className="btn-product-icon btn-cart"
-                                          data-toggle="modal"
-                                          data-target="#addCartModal"
-                                          title="Add to Cart"
-                                        >
-                                          <i className="p-icon-cart-solid"></i>
-                                        </a>
-                                        <a
-                                          href="#"
-                                          className="btn-product-icon btn-wishlist"
-                                          title="Add to Wishlist"
-                                        >
-                                          <i className="p-icon-heart-solid"></i>
-                                        </a>
-                                        <a
-                                          href="#"
-                                          className="btn-product-icon btn-compare"
-                                          title="Compare"
-                                        >
-                                          <i className="p-icon-compare-solid"></i>
-                                        </a>
-                                        <a
-                                          href="#"
-                                          className="btn-product-icon btn-quickview"
-                                          title="Quick View"
-                                        >
-                                          <i className="p-icon-search-solid"></i>
-                                        </a>
-                                      </div>
+
                                       {/* Product actions */}
                                     </figure>
                                     <div className="product-details">

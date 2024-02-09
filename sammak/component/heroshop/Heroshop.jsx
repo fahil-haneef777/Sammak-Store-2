@@ -129,38 +129,7 @@ function Heroshop() {
                           style={{ width: "295", height: "369" }}
                         />
                       </a>
-                      <div className="product-action-vertical">
-                        <a
-                          href="#"
-                          className="btn-product-icon btn-cart"
-                          data-toggle="modal"
-                          data-target="#addCartModal"
-                          title="Add to Cart"
-                        >
-                          <i className="p-icon-cart-solid"></i>
-                        </a>
-                        <a
-                          href="#"
-                          className="btn-product-icon btn-wishlist"
-                          title="Add to Wishlist"
-                        >
-                          <i className="p-icon-heart-solid"></i>
-                        </a>
-                        <a
-                          href="#"
-                          className="btn-product-icon btn-compare"
-                          title="Compare"
-                        >
-                          <i className="p-icon-compare-solid"></i>
-                        </a>
-                        <a
-                          href="#"
-                          className="btn-product-icon btn-quickview"
-                          title="Quick View"
-                        >
-                          <i className="p-icon-search-solid"></i>
-                        </a>
-                      </div>
+
                       {/* Product actions */}
                     </figure>
                     <div className="product-details">

@@ -43,30 +43,6 @@ function Shopview() {
     setsearch,
   } = useContext(AllContext);
 
-  const home1 = () => {
-    sethome(true);
-    setshop(false);
-    setabout(false);
-    setcontact(false);
-  };
-  const shop1 = () => {
-    sethome(false);
-    setshop(true);
-    setabout(false);
-    setcontact(false);
-  };
-  const about1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(true);
-    setcontact(false);
-  };
-  const contact1 = () => {
-    sethome(false);
-    setshop(false);
-    setabout(false);
-    setcontact(true);
-  };
   let newdata = JSON.stringify(registeruser);
   const register = () => {
     if (
@@ -196,7 +172,10 @@ function Shopview() {
   }
 
   function logout() {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userid");
+    localStorage.removeItem("cart");
+    localStorage.removeItem("orders");
     window.location.reload();
   }
 
@@ -442,7 +421,7 @@ function Shopview() {
                                     Remember me
                                   </label>
                                 </div>
-                                <a href="#" className="lost-link">
+                                <a href="/forgotpassword" className="lost-link">
                                   Lost your password?
                                 </a>
                               </div>
@@ -474,26 +453,6 @@ function Shopview() {
                                 )}
                               </button>
                             </form>
-                            <div className="form-choice text-center">
-                              <label>or Login With</label>
-                              <div className="social-links social-link-active">
-                                <a
-                                  href="#"
-                                  title="Facebook"
-                                  className="social-link social-facebook fab fa-facebook-f"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Twitter"
-                                  className="social-link social-twitter fab fa-twitter"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Linkedin"
-                                  className="social-link social-linkedin fab fa-linkedin-in"
-                                ></a>
-                              </div>
-                            </div>
                           </div>
                           <div className="tab-pane" id="register">
                             <form
@@ -563,26 +522,6 @@ function Shopview() {
                                 Register
                               </button>
                             </form>
-                            <div className="form-choice text-center">
-                              <label className="ls-m">or Register With</label>
-                              <div className="social-links social-link-active">
-                                <a
-                                  href="#"
-                                  title="Facebook"
-                                  className="social-link social-facebook fab fa-facebook-f"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Twitter"
-                                  className="social-link social-twitter fab fa-twitter"
-                                ></a>
-                                <a
-                                  href="#"
-                                  title="Linkedin"
-                                  className="social-link social-linkedin fab fa-linkedin-in"
-                                ></a>
-                              </div>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -748,40 +687,16 @@ function Shopview() {
           <div className="mobile-menu-container scrollable">
             <ul className="mobile-menu mmenu-anim">
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                >
-                  Home
-                </a>
+                <a href="/">Home</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/shopview");
-                  }}
-                >
-                  Shop
-                </a>
+                <a href="/shopview">Shop</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/about");
-                  }}
-                >
-                  About Us
-                </a>
+                <a href="/about">About Us</a>
               </li>
               <li>
-                <a
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
-                >
-                  Contact Us
-                </a>
+                <a href="/contact">Contact Us</a>
               </li>
             </ul>
           </div>
