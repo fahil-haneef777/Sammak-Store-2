@@ -75,8 +75,11 @@ function CheckoutMain() {
                   <a
                     className="nav-link no-tab-item"
                     onClick={() => {
-                      localStorage.clear();
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("cart");
+                      localStorage.removeItem("userid");
                       navigate("/");
+                      window.location.reload();
                     }}
                     style={{ cursor: "pointer" }}
                   >
@@ -110,8 +113,11 @@ function CheckoutMain() {
                     <div
                       className="ib-wrapper mb-4"
                       onClick={() => {
-                        localStorage.clear();
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("cart");
+                        localStorage.removeItem("userid");
                         navigate("/");
+                        window.location.reload();
                       }}
                       style={{ cursor: "pointer" }}
                     >
@@ -137,6 +143,7 @@ function CheckoutMain() {
                         <th>Product name</th>
 
                         <th>Quantity</th>
+                        <th>Ordered at</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -150,6 +157,9 @@ function CheckoutMain() {
                           </td>
                           <td className="order-status">
                             <span>{order.quantity}</span>
+                          </td>
+                          <td className="order-status">
+                            <span>{order.deliveredAt}</span>
                           </td>
                           <td className="order-action">
                             <img
