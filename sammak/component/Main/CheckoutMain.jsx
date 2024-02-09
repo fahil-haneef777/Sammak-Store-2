@@ -137,13 +137,13 @@ function CheckoutMain() {
                 <div className="tab-pane" id="orders">
                   <table className="order-table">
                     <thead>
-                      <tr>
+                      <tr style={{ textAlign: "center" }}>
                         <th>Order id</th>
 
                         <th>Product name</th>
 
                         <th>Quantity</th>
-                        <th>Ordered at</th>
+                        <th>Image</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -158,9 +158,7 @@ function CheckoutMain() {
                           <td className="order-status">
                             <span>{order.quantity}</span>
                           </td>
-                          <td className="order-status">
-                            <span>{order.deliveredAt}</span>
-                          </td>
+
                           <td className="order-action">
                             <img
                               src={order.imageUrl}
