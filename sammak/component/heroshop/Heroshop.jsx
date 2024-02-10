@@ -145,7 +145,7 @@ function Heroshop() {
                           href="javascript:void(0);"
                           className="rating-reviews"
                         >
-                          ({Math.floor(Math.random() * 20 + 5)})
+                          (12)
                         </a>
                       </div>
                       <h5 className="product-name">
